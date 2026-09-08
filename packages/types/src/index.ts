@@ -8,3 +8,5 @@ export interface ProjectDetails {status?:ProjectStatus;category?:string;startDat
 export interface ProjectView {record:ContentRecord;details:ProjectDetails}
 export type PublicationType='Scientific Journal'|'Research Reports'|'Policy Briefs'|'Working Papers'|'Articles & Insights';
 export interface Publication {title:string;slug:string;type:PublicationType;coverImage?:{url:string;alt:string};summary:string;abstract:string;executiveSummary?:string;authors:string[];publishedAt?:string;year?:number;language:string;pdfUrl?:string;externalUrl?:string;doi?:string;isbn?:string;citation?:string;featured:boolean;status:'Published'|'Forthcoming'|'Draft';isDemo:boolean}
+export interface TeamProfileDetails {category:'leadership'|'advisory';expertise:string[];institutionRole?:string;email?:string;linkedin?:string;orcid?:string;googleScholar?:string;institutionalProfile?:string}
+export interface TeamProfile extends TeamProfileDetails {id:string;name:string;role:string;biography:string;photoUrl?:string;photoAlt?:string}

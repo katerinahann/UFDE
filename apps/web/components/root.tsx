@@ -16,3 +16,5 @@ import './activities.css';
 import './projects.css';
 
 import './publications.css';
+
+import './team.css';

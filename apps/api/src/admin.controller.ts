@@ -2,7 +2,7 @@ import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestExce
 import {ApiBearerAuth,ApiTags} from '@nestjs/swagger';
 import {PrismaService} from './prisma.service';
 import {AdminGuard} from './admin.guard';
-import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto} from './dto';
+import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto,TeamProfileDto} from './dto';
 @ApiTags('Editorial administration') @ApiBearerAuth() @UseGuards(AdminGuard) @Controller('admin')
 export class AdminController {
  constructor(private readonly db:PrismaService){}
@@ -20,6 +20,8 @@ export class AdminController {
  @Put('publications/:slug') publication(@Param('slug') slug:string,@Query() q:ListQuery,@Body() dto:PublicationDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');if(dto.status==='Published'&&(!dto.authors.length||!dto.summary.trim()||!dto.abstract.trim()||(!dto.publishedAt&&!dto.year)))throw new BadRequestException('Published publications require authors, summary, abstract and date or year');const key='publication:'+slug+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
  @Get('publications') async publications(@Query() q:ListQuery){return (await this.db.siteSetting.findMany({where:{key:{startsWith:'publication:',endsWith:':'+q.locale}},take:q.limit,skip:q.offset,orderBy:{key:'asc'}})).map(r=>r.value)}
  @Get('pages') pages(@Query() q:ListQuery){return this.db.page.findMany({take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
+ @Get('team') async teamList(@Query() q:ListQuery){const rows=await this.db.teamMember.findMany({take:q.limit,skip:q.offset,orderBy:[{order:'asc'},{id:'asc'}]});const profiles=await this.db.siteSetting.findMany({where:{key:{in:rows.map(r=>'team:'+r.id+':'+q.locale)}}});return rows.map(r=>({...r,profile:profiles.find(p=>p.key==='team:'+r.id+':'+q.locale)?.value??null}))}
+ @Put('team/:id/profile') async teamProfile(@Param('id') id:string,@Query() q:ListQuery,@Body() dto:TeamProfileDto){if(!await this.db.teamMember.findUnique({where:{id}}))throw new NotFoundException();const key='team:'+id+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
  @Post('team') team(@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.create({data:dto})}
  @Put('team/:id') updateTeam(@Param('id') id:string,@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.update({where:{id},data:dto})}
  @Delete('team/:id') async removeTeam(@Param('id') id:string){await this.db.teamMember.delete({where:{id}});return {deleted:true}}

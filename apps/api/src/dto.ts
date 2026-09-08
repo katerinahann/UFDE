@@ -148,3 +148,14 @@ export class PublicationDto {
  @ApiProperty() @IsIn(['Published','Forthcoming','Draft']) status!:string;
  @ApiProperty() @IsBoolean() isDemo!:boolean;
 }
+
+export class TeamProfileDto {
+ @ApiProperty({enum:['leadership','advisory']}) @IsIn(['leadership','advisory']) category!:'leadership'|'advisory';
+ @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(30) @IsString({each:true}) @MinLength(1,{each:true}) @MaxLength(100,{each:true}) expertise!:string[];
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(300) institutionRole?:string;
+ @ApiPropertyOptional() @IsOptional() @IsEmail() @MaxLength(250) email?:string;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) linkedin?:string;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) orcid?:string;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) googleScholar?:string;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) institutionalProfile?:string;
+}

@@ -84,3 +84,23 @@ allowlist. Remote servers control Content-Disposition, so cross-origin PDFs may
 open in the browser instead of triggering a download. No storage credentials are
 placed in client code. Rebuild Vercel after editorial changes, including status
 changes, to update static pages and remove previously published output.
+
+### Team profiles
+
+The Team page shows approved CMS members; no people are invented. Existing
+`POST /admin/team` and `PUT /admin/team/:id` manage the member's full name,
+localized role/biography, portrait, published flag and ordering. Add the localized
+profile fields with `PUT /admin/team/:id/profile?locale=en` (`fr`, `uk` supported):
+`category` (`leadership` or `advisory`), `expertise` string array, optional
+`institutionRole`, `email`, `linkedin`, `orcid`, `googleScholar`, and
+`institutionalProfile` HTTPS URLs. `GET /admin/team?locale=en` includes profile
+metadata for editorial review. Profiles use existing SiteSetting storage.
+
+Public members must be published, have an explicit category and a role in the
+requested locale. Advisory Board is hidden when no eligible members exist.
+Missing portraits use a neutral placeholder; professional links appear only when
+provided. Desktop selection expands immediately beneath its row; mobile uses a
+focus-managed dialog with Escape/close support. Rebuild static deployments after
+CMS changes. The meeting hero is illustrative, credited to woodleywonderworks,
+CC BY 2.0, source https://commons.wikimedia.org/wiki/File:Team_Meeting.jpg; the
+local WebP is resized and the layout crops it. It does not depict the UFDE team.
