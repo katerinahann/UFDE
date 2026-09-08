@@ -1,0 +1,10 @@
+packages:
+  - apps/*
+  - packages/*
+allowBuilds:
+  esbuild: true
+  sharp: true
+  workerd: true
+  prisma: true
+  "@prisma/engines": true
+  "@nestjs/core": true

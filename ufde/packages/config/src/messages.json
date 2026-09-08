@@ -1,0 +1,539 @@
+{
+  "en": {
+    "nav": [
+      "Home",
+      "About",
+      "Activities",
+      "Projects",
+      "Publications",
+      "Team",
+      "Contact"
+    ],
+    "fullName": "Ukrainian-French Institute for Science, Innovation and European Development",
+    "hero": [
+      "UKRAINE · FRANCE · EUROPE",
+      "Knowledge connects.",
+      "Cooperation",
+      "transforms.",
+      "Discover the institute",
+      "Explore our strategic areas"
+    ],
+    "mission": [
+      "Science. Dialogue. Shared progress.",
+      "Connecting Ukraine and France through knowledge"
+    ],
+    "intro": [
+      "THE INSTITUTE",
+      "A shared ambition.",
+      "A European perspective.",
+      "A space for Ukrainian-French dialogue at the intersection of science, innovation and European development.",
+      "Explore the institute’s focus, discover opportunities for cooperation, and get in touch with UFDE in Paris.",
+      "About UFDE"
+    ],
+    "focus": [
+      "OUR FOCUS",
+      "Knowledge into shared progress",
+      "All strategic areas"
+    ],
+    "areas": [
+      [
+        "Science & research",
+        "Scientific exchange and connections across disciplines.",
+        "An area for dialogue on scientific cooperation, interdisciplinary research and the exchange of knowledge between Ukraine and France."
+      ],
+      [
+        "Innovation & knowledge",
+        "An open dialogue between ideas, research and innovation.",
+        "An area for exploring how research can inform innovation, knowledge transfer and responses to shared challenges."
+      ],
+      [
+        "European development",
+        "Perspectives on cooperation and a shared European future.",
+        "An area for considering European development through academic exchange, institutional dialogue and informed discussion."
+      ]
+    ],
+    "connect": [
+      "LET’S START A CONVERSATION",
+      "New perspectives begin",
+      "with a connection.",
+      "Connect with UFDE"
+    ],
+    "footer": [
+      "Explore",
+      "Our work",
+      "Get in touch",
+      "Stay informed",
+      "Receive future news from UFDE.",
+      "All rights reserved.",
+      "Social channels will be added once verified."
+    ],
+    "preview": "Website preview — institutional text and demo content await approval.",
+    "demo": "Demonstration content",
+    "read": "Read more",
+    "back": "Back to overview",
+    "skip": "Skip to content",
+    "menu": "Menu",
+    "close": "Close menu",
+    "empty": "No approved content has been published yet.",
+    "unavailable": "Content is temporarily unavailable. Please try again later.",
+    "overview": "OVERVIEW",
+    "photo": "Paris photograph",
+    "cropped": "Cropped for display. Demo visual.",
+    "form": {
+      "name": "Full name",
+      "email": "Email address",
+      "organization": "Organisation (optional)",
+      "subject": "Subject",
+      "message": "Your message",
+      "consent": "I have read the privacy notice and agree to the use of my details to respond to this enquiry.",
+      "newsletterConsent": "I agree to receive UFDE news by email and have read the privacy notice.",
+      "send": "Send enquiry",
+      "subscribe": "Subscribe",
+      "sending": "Submitting…",
+      "success": "Thank you. Your enquiry has been recorded for the UFDE team.",
+      "subscribed": "Thank you. Your subscription has been recorded.",
+      "demoSuccess": "Demo validated. Nothing was sent or stored.",
+      "demoNotice": "Preview form: details are not sent or saved.",
+      "error": "We could not submit your request. Please try again or use the email address shown.",
+      "invalid": "Please check this field.",
+      "privacy": "Privacy notice"
+    },
+    "pages": {
+      "about": [
+        "About UFDE",
+        "Science, innovation and European development — in dialogue.",
+        "The Ukrainian-French Institute for Science, Innovation and European Development brings these three themes into a shared institutional space in Paris.",
+        "Our perspective",
+        "The institute’s website is a place to present its purpose, areas of focus and opportunities for dialogue. The final institutional profile will be published after approval.",
+        "Explore our strategic areas"
+      ],
+      "strategic-areas": [
+        "Strategic areas",
+        "Three perspectives. One shared horizon.",
+        "The following focus areas reflect UFDE’s stated scope. Detailed programmes and priorities will be published following institutional approval."
+      ],
+      "activities": [
+        "Activities",
+        "Conversations that move knowledge forward.",
+        "Explore activities as they are published. The examples below illustrate the content format and do not describe events that have taken place."
+      ],
+      "projects": [
+        "Projects",
+        "Cooperation with purpose.",
+        "Project information will be published once approved. Demonstration records are illustrative and do not imply funded initiatives, partners or results."
+      ],
+      "publications": [
+        "Publications",
+        "Ideas for an informed dialogue.",
+        "Approved publications will be made available here. Demonstration records are not published research and have no authors, findings or downloadable reports."
+      ],
+      "team": [
+        "Our team",
+        "The people behind the institute.",
+        "Verified team profiles and responsibilities will be published with the individuals’ approval.",
+        "Team profiles are being prepared",
+        "For enquiries in the meantime, please contact UFDE."
+      ],
+      "governance-transparency": [
+        "Governance & transparency",
+        "Clarity, accountability and institutional trust.",
+        "Verified governance information and approved institutional documents will be available here.",
+        "Documents awaiting publication",
+        "Statutes, governance structure, annual reports and relevant institutional policies will be linked when supplied and approved. No legal status or accreditation is asserted by this preview."
+      ],
+      "contact": [
+        "Contact",
+        "Let’s begin a conversation.",
+        "For scientific, institutional or general enquiries, contact UFDE in Paris.",
+        "Contact details",
+        "Send an enquiry"
+      ],
+      "legal-notice": [
+        "Legal notice",
+        "Publication details",
+        "Draft — not approved for public launch.",
+        "Publisher information pending",
+        "The legal entity name, registration details, registered address, publication director and hosting provider must be supplied and verified before launch."
+      ],
+      "privacy": [
+        "Privacy policy",
+        "Your information and this website",
+        "Draft — operational details must be reviewed before public launch.",
+        "Enquiries and subscriptions",
+        "In this preview, forms only validate input locally; they do not send or store personal details. When live services are enabled, the operator must publish the verified controller identity, purposes and lawful bases, recipients, retention periods and rights procedures. Contact UFDE with privacy enquiries."
+      ],
+      "cookies": [
+        "Cookies",
+        "A restrained approach to website data",
+        "Draft — review after production hosting is configured.",
+        "Website storage",
+        "This implementation includes no analytics, advertising pixels or optional tracking cookies. The private preview host may use authentication cookies. Any future optional tracking must remain off until an appropriate consent mechanism is in place."
+      ],
+      "terms": [
+        "Terms of use",
+        "Using this website",
+        "Draft — pending institutional and legal review.",
+        "Content and permissions",
+        "Demonstration content is illustrative and must not be cited as institutional activity, research or a partner relationship. The Paris photograph has a separate attribution and reuse licence, linked on the homepage. Final terms must be approved before public launch."
+      ]
+    }
+  },
+  "fr": {
+    "nav": [
+      "Accueil",
+      "À propos",
+      "Activités",
+      "Projets",
+      "Publications",
+      "Équipe",
+      "Contact"
+    ],
+    "fullName": "Institut ukraino-français pour la science, l’innovation et le développement européen",
+    "hero": [
+      "UKRAINE · FRANCE · EUROPE",
+      "Le savoir rapproche.",
+      "La coopération",
+      "transforme.",
+      "Découvrir l’institut",
+      "Explorer nos axes stratégiques"
+    ],
+    "mission": [
+      "Science. Dialogue. Progrès partagé.",
+      "Relier l’Ukraine et la France par le savoir"
+    ],
+    "intro": [
+      "L’INSTITUT",
+      "Une ambition commune.",
+      "Une perspective européenne.",
+      "Un espace de dialogue ukraino-français au croisement de la science, de l’innovation et du développement européen.",
+      "Découvrez les axes de l’institut, les possibilités de coopération et contactez UFDE à Paris.",
+      "À propos d’UFDE"
+    ],
+    "focus": [
+      "NOS AXES",
+      "Le savoir au service du progrès partagé",
+      "Tous les axes stratégiques"
+    ],
+    "areas": [
+      [
+        "Science et recherche",
+        "Les échanges scientifiques au-delà des disciplines.",
+        "Un axe de dialogue sur la coopération scientifique, la recherche interdisciplinaire et les échanges de connaissances entre l’Ukraine et la France."
+      ],
+      [
+        "Innovation et savoir",
+        "Un dialogue ouvert entre les idées, la recherche et l’innovation.",
+        "Un axe pour explorer la contribution de la recherche à l’innovation, au transfert de connaissances et aux défis communs."
+      ],
+      [
+        "Développement européen",
+        "Des perspectives de coopération pour un avenir européen commun.",
+        "Un axe pour aborder le développement européen par les échanges universitaires, le dialogue institutionnel et une réflexion éclairée."
+      ]
+    ],
+    "connect": [
+      "ENGAGEONS LE DIALOGUE",
+      "De nouvelles perspectives",
+      "naissent d’une rencontre.",
+      "Contacter UFDE"
+    ],
+    "footer": [
+      "Explorer",
+      "Nos travaux",
+      "Nous contacter",
+      "Rester informé",
+      "Recevez les prochaines actualités d’UFDE.",
+      "Tous droits réservés.",
+      "Les réseaux sociaux seront ajoutés après vérification."
+    ],
+    "preview": "Aperçu du site — textes institutionnels et contenus de démonstration à valider.",
+    "demo": "Contenu de démonstration",
+    "read": "En savoir plus",
+    "back": "Retour à la liste",
+    "skip": "Aller au contenu",
+    "menu": "Menu",
+    "close": "Fermer le menu",
+    "empty": "Aucun contenu approuvé n’a encore été publié.",
+    "unavailable": "Le contenu est temporairement indisponible. Veuillez réessayer plus tard.",
+    "overview": "PRÉSENTATION",
+    "photo": "Photographie de Paris",
+    "cropped": "Recadrée pour l’affichage. Visuel de démonstration.",
+    "form": {
+      "name": "Nom complet",
+      "email": "Adresse e-mail",
+      "organization": "Organisation (facultatif)",
+      "subject": "Objet",
+      "message": "Votre message",
+      "consent": "J’ai lu la notice de confidentialité et j’accepte l’utilisation de mes coordonnées pour répondre à cette demande.",
+      "newsletterConsent": "J’accepte de recevoir les actualités d’UFDE par e-mail et j’ai lu la notice de confidentialité.",
+      "send": "Envoyer la demande",
+      "subscribe": "S’abonner",
+      "sending": "Envoi…",
+      "success": "Merci. Votre demande a été enregistrée pour l’équipe UFDE.",
+      "subscribed": "Merci. Votre abonnement a été enregistré.",
+      "demoSuccess": "Démonstration validée. Aucune donnée n’a été envoyée ni enregistrée.",
+      "demoNotice": "Formulaire de démonstration : aucune donnée n’est envoyée ni enregistrée.",
+      "error": "L’envoi a échoué. Réessayez ou utilisez l’adresse e-mail indiquée.",
+      "invalid": "Veuillez vérifier ce champ.",
+      "privacy": "Notice de confidentialité"
+    },
+    "pages": {
+      "about": [
+        "À propos d’UFDE",
+        "Science, innovation et développement européen — en dialogue.",
+        "L’Institut ukraino-français pour la science, l’innovation et le développement européen réunit ces trois thèmes dans un espace institutionnel commun à Paris.",
+        "Notre perspective",
+        "Le site de l’institut présente sa vocation, ses axes et les possibilités de dialogue. La présentation institutionnelle définitive sera publiée après validation.",
+        "Explorer nos axes stratégiques"
+      ],
+      "strategic-areas": [
+        "Axes stratégiques",
+        "Trois perspectives. Un horizon commun.",
+        "Les axes suivants reflètent le périmètre annoncé d’UFDE. Les programmes et les priorités seront publiés après validation institutionnelle."
+      ],
+      "activities": [
+        "Activités",
+        "Des échanges qui font avancer le savoir.",
+        "Découvrez les activités au fil des publications. Les exemples ci-dessous illustrent un format de contenu et ne décrivent pas des événements ayant eu lieu."
+      ],
+      "projects": [
+        "Projets",
+        "Une coopération porteuse de sens.",
+        "Les projets seront présentés après validation. Les exemples ne représentent ni des initiatives financées, ni des partenariats, ni des résultats."
+      ],
+      "publications": [
+        "Publications",
+        "Des idées pour un dialogue éclairé.",
+        "Les publications approuvées seront disponibles ici. Les exemples ne sont pas des travaux publiés et n’ont ni auteurs, ni résultats, ni rapports à télécharger."
+      ],
+      "team": [
+        "Notre équipe",
+        "Les personnes qui font vivre l’institut.",
+        "Les profils et les responsabilités seront publiés après vérification et accord des personnes concernées.",
+        "Les profils sont en préparation",
+        "Pour toute demande, veuillez contacter UFDE."
+      ],
+      "governance-transparency": [
+        "Gouvernance et transparence",
+        "Clarté, responsabilité et confiance institutionnelle.",
+        "Les informations de gouvernance vérifiées et les documents approuvés seront disponibles ici.",
+        "Documents en attente de publication",
+        "Les statuts, la gouvernance, les rapports annuels et les politiques seront accessibles après réception et validation. Cet aperçu n’affirme aucun statut juridique ni aucune accréditation."
+      ],
+      "contact": [
+        "Contact",
+        "Engageons le dialogue.",
+        "Pour toute demande scientifique, institutionnelle ou générale, contactez UFDE à Paris.",
+        "Coordonnées",
+        "Envoyer une demande"
+      ],
+      "legal-notice": [
+        "Mentions légales",
+        "Informations de publication",
+        "Projet — non approuvé pour une mise en ligne publique.",
+        "Informations sur l’éditeur à compléter",
+        "La dénomination juridique, l’immatriculation, l’adresse du siège, la direction de publication et l’hébergeur doivent être renseignés et vérifiés avant le lancement."
+      ],
+      "privacy": [
+        "Politique de confidentialité",
+        "Vos informations et ce site",
+        "Projet — à examiner avant la mise en ligne publique.",
+        "Demandes et abonnements",
+        "Dans cet aperçu, les formulaires valident les données localement sans les envoyer ni les enregistrer. Avant l’activation des services, l’exploitant doit publier l’identité du responsable, les finalités et bases légales, les destinataires, les durées de conservation et les modalités d’exercice des droits. Contactez UFDE pour toute question."
+      ],
+      "cookies": [
+        "Cookies",
+        "Une approche sobre des données",
+        "Projet — à revoir après configuration de l’hébergement.",
+        "Stockage du site",
+        "Cette version n’intègre ni analyse d’audience, ni pixels publicitaires, ni cookies de suivi facultatifs. L’hébergeur de l’aperçu privé peut utiliser des cookies d’authentification. Tout futur suivi facultatif doit rester désactivé sans mécanisme de consentement approprié."
+      ],
+      "terms": [
+        "Conditions d’utilisation",
+        "Utilisation de ce site",
+        "Projet — en attente de validation institutionnelle et juridique.",
+        "Contenus et autorisations",
+        "Les contenus de démonstration ne doivent pas être cités comme des activités, des recherches ou des partenariats institutionnels. La photographie de Paris possède une licence distincte, accessible depuis l’accueil. Les conditions définitives doivent être approuvées avant le lancement."
+      ]
+    }
+  },
+  "uk": {
+    "nav": [
+      "Головна",
+      "Про інститут",
+      "Діяльність",
+      "Проєкти",
+      "Публікації",
+      "Команда",
+      "Контакти"
+    ],
+    "fullName": "Українсько-французький інститут науки, інновацій та європейського розвитку",
+    "hero": [
+      "УКРАЇНА · ФРАНЦІЯ · ЄВРОПА",
+      "Знання об’єднують.",
+      "Співпраця",
+      "змінює.",
+      "Дізнатися про інститут",
+      "Наші стратегічні напрями"
+    ],
+    "mission": [
+      "Наука. Діалог. Спільний поступ.",
+      "Поєднуємо Україну та Францію через знання"
+    ],
+    "intro": [
+      "ІНСТИТУТ",
+      "Спільне прагнення.",
+      "Європейська перспектива.",
+      "Простір українсько-французького діалогу на перетині науки, інновацій та європейського розвитку.",
+      "Ознайомтеся з напрямами інституту, можливостями співпраці та зв’яжіться з UFDE у Парижі.",
+      "Про UFDE"
+    ],
+    "focus": [
+      "НАШІ НАПРЯМИ",
+      "Знання заради спільного поступу",
+      "Усі стратегічні напрями"
+    ],
+    "areas": [
+      [
+        "Наука та дослідження",
+        "Науковий обмін і міждисциплінарні зв’язки.",
+        "Напрям для діалогу про наукову співпрацю, міждисциплінарні дослідження та обмін знаннями між Україною та Францією."
+      ],
+      [
+        "Інновації та знання",
+        "Відкритий діалог між ідеями, дослідженнями та інноваціями.",
+        "Напрям для обговорення ролі досліджень в інноваціях, передачі знань і пошуку відповідей на спільні виклики."
+      ],
+      [
+        "Європейський розвиток",
+        "Перспективи співпраці та спільного європейського майбутнього.",
+        "Напрям для осмислення європейського розвитку через академічний обмін, інституційний діалог та змістовне обговорення."
+      ]
+    ],
+    "connect": [
+      "РОЗПОЧНІМО ДІАЛОГ",
+      "Нові перспективи",
+      "починаються зі знайомства.",
+      "Зв’язатися з UFDE"
+    ],
+    "footer": [
+      "Навігація",
+      "Наша робота",
+      "Зв’язок з нами",
+      "Будьте в курсі",
+      "Отримуйте майбутні новини UFDE.",
+      "Усі права захищено.",
+      "Соціальні мережі буде додано після перевірки."
+    ],
+    "preview": "Попередній перегляд — інституційні тексти й демонстраційні матеріали очікують затвердження.",
+    "demo": "Демонстраційний матеріал",
+    "read": "Докладніше",
+    "back": "Повернутися до переліку",
+    "skip": "Перейти до вмісту",
+    "menu": "Меню",
+    "close": "Закрити меню",
+    "empty": "Затверджених матеріалів поки немає.",
+    "unavailable": "Матеріали тимчасово недоступні. Спробуйте пізніше.",
+    "overview": "ОГЛЯД",
+    "photo": "Фотографія Парижа",
+    "cropped": "Кадровано для відображення. Демонстраційне зображення.",
+    "form": {
+      "name": "Повне ім’я",
+      "email": "Електронна адреса",
+      "organization": "Організація (необов’язково)",
+      "subject": "Тема",
+      "message": "Ваше повідомлення",
+      "consent": "Я ознайомився/ознайомилася з повідомленням про конфіденційність і погоджуюся на використання моїх даних для відповіді на запит.",
+      "newsletterConsent": "Я погоджуюся отримувати новини UFDE електронною поштою та ознайомився/ознайомилася з повідомленням про конфіденційність.",
+      "send": "Надіслати запит",
+      "subscribe": "Підписатися",
+      "sending": "Надсилання…",
+      "success": "Дякуємо. Ваш запит зареєстровано для команди UFDE.",
+      "subscribed": "Дякуємо. Вашу підписку зареєстровано.",
+      "demoSuccess": "Перевірку завершено. Дані не надсилалися й не зберігалися.",
+      "demoNotice": "Демонстраційна форма: дані не надсилаються й не зберігаються.",
+      "error": "Не вдалося надіслати запит. Спробуйте ще раз або скористайтеся вказаною електронною адресою.",
+      "invalid": "Перевірте це поле.",
+      "privacy": "Повідомлення про конфіденційність"
+    },
+    "pages": {
+      "about": [
+        "Про UFDE",
+        "Наука, інновації та європейський розвиток — у діалозі.",
+        "Українсько-французький інститут науки, інновацій та європейського розвитку об’єднує ці три теми у спільному інституційному просторі в Парижі.",
+        "Наше бачення",
+        "Сайт інституту представляє його призначення, напрями та можливості діалогу. Остаточний інституційний профіль буде опубліковано після затвердження.",
+        "Переглянути стратегічні напрями"
+      ],
+      "strategic-areas": [
+        "Стратегічні напрями",
+        "Три перспективи. Спільний горизонт.",
+        "Наведені напрями відображають заявлену сферу діяльності UFDE. Програми та пріоритети буде опубліковано після інституційного затвердження."
+      ],
+      "activities": [
+        "Діяльність",
+        "Діалог, що сприяє розвитку знань.",
+        "Ознайомлюйтеся з діяльністю в міру публікації матеріалів. Наведені приклади ілюструють формат і не описують події, що відбулися."
+      ],
+      "projects": [
+        "Проєкти",
+        "Змістовна співпраця.",
+        "Інформацію буде опубліковано після затвердження. Приклади не означають наявності фінансування, партнерів чи результатів."
+      ],
+      "publications": [
+        "Публікації",
+        "Ідеї для змістовного діалогу.",
+        "Тут з’являться затверджені публікації. Приклади не є опублікованими дослідженнями й не мають авторів, результатів або звітів для завантаження."
+      ],
+      "team": [
+        "Наша команда",
+        "Люди, які творять інститут.",
+        "Перевірені профілі та обов’язки буде опубліковано за згодою відповідних осіб.",
+        "Профілі готуються до публікації",
+        "З усіх питань поки що звертайтеся до UFDE."
+      ],
+      "governance-transparency": [
+        "Управління та прозорість",
+        "Відкритість, відповідальність та інституційна довіра.",
+        "Тут буде розміщено перевірену інформацію про управління та затверджені документи.",
+        "Документи очікують публікації",
+        "Статут, структура управління, річні звіти та політики будуть доступні після отримання й затвердження. Цей перегляд не підтверджує юридичний статус або акредитацію."
+      ],
+      "contact": [
+        "Контакти",
+        "Розпочнімо розмову.",
+        "З наукових, інституційних та загальних питань звертайтеся до UFDE у Парижі.",
+        "Контактні дані",
+        "Надіслати запит"
+      ],
+      "legal-notice": [
+        "Юридична інформація",
+        "Відомості про видавця",
+        "Проєкт — не затверджено для публічного запуску.",
+        "Дані видавця очікують уточнення",
+        "Юридичну назву, реєстраційні дані, адресу, відповідального за публікацію та хостинг-провайдера слід надати й перевірити перед запуском."
+      ],
+      "privacy": [
+        "Політика конфіденційності",
+        "Ваші дані та цей сайт",
+        "Проєкт — потребує перевірки перед публічним запуском.",
+        "Запити та підписки",
+        "У цьому перегляді форми перевіряють дані локально, не надсилаючи й не зберігаючи їх. Перед увімкненням сервісів оператор має опублікувати дані контролера, цілі й правові підстави, одержувачів, строки зберігання та порядок реалізації прав. Із запитаннями звертайтеся до UFDE."
+      ],
+      "cookies": [
+        "Файли cookie",
+        "Стриманий підхід до даних",
+        "Проєкт — перевірити після налаштування хостингу.",
+        "Зберігання даних сайту",
+        "Ця версія не містить аналітики, рекламних пікселів або необов’язкових файлів відстеження. Хостинг приватного перегляду може використовувати файли автентифікації. Майбутнє необов’язкове відстеження має залишатися вимкненим без належного механізму згоди."
+      ],
+      "terms": [
+        "Умови використання",
+        "Користування сайтом",
+        "Проєкт — очікує інституційної та юридичної перевірки.",
+        "Матеріали та дозволи",
+        "Демонстраційні матеріали не можна цитувати як інституційну діяльність, дослідження чи партнерство. Фотографія Парижа має окрему ліцензію, посилання на яку наведено на головній сторінці. Остаточні умови мають бути затверджені перед запуском."
+      ]
+    }
+  }
+}

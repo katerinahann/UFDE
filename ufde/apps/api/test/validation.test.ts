@@ -1,0 +1,13 @@
+import 'reflect-metadata';
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {plainToInstance} from 'class-transformer';
+import {validate} from 'class-validator';
+import {ContactDto,NewsletterDto} from '../src/dto';
+import {validateEnvironment} from '../src/environment';
+import {AdminGuard} from '../src/admin.guard';
+import {ConfigService} from '@nestjs/config';
+test('contact validates and normalizes email, rejects absent consent and oversize message',async()=>{const valid={name:'Test Reviewer',email:' TEST@example.org ',subject:'Website enquiry',message:'A sufficiently detailed test enquiry.',locale:'en',consent:true};const dto=plainToInstance(ContactDto,valid);assert.equal((await validate(dto)).length,0);assert.equal(dto.email,'test@example.org');assert.ok((await validate(plainToInstance(ContactDto,{...valid,consent:false}))).length);assert.ok((await validate(plainToInstance(ContactDto,{...valid,message:'x'.repeat(5001)}))).length)});
+test('newsletter rejects honeypot and invalid locale',async()=>{assert.ok((await validate(plainToInstance(NewsletterDto,{email:'x@example.org',locale:'xx',consent:true,website:'spam'}))).length)});
+test('production refuses unsafe configuration',()=>{assert.throws(()=>validateEnvironment({NODE_ENV:'production',DATABASE_URL:'postgresql://localhost/test'}));assert.throws(()=>validateEnvironment({NODE_ENV:'production',DATABASE_URL:'postgresql://localhost/test',ADMIN_API_TOKEN:'x'.repeat(48),CORS_ORIGINS:'http://example.org',LEGAL_APPROVED:'true'}));assert.doesNotThrow(()=>validateEnvironment({NODE_ENV:'production',DATABASE_URL:'postgresql://localhost/test',ADMIN_API_TOKEN:'x'.repeat(48),CORS_ORIGINS:'https://example.org',LEGAL_APPROVED:'true'}))});
+test('admin endpoints require exact configured bearer token',()=>{const token='x'.repeat(48);const guard=new AdminGuard(new ConfigService({ADMIN_API_TOKEN:token}));const ctx=(authorization:string)=>({switchToHttp:()=>({getRequest:()=>({headers:{authorization}})})}) as any;assert.equal(guard.canActivate(ctx('Bearer '+token)),true);assert.throws(()=>guard.canActivate(ctx('Bearer invalid')));assert.throws(()=>new AdminGuard(new ConfigService({})).canActivate(ctx('Bearer '+token)))});

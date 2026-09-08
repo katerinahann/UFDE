@@ -1,0 +1,93 @@
+generator client {
+  provider = "prisma-client"
+  output = "../src/generated/prisma"
+  moduleFormat = "cjs"
+}
+datasource db {
+  provider = "postgresql"
+}
+enum ContentKind {
+  ACTIVITY
+  PROJECT
+  PUBLICATION
+}
+model Content {
+  id String @id @default(cuid())
+  slug String @unique
+  kind ContentKind
+  published Boolean @default(false)
+  isDemo Boolean @default(true)
+  publishedAt DateTime?
+  imageId String?
+  image Asset? @relation(fields:[imageId], references:[id], onDelete: SetNull)
+  translations ContentTranslation[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([kind, published, isDemo, publishedAt])
+}
+model ContentTranslation {
+  id String @id @default(cuid())
+  contentId String
+  content Content @relation(fields:[contentId], references:[id], onDelete: Cascade)
+  locale String
+  title String
+  summary String
+  body String
+  category String
+  seoTitle String?
+  seoDescription String?
+  @@unique([contentId, locale])
+}
+model Asset {
+  id String @id @default(cuid())
+  url String
+  alt String
+  credit String?
+  licenseUrl String?
+  contents Content[]
+  createdAt DateTime @default(now())
+}
+model Page {
+  id String @id @default(cuid())
+  slug String
+  locale String
+  blocks Json
+  approved Boolean @default(false)
+  updatedAt DateTime @updatedAt
+  @@unique([slug,locale])
+}
+model SiteSetting {
+  key String @id
+  value Json
+  updatedAt DateTime @updatedAt
+}
+model TeamMember {
+  id String @id @default(cuid())
+  name String
+  role Json
+  biography Json
+  photoUrl String?
+  photoAlt String?
+  published Boolean @default(false)
+  order Int @default(0)
+  updatedAt DateTime @updatedAt
+}
+model ContactSubmission {
+  id String @id @default(cuid())
+  name String
+  email String
+  organization String?
+  subject String
+  message String
+  locale String
+  consentVersion String
+  createdAt DateTime @default(now())
+  @@index([createdAt])
+}
+model Subscriber {
+  id String @id @default(cuid())
+  email String @unique
+  locale String
+  consentVersion String
+  createdAt DateTime @default(now())
+}
