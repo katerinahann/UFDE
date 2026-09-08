@@ -1,93 +1,845 @@
 generator client {
-  provider = "prisma-client"
-  output = "../src/generated/prisma"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
   moduleFormat = "cjs"
 }
+
 datasource db {
   provider = "postgresql"
 }
+
 enum ContentKind {
   ACTIVITY
   PROJECT
   PUBLICATION
 }
+
+// Legacy compatibility models: retained until the API repositories are migrated.
 model Content {
-  id String @id @default(cuid())
-  slug String @unique
-  kind ContentKind
-  published Boolean @default(false)
-  isDemo Boolean @default(true)
-  publishedAt DateTime?
-  imageId String?
-  image Asset? @relation(fields:[imageId], references:[id], onDelete: SetNull)
+  id           String               @id @default(cuid())
+  slug         String               @unique
+  kind         ContentKind
+  published    Boolean              @default(false)
+  isDemo       Boolean              @default(true)
+  publishedAt  DateTime?
+  imageId      String?
+  image        Asset?               @relation(fields: [imageId], references: [id], onDelete: SetNull)
   translations ContentTranslation[]
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @updatedAt
+
   @@index([kind, published, isDemo, publishedAt])
 }
+
 model ContentTranslation {
-  id String @id @default(cuid())
-  contentId String
-  content Content @relation(fields:[contentId], references:[id], onDelete: Cascade)
-  locale String
-  title String
-  summary String
-  body String
-  category String
-  seoTitle String?
+  id             String   @id @default(cuid())
+  contentId      String
+  content        Content  @relation(fields: [contentId], references: [id], onDelete: Cascade)
+  locale         String
+  title          String
+  summary        String
+  body           String
+  category       String
+  seoTitle       String?
   seoDescription String?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+
   @@unique([contentId, locale])
 }
+
 model Asset {
-  id String @id @default(cuid())
-  url String
-  alt String
-  credit String?
+  id         String    @id @default(cuid())
+  url        String
+  alt        String
+  credit     String?
   licenseUrl String?
-  contents Content[]
-  createdAt DateTime @default(now())
+  contents   Content[]
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @default(now()) @updatedAt
 }
+
 model Page {
-  id String @id @default(cuid())
-  slug String
-  locale String
-  blocks Json
-  approved Boolean @default(false)
+  id        String   @id @default(cuid())
+  slug      String
+  locale    String
+  blocks    Json
+  approved  Boolean  @default(false)
   updatedAt DateTime @updatedAt
-  @@unique([slug,locale])
+
+  @@unique([slug, locale])
 }
+
 model SiteSetting {
-  key String @id
-  value Json
+  key       String   @id
+  value     Json
   updatedAt DateTime @updatedAt
-}
-model TeamMember {
-  id String @id @default(cuid())
-  name String
-  role Json
-  biography Json
-  photoUrl String?
-  photoAlt String?
-  published Boolean @default(false)
-  order Int @default(0)
-  updatedAt DateTime @updatedAt
-}
-model ContactSubmission {
-  id String @id @default(cuid())
-  name String
-  email String
-  organization String?
-  subject String
-  message String
-  locale String
-  consentVersion String
   createdAt DateTime @default(now())
+}
+
+model TeamMember {
+  id                   String                  @id @default(cuid())
+  name                 String
+  role                 Json                    @default("{}")
+  biography            Json                    @default("{}")
+  photoUrl             String?
+  photoAlt             String?
+  published            Boolean                 @default(false)
+  order                Int                     @default(0)
+  updatedAt            DateTime                @updatedAt
+  createdAt            DateTime                @default(now())
+  slug                 String                  @unique @default(cuid())
+  category             TeamCategory?
+  publishedAt          DateTime?
+  isDemo               Boolean                 @default(false)
+  portraitId           String?
+  portrait             Media?                  @relation("TeamPortrait", fields: [portraitId], references: [id], onDelete: SetNull)
+  email                String?
+  linkedin             String?
+  orcid                String?
+  googleScholar        String?
+  institutionalProfile String?
+  translations         TeamMemberTranslation[]
+  expertise            TeamMemberExpertise[]
+  ledProjects          Project[]
+  user                 User?
+
+  @@index([category, published, isDemo, order])
+}
+
+model ContactSubmission {
+  id             String   @id @default(cuid())
+  name           String
+  email          String
+  organization   String?
+  subject        String
+  message        String
+  locale         String
+  consentVersion String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+
   @@index([createdAt])
 }
+
 model Subscriber {
-  id String @id @default(cuid())
-  email String @unique
-  locale String
+  id             String   @id @default(cuid())
+  email          String   @unique
+  locale         String
   consentVersion String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
+}
+
+// Normalized platform domain. Localized copy belongs to translation tables.
+enum Locale {
+  EN
+  FR
+  UK
+}
+
+enum PublicationType {
+  SCIENTIFIC_JOURNAL
+  RESEARCH_REPORT
+  POLICY_BRIEF
+  WORKING_PAPER
+  ARTICLE_INSIGHT
+}
+
+enum PublicationStatus {
+  DRAFT
+  FORTHCOMING
+  PUBLISHED
+}
+
+enum ProjectStatus {
+  PLANNED
+  UPCOMING
+  ONGOING
+  COMPLETED
+}
+
+enum TeamCategory {
+  LEADERSHIP
+  ADVISORY
+}
+
+enum PartnerType {
+  INSTITUTIONAL
+  ACADEMIC
+  RESEARCH
+  PUBLIC_AUTHORITY
+  INTERNATIONAL_ORGANISATION
+  LOCAL_AUTHORITY
+  STRATEGIC
+}
+
+enum PartnerLabel {
+  OUR_PARTNERS
+  INSTITUTIONAL_PARTNERS
+  SELECTED_PARTNERS
+  COLLABORATING_INSTITUTIONS
+}
+
+enum MediaVisibility {
+  PRIVATE
+  PUBLIC
+}
+
+enum DocumentStatus {
+  DRAFT
+  COMING_SOON
+  AVAILABLE
+}
+
+enum SubscriptionStatus {
+  PENDING
+  SUBSCRIBED
+  UNSUBSCRIBED
+}
+
+model User {
+  id              String      @id @default(cuid())
+  slug            String      @unique @default(cuid())
+  email           String      @unique
+  name            String
+  passwordHash    String?
+  emailVerifiedAt DateTime?
+  active          Boolean     @default(false)
+  isDemo          Boolean     @default(false)
+  teamMemberId    String?     @unique
+  teamMember      TeamMember? @relation(fields: [teamMemberId], references: [id], onDelete: SetNull)
+  roles           UserRole[]
+  uploads         Media[]
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @default(now()) @updatedAt
+}
+
+model Role {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  name        String
+  permissions String[]   @default([])
+  users       UserRole[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @default(now()) @updatedAt
+}
+
+model UserRole {
+  userId    String
+  roleId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  role      Role     @relation(fields: [roleId], references: [id], onDelete: Cascade)
   createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@id([userId, roleId])
+  @@index([roleId])
+}
+
+model SiteSettings {
+  id                     String       @id @default("site")
+  siteName               String
+  defaultLocale          Locale       @default(EN)
+  enabledLocales         Locale[]     @default([EN, FR, UK])
+  contactEmail           String?
+  contactPhone           String?
+  registeredOffice       String?
+  foundedYear            Int?
+  legalName              String?
+  legalForm              String?
+  registrationNumber     String?
+  registrationDate       DateTime?    @db.Date
+  officialPublicationUrl String?
+  siren                  String?
+  siret                  String?
+  socialLinks            Json         @default("{}")
+  partnerLabel           PartnerLabel @default(OUR_PARTNERS)
+  logoId                 String?
+  logo                   Media?       @relation("SiteLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  isDemo                 Boolean      @default(false)
+  createdAt              DateTime     @default(now())
+  updatedAt              DateTime     @default(now()) @updatedAt
+}
+
+model PageSEO {
+  id               String   @id @default(cuid())
+  slug             String
+  locale           Locale
+  title            String
+  description      String?
+  canonicalUrl     String?
+  noIndex          Boolean  @default(true)
+  openGraphImageId String?
+  openGraphImage   Media?   @relation("SEOImage", fields: [openGraphImageId], references: [id], onDelete: SetNull)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now()) @updatedAt
+
+  @@unique([slug, locale])
+}
+
+model Media {
+  id                  String                @id @default(cuid())
+  slug                String                @unique @default(cuid())
+  storageKey          String?               @unique
+  url                 String
+  filename            String
+  mimeType            String
+  sizeBytes           BigInt?
+  width               Int?
+  height              Int?
+  sha256              String?
+  credit              String?
+  licenseUrl          String?
+  visibility          MediaVisibility       @default(PRIVATE)
+  isDemo              Boolean               @default(false)
+  uploadedById        String?
+  uploadedBy          User?                 @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+  translations        MediaTranslation[]
+  activityImages      ActivityImage[]
+  activityCovers      Activity[]            @relation("ActivityCover")
+  projectCovers       Project[]             @relation("ProjectCover")
+  publicationCovers   Publication[]         @relation("PublicationCover")
+  publicationFiles    Publication[]         @relation("PublicationPDF")
+  portraits           TeamMember[]          @relation("TeamPortrait")
+  partnerLogos        Partner[]             @relation("PartnerLogo")
+  documentFiles       Document[]            @relation("DocumentFile")
+  translatedDocuments DocumentTranslation[] @relation("TranslatedDocumentFile")
+  seoImages           PageSEO[]             @relation("SEOImage")
+  siteLogos           SiteSettings[]        @relation("SiteLogo")
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime              @default(now()) @updatedAt
+
+  @@index([uploadedById])
+  @@index([visibility, isDemo])
+}
+
+model MediaTranslation {
+  id        String   @id @default(cuid())
+  mediaId   String
+  locale    Locale
+  altText   String
+  caption   String?
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([mediaId, locale])
+}
+
+model ActivityCategory {
+  id           String                        @id @default(cuid())
+  slug         String                        @unique
+  sortOrder    Int                           @default(0)
+  published    Boolean                       @default(false)
+  publishedAt  DateTime?
+  isDemo       Boolean                       @default(false)
+  translations ActivityCategoryTranslation[]
+  activities   Activity[]
+  createdAt    DateTime                      @default(now())
+  updatedAt    DateTime                      @default(now()) @updatedAt
+}
+
+model ActivityCategoryTranslation {
+  id          String           @id @default(cuid())
+  categoryId  String
+  locale      Locale
+  name        String
+  description String?
+  category    ActivityCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @default(now()) @updatedAt
+
+  @@unique([categoryId, locale])
+}
+
+model Activity {
+  id              String                @id @default(cuid())
+  slug            String                @unique
+  categoryId      String?
+  category        ActivityCategory?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  strategicAreaId String?
+  strategicArea   StrategicArea?        @relation(fields: [strategicAreaId], references: [id], onDelete: SetNull)
+  coverId         String?
+  cover           Media?                @relation("ActivityCover", fields: [coverId], references: [id], onDelete: SetNull)
+  startsAt        DateTime?
+  endsAt          DateTime?
+  timezone        String                @default("Europe/Paris")
+  countryCode     String?
+  eventUrl        String?
+  featured        Boolean               @default(false)
+  published       Boolean               @default(false)
+  publishedAt     DateTime?
+  isDemo          Boolean               @default(false)
+  translations    ActivityTranslation[]
+  images          ActivityImage[]
+  partners        ActivityPartner[]
+  projects        ProjectActivity[]
+  documents       ActivityDocument[]
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @default(now()) @updatedAt
+
+  @@index([published, isDemo, publishedAt])
+  @@index([categoryId])
+  @@index([strategicAreaId])
+  @@index([coverId])
+}
+
+model ActivityTranslation {
+  id         String   @id @default(cuid())
+  activityId String
+  locale     Locale
+  title      String
+  summary    String
+  body       String
+  location   String?
+  coverAlt   String?
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@unique([activityId, locale])
+}
+
+model ActivityImage {
+  id         String   @id @default(cuid())
+  activityId String
+  mediaId    String
+  sortOrder  Int      @default(0)
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  media      Media    @relation(fields: [mediaId], references: [id], onDelete: Restrict)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@unique([activityId, mediaId])
+  @@index([activityId, sortOrder])
+  @@index([mediaId])
+}
+
+model ProjectCategory {
+  id           String                       @id @default(cuid())
+  slug         String                       @unique
+  sortOrder    Int                          @default(0)
+  published    Boolean                      @default(false)
+  publishedAt  DateTime?
+  isDemo       Boolean                      @default(false)
+  translations ProjectCategoryTranslation[]
+  projects     Project[]
+  createdAt    DateTime                     @default(now())
+  updatedAt    DateTime                     @default(now()) @updatedAt
+}
+
+model ProjectCategoryTranslation {
+  id          String          @id @default(cuid())
+  categoryId  String
+  locale      Locale
+  name        String
+  description String?
+  category    ProjectCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @default(now()) @updatedAt
+
+  @@unique([categoryId, locale])
+}
+
+model Project {
+  id              String               @id @default(cuid())
+  slug            String               @unique
+  status          ProjectStatus        @default(PLANNED)
+  startDate       DateTime?            @db.Date
+  endDate         DateTime?            @db.Date
+  countries       String[]             @default([])
+  contactEmail    String?
+  categoryId      String?
+  category        ProjectCategory?     @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  strategicAreaId String?
+  strategicArea   StrategicArea?       @relation(fields: [strategicAreaId], references: [id], onDelete: SetNull)
+  leadId          String?
+  lead            TeamMember?          @relation(fields: [leadId], references: [id], onDelete: SetNull)
+  coverId         String?
+  cover           Media?               @relation("ProjectCover", fields: [coverId], references: [id], onDelete: SetNull)
+  featured        Boolean              @default(false)
+  sortOrder       Int                  @default(0)
+  published       Boolean              @default(false)
+  publishedAt     DateTime?
+  isDemo          Boolean              @default(false)
+  translations    ProjectTranslation[]
+  partners        ProjectPartner[]
+  activities      ProjectActivity[]
+  documents       ProjectDocument[]
+  publications    ProjectPublication[]
+  createdAt       DateTime             @default(now())
+  updatedAt       DateTime             @default(now()) @updatedAt
+
+  @@index([published, isDemo, status, publishedAt])
+  @@index([categoryId])
+  @@index([strategicAreaId])
+  @@index([leadId])
+  @@index([coverId])
+}
+
+model ProjectTranslation {
+  id              String   @id @default(cuid())
+  projectId       String
+  locale          Locale
+  title           String
+  summary         String
+  background      String?
+  objectives      String[] @default([])
+  activities      String[] @default([])
+  outcomes        String[] @default([])
+  institutionType String?
+  coverAlt        String?
+  project         Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+
+  @@unique([projectId, locale])
+}
+
+model Partner {
+  id           String               @id @default(cuid())
+  slug         String               @unique
+  name         String
+  website      String?
+  countryCode  String?
+  partnerType  PartnerType          @default(INSTITUTIONAL)
+  logoId       String?
+  logo         Media?               @relation("PartnerLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  featured     Boolean              @default(false)
+  sortOrder    Int                  @default(0)
+  published    Boolean              @default(false)
+  publishedAt  DateTime?
+  isDemo       Boolean              @default(false)
+  translations PartnerTranslation[]
+  projects     ProjectPartner[]
+  activities   ActivityPartner[]
+  createdAt    DateTime             @default(now())
+  updatedAt    DateTime             @default(now()) @updatedAt
+
+  @@index([published, isDemo, featured, sortOrder])
+  @@index([logoId])
+}
+
+model PartnerTranslation {
+  id          String   @id @default(cuid())
+  partnerId   String
+  locale      Locale
+  displayName String?
+  description String?
+  logoAlt     String?
+  partner     Partner  @relation(fields: [partnerId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  @@unique([partnerId, locale])
+}
+
+model ProjectPartner {
+  projectId String
+  partnerId String
+  role      String?
+  approved  Boolean  @default(false)
+  sortOrder Int      @default(0)
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  partner   Partner  @relation(fields: [partnerId], references: [id], onDelete: Restrict)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@id([projectId, partnerId])
+  @@index([partnerId])
+}
+
+model ActivityPartner {
+  activityId String
+  partnerId  String
+  approved   Boolean  @default(false)
+  sortOrder  Int      @default(0)
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  partner    Partner  @relation(fields: [partnerId], references: [id], onDelete: Restrict)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@id([activityId, partnerId])
+  @@index([partnerId])
+}
+
+model Publication {
+  id              String                   @id @default(cuid())
+  slug            String                   @unique
+  type            PublicationType
+  status          PublicationStatus        @default(DRAFT)
+  language        Locale                   @default(EN)
+  year            Int?
+  doi             String?                  @unique
+  isbn            String?
+  externalUrl     String?
+  coverId         String?
+  cover           Media?                   @relation("PublicationCover", fields: [coverId], references: [id], onDelete: SetNull)
+  pdfId           String?
+  pdf             Media?                   @relation("PublicationPDF", fields: [pdfId], references: [id], onDelete: SetNull)
+  strategicAreaId String?
+  strategicArea   StrategicArea?           @relation(fields: [strategicAreaId], references: [id], onDelete: SetNull)
+  featured        Boolean                  @default(false)
+  published       Boolean                  @default(false)
+  publishedAt     DateTime?
+  isDemo          Boolean                  @default(false)
+  translations    PublicationTranslation[]
+  authors         PublicationAuthorship[]
+  projects        ProjectPublication[]
+  documents       PublicationDocument[]
+  createdAt       DateTime                 @default(now())
+  updatedAt       DateTime                 @default(now()) @updatedAt
+
+  @@index([published, isDemo, status, type, publishedAt])
+  @@index([coverId])
+  @@index([pdfId])
+  @@index([strategicAreaId])
+}
+
+model PublicationTranslation {
+  id               String      @id @default(cuid())
+  publicationId    String
+  locale           Locale
+  title            String
+  summary          String
+  abstract         String
+  executiveSummary String?
+  citation         String?
+  coverAlt         String?
+  publication      Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @default(now()) @updatedAt
+
+  @@unique([publicationId, locale])
+}
+
+model PublicationAuthor {
+  id                   String                  @id @default(cuid())
+  slug                 String                  @unique
+  name                 String
+  orcid                String?                 @unique
+  institutionalProfile String?
+  affiliation          String?
+  isDemo               Boolean                 @default(false)
+  publications         PublicationAuthorship[]
+  createdAt            DateTime                @default(now())
+  updatedAt            DateTime                @default(now()) @updatedAt
+}
+
+model PublicationAuthorship {
+  publicationId String
+  authorId      String
+  sortOrder     Int               @default(0)
+  corresponding Boolean           @default(false)
+  publication   Publication       @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  author        PublicationAuthor @relation(fields: [authorId], references: [id], onDelete: Restrict)
+  createdAt     DateTime          @default(now())
+  updatedAt     DateTime          @default(now()) @updatedAt
+
+  @@id([publicationId, authorId])
+  @@unique([publicationId, sortOrder])
+  @@index([authorId])
+}
+
+model TeamMemberTranslation {
+  id              String     @id @default(cuid())
+  teamMemberId    String
+  locale          Locale
+  displayName     String?
+  role            String
+  biography       String
+  institutionRole String?
+  portraitAlt     String?
+  teamMember      TeamMember @relation(fields: [teamMemberId], references: [id], onDelete: Cascade)
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @default(now()) @updatedAt
+
+  @@unique([teamMemberId, locale])
+}
+
+model Expertise {
+  id           String                 @id @default(cuid())
+  slug         String                 @unique
+  isDemo       Boolean                @default(false)
+  translations ExpertiseTranslation[]
+  members      TeamMemberExpertise[]
+  createdAt    DateTime               @default(now())
+  updatedAt    DateTime               @default(now()) @updatedAt
+}
+
+model ExpertiseTranslation {
+  id          String    @id @default(cuid())
+  expertiseId String
+  locale      Locale
+  name        String
+  expertise   Expertise @relation(fields: [expertiseId], references: [id], onDelete: Cascade)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @default(now()) @updatedAt
+
+  @@unique([expertiseId, locale])
+}
+
+model TeamMemberExpertise {
+  teamMemberId String
+  expertiseId  String
+  teamMember   TeamMember @relation(fields: [teamMemberId], references: [id], onDelete: Cascade)
+  expertise    Expertise  @relation(fields: [expertiseId], references: [id], onDelete: Restrict)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @default(now()) @updatedAt
+
+  @@id([teamMemberId, expertiseId])
+  @@index([expertiseId])
+}
+
+model Document {
+  id              String                @id @default(cuid())
+  slug            String                @unique
+  type            String
+  status          DocumentStatus        @default(DRAFT)
+  language        Locale                @default(EN)
+  publicationDate DateTime?             @db.Date
+  fileId          String?
+  file            Media?                @relation("DocumentFile", fields: [fileId], references: [id], onDelete: SetNull)
+  public          Boolean               @default(false)
+  published       Boolean               @default(false)
+  publishedAt     DateTime?
+  isDemo          Boolean               @default(false)
+  sortOrder       Int                   @default(0)
+  translations    DocumentTranslation[]
+  projects        ProjectDocument[]
+  activities      ActivityDocument[]
+  publications    PublicationDocument[]
+  createdAt       DateTime              @default(now())
+  updatedAt       DateTime              @default(now()) @updatedAt
+
+  @@index([public, published, isDemo, sortOrder])
+  @@index([fileId])
+}
+
+model DocumentTranslation {
+  id          String   @id @default(cuid())
+  documentId  String
+  locale      Locale
+  title       String
+  description String?
+  // A translated PDF may be a different file, while dates/access/order remain shared.
+  fileId      String?
+  file        Media?   @relation("TranslatedDocumentFile", fields: [fileId], references: [id], onDelete: SetNull)
+  document    Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
+
+  @@unique([documentId, locale])
+  @@index([fileId])
+}
+
+model StrategicArea {
+  id           String                     @id @default(cuid())
+  slug         String                     @unique
+  iconKey      String?
+  sortOrder    Int                        @default(0)
+  published    Boolean                    @default(false)
+  publishedAt  DateTime?
+  isDemo       Boolean                    @default(false)
+  translations StrategicAreaTranslation[]
+  activities   Activity[]
+  projects     Project[]
+  publications Publication[]
+  createdAt    DateTime                   @default(now())
+  updatedAt    DateTime                   @default(now()) @updatedAt
+
+  @@index([published, isDemo, sortOrder])
+}
+
+model StrategicAreaTranslation {
+  id              String        @id @default(cuid())
+  strategicAreaId String
+  locale          Locale
+  title           String
+  summary         String
+  body            String?
+  strategicArea   StrategicArea @relation(fields: [strategicAreaId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @default(now()) @updatedAt
+
+  @@unique([strategicAreaId, locale])
+}
+
+model NewsletterSubscriber {
+  id                    String             @id @default(cuid())
+  email                 String             @unique
+  locale                Locale             @default(EN)
+  status                SubscriptionStatus @default(PENDING)
+  consentVersion        String
+  consentedAt           DateTime
+  confirmedAt           DateTime?
+  unsubscribedAt        DateTime?
+  confirmationTokenHash String?            @unique
+  unsubscribeTokenHash  String?            @unique
+  isDemo                Boolean            @default(false)
+  createdAt             DateTime           @default(now())
+  updatedAt             DateTime           @default(now()) @updatedAt
+
+  @@index([status, locale])
+}
+
+model ProjectActivity {
+  projectId  String
+  activityId String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@id([projectId, activityId])
+  @@index([activityId])
+}
+
+model ProjectPublication {
+  projectId     String
+  publicationId String
+  project       Project     @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  publication   Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now()) @updatedAt
+
+  @@id([projectId, publicationId])
+  @@index([publicationId])
+}
+
+model ProjectDocument {
+  projectId  String
+  documentId String
+  project    Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@id([projectId, documentId])
+  @@index([documentId])
+}
+
+model ActivityDocument {
+  activityId String
+  documentId String
+  activity   Activity @relation(fields: [activityId], references: [id], onDelete: Cascade)
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@id([activityId, documentId])
+  @@index([documentId])
+}
+
+model PublicationDocument {
+  publicationId String
+  documentId    String
+  publication   Publication @relation(fields: [publicationId], references: [id], onDelete: Cascade)
+  document      Document    @relation(fields: [documentId], references: [id], onDelete: Restrict)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now()) @updatedAt
+
+  @@id([publicationId, documentId])
+  @@index([documentId])
 }
