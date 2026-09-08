@@ -2,7 +2,7 @@ import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestExce
 import {ApiBearerAuth,ApiTags} from '@nestjs/swagger';
 import {PrismaService} from './prisma.service';
 import {AdminGuard} from './admin.guard';
-import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto} from './dto';
+import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto} from './dto';
 @ApiTags('Editorial administration') @ApiBearerAuth() @UseGuards(AdminGuard) @Controller('admin')
 export class AdminController {
  constructor(private readonly db:PrismaService){}
@@ -17,6 +17,8 @@ export class AdminController {
  @Put('settings/about-profile') aboutProfile(@Body() dto:AboutProfileDto){const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key:'aboutProfile'},create:{key:'aboutProfile',value},update:{value}})}
  @Put('activity-details/:slug') async activityDetails(@Param('slug') slug:string,@Query() q:ListQuery,@Body() dto:ActivityDetailsDto){const content=await this.db.content.findUnique({where:{slug}});if(!content||content.kind!=='ACTIVITY')throw new NotFoundException();const key='activity:'+slug+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
  @Put('project-details/:slug') async projectDetails(@Param('slug') slug:string,@Query() q:ListQuery,@Body() dto:ProjectDetailsDto){const content=await this.db.content.findUnique({where:{slug}});if(!content||content.kind!=='PROJECT')throw new NotFoundException();if(dto.startDate&&dto.endDate&&new Date(dto.endDate)<new Date(dto.startDate))throw new BadRequestException('Project end date precedes start date');const key='project:'+slug+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
+ @Put('publications/:slug') publication(@Param('slug') slug:string,@Query() q:ListQuery,@Body() dto:PublicationDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');if(dto.status==='Published'&&(!dto.authors.length||!dto.summary.trim()||!dto.abstract.trim()||(!dto.publishedAt&&!dto.year)))throw new BadRequestException('Published publications require authors, summary, abstract and date or year');const key='publication:'+slug+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
+ @Get('publications') async publications(@Query() q:ListQuery){return (await this.db.siteSetting.findMany({where:{key:{startsWith:'publication:',endsWith:':'+q.locale}},take:q.limit,skip:q.offset,orderBy:{key:'asc'}})).map(r=>r.value)}
  @Get('pages') pages(@Query() q:ListQuery){return this.db.page.findMany({take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
  @Post('team') team(@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.create({data:dto})}
  @Put('team/:id') updateTeam(@Param('id') id:string,@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.update({where:{id},data:dto})}

@@ -6,3 +6,5 @@ export interface ActivityDetails {date?:string;location?:string;gallery:{url:str
 export type ProjectStatus='Ongoing'|'Upcoming'|'Completed'|'Planned';
 export interface ProjectDetails {status?:ProjectStatus;category?:string;startDate?:string;endDate?:string;institutionType?:string;strategicArea?:string;lead?:string;countries:string[];partners:PartnerRecord[];background?:string;objectives:string[];activities:string[];outcomes:string[];resources:{title:string;url:string;format:'PDF'|'Link'}[];relatedActivitySlugs:string[];contactEmail?:string;featured:boolean}
 export interface ProjectView {record:ContentRecord;details:ProjectDetails}
+export type PublicationType='Scientific Journal'|'Research Reports'|'Policy Briefs'|'Working Papers'|'Articles & Insights';
+export interface Publication {title:string;slug:string;type:PublicationType;coverImage?:{url:string;alt:string};summary:string;abstract:string;executiveSummary?:string;authors:string[];publishedAt?:string;year?:number;language:string;pdfUrl?:string;externalUrl?:string;doi?:string;isbn?:string;citation?:string;featured:boolean;status:'Published'|'Forthcoming'|'Draft';isDemo:boolean}

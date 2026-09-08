@@ -126,3 +126,25 @@ export class ProjectDetailsDto {
  @ApiPropertyOptional() @IsOptional() @IsEmail() @MaxLength(250) contactEmail?:string;
  @ApiProperty() @IsBoolean() featured!:boolean;
 }
+
+export class PublicationDto {
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(300) title!:string;
+ @ApiProperty() @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/) @MaxLength(160) slug!:string;
+ @ApiProperty() @IsIn(['Scientific Journal','Research Reports','Policy Briefs','Working Papers','Articles & Insights']) type!:string;
+ @ApiPropertyOptional({type:AssetDto}) @IsOptional() @ValidateNested() @Type(()=>AssetDto) coverImage?:AssetDto;
+ @ApiProperty() @IsString() @MaxLength(1000) summary!:string;
+ @ApiProperty() @IsString() @MaxLength(30000) abstract!:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(30000) executiveSummary?:string;
+ @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(100) @IsString({each:true}) @MinLength(1,{each:true}) @MaxLength(200,{each:true}) authors!:string[];
+ @ApiPropertyOptional() @IsOptional() @IsDateString() publishedAt?:string;
+ @ApiPropertyOptional() @IsOptional() @IsInt() @Min(1800) @Max(2200) year?:number;
+ @ApiProperty() @IsString() @MinLength(2) @MaxLength(100) language!:string;
+ @ApiPropertyOptional() @IsOptional() @Matches(/^(\/documents\/[a-zA-Z0-9/_\-.]+\.pdf|https:\/\/[^\s]+)$/) @MaxLength(4000) pdfUrl?:string;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(4000) externalUrl?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(300) doi?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(100) isbn?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(5000) citation?:string;
+ @ApiProperty() @IsBoolean() featured!:boolean;
+ @ApiProperty() @IsIn(['Published','Forthcoming','Draft']) status!:string;
+ @ApiProperty() @IsBoolean() isDemo!:boolean;
+}

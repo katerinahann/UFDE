@@ -56,3 +56,31 @@ Demo project badges and dates are examples. Missing approved facts use empty
 states; no project metrics or affiliations are generated. Metadata edits require
 a rebuild for static Vercel deployments. The project details reuse existing
 SiteSetting storage, so no database migration is required.
+
+### Publications
+
+Publications use an explicit editorial object (`Publication`, `PublicationDto`),
+separate from legacy demonstration content. Authenticated editors save with
+`PUT /admin/publications/:slug?locale=en` and list drafts through
+`GET /admin/publications?locale=en`; French and Ukrainian locales are supported.
+The public `/publications` API, website, detail routes and sitemap accept only
+`status: "Published"` with `isDemo: false`. Draft, Forthcoming and demonstration
+records are excluded, including from direct public detail requests. Legacy
+PUBLICATION content records are no longer exposed through the generic API.
+
+Fields include title, slug, type, coverImage (`url`, `alt`), summary, abstract,
+executiveSummary, authors, publishedAt, year, language, pdfUrl, externalUrl, doi,
+isbn, citation, featured, status and isDemo. Published records require authors,
+a summary, an abstract, and a publication date or year. Working Papers and
+Articles & Insights filters only appear when published content of those types
+exists. The built-in preview intentionally contains no published research.
+
+For local PDFs, add the file under `apps/web/public/documents/` and use
+`/documents/filename.pdf`. S3-compatible storage and remote files use browser-
+accessible HTTPS URLs (public object URLs or appropriately managed signed URLs).
+Avoid short-lived signed URLs in static exports; rebuild before expiry or use a
+stable download endpoint. Configure external cover hosts using the existing image
+allowlist. Remote servers control Content-Disposition, so cross-origin PDFs may
+open in the browser instead of triggering a download. No storage credentials are
+placed in client code. Rebuild Vercel after editorial changes, including status
+changes, to update static pages and remove previously published output.
