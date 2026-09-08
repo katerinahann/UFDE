@@ -37,19 +37,34 @@
     ],
     "areas": [
       [
-        "Science & research",
-        "Scientific exchange and connections across disciplines.",
-        "An area for dialogue on scientific cooperation, interdisciplinary research and the exchange of knowledge between Ukraine and France."
+        "Scientific Research",
+        "Connecting researchers and supporting the exchange of scientific knowledge.",
+        "Connecting researchers and supporting the exchange of scientific knowledge."
       ],
       [
-        "Innovation & knowledge",
-        "An open dialogue between ideas, research and innovation.",
-        "An area for exploring how research can inform innovation, knowledge transfer and responses to shared challenges."
+        "Education & Training",
+        "Building skills through learning, academic exchange and training.",
+        "Building skills through learning, academic exchange and training."
       ],
       [
-        "European development",
-        "Perspectives on cooperation and a shared European future.",
-        "An area for considering European development through academic exchange, institutional dialogue and informed discussion."
+        "Digital Transformation & AI",
+        "Exploring responsible technology and the possibilities of artificial intelligence.",
+        "Exploring responsible technology and the possibilities of artificial intelligence."
+      ],
+      [
+        "International Partnerships",
+        "Creating space for dialogue and cooperation across borders.",
+        "Creating space for dialogue and cooperation across borders."
+      ],
+      [
+        "Public Policy & Development",
+        "Bringing knowledge into discussions on sustainable development.",
+        "Bringing knowledge into discussions on sustainable development."
+      ],
+      [
+        "Culture & Creative Industries",
+        "Encouraging cultural exchange and connections across creative disciplines.",
+        "Encouraging cultural exchange and connections across creative disciplines."
       ]
     ],
     "connect": [
@@ -175,7 +190,42 @@
         "Draft — pending institutional and legal review.",
         "Content and permissions",
         "Demonstration content is illustrative and must not be cited as institutional activity, research or a partner relationship. The Paris photograph has a separate attribution and reuse licence, linked on the homepage. Final terms must be approved before public launch."
+      ],
+      "partners": [
+        "Our Partners",
+        "Our Partners",
+        "Partner logos will be published after verification. These placeholders do not imply partnerships."
       ]
+    },
+    "home": {
+      "headline": [
+        "FRANCE AND UKRAINE:",
+        "SCIENCE AND INNOVATION FOR",
+        "EUROPE’S FUTURE"
+      ],
+      "description": "UFDE strengthens cooperation between Ukraine and France, promotes knowledge exchange, and supports Ukraine’s sustainable development and European integration.",
+      "activitiesButton": "OUR ACTIVITIES",
+      "contactButton": "CONTACT US",
+      "strategic": "Strategic Areas",
+      "activities": "Latest Activities",
+      "projects": "Featured Projects",
+      "partners": "Our Partners",
+      "all": "View all",
+      "allPartners": "View all partners",
+      "learn": "Learn more",
+      "read": "Read more",
+      "join": "Join Our Network",
+      "joinText": "Researchers, institutions and partners are welcome to collaborate with UFDE.",
+      "joinButton": "CONTACT UFDE",
+      "demoNotice": "Illustrative content — dates, images and records below are examples, not announcements of real UFDE activities or projects.",
+      "pendingDate": "Dates awaiting confirmation",
+      "pendingStatus": "Details awaiting publication",
+      "partnerPlaceholder": "Logo awaiting approval",
+      "partnerDemo": "Demo placeholder",
+      "partnersNotice": "Partner logos will be published after verification. These placeholders do not imply partnerships.",
+      "demoImage": "Illustrative Paris image",
+      "dateExample": "Demo dates",
+      "focusEyebrow": "SCIENCE · KNOWLEDGE · COOPERATION"
     }
   },
   "fr": {
@@ -216,19 +266,34 @@
     ],
     "areas": [
       [
-        "Science et recherche",
-        "Les échanges scientifiques au-delà des disciplines.",
-        "Un axe de dialogue sur la coopération scientifique, la recherche interdisciplinaire et les échanges de connaissances entre l’Ukraine et la France."
+        "Recherche scientifique",
+        "Relier les chercheurs et favoriser les échanges de connaissances scientifiques.",
+        "Relier les chercheurs et favoriser les échanges de connaissances scientifiques."
       ],
       [
-        "Innovation et savoir",
-        "Un dialogue ouvert entre les idées, la recherche et l’innovation.",
-        "Un axe pour explorer la contribution de la recherche à l’innovation, au transfert de connaissances et aux défis communs."
+        "Éducation et formation",
+        "Développer les compétences par la formation et les échanges universitaires.",
+        "Développer les compétences par la formation et les échanges universitaires."
       ],
       [
-        "Développement européen",
-        "Des perspectives de coopération pour un avenir européen commun.",
-        "Un axe pour aborder le développement européen par les échanges universitaires, le dialogue institutionnel et une réflexion éclairée."
+        "Transformation numérique et IA",
+        "Explorer les technologies responsables et les possibilités de l’intelligence artificielle.",
+        "Explorer les technologies responsables et les possibilités de l’intelligence artificielle."
+      ],
+      [
+        "Partenariats internationaux",
+        "Ouvrir des espaces de dialogue et de coopération au-delà des frontières.",
+        "Ouvrir des espaces de dialogue et de coopération au-delà des frontières."
+      ],
+      [
+        "Politiques publiques et développement",
+        "Éclairer les échanges sur le développement durable par le savoir.",
+        "Éclairer les échanges sur le développement durable par le savoir."
+      ],
+      [
+        "Culture et industries créatives",
+        "Encourager les échanges culturels et les liens entre disciplines créatives.",
+        "Encourager les échanges culturels et les liens entre disciplines créatives."
       ]
     ],
     "connect": [
@@ -354,7 +419,42 @@
         "Projet — en attente de validation institutionnelle et juridique.",
         "Contenus et autorisations",
         "Les contenus de démonstration ne doivent pas être cités comme des activités, des recherches ou des partenariats institutionnels. La photographie de Paris possède une licence distincte, accessible depuis l’accueil. Les conditions définitives doivent être approuvées avant le lancement."
+      ],
+      "partners": [
+        "Nos partenaires",
+        "Nos partenaires",
+        "Les logos des partenaires seront publiés après vérification. Ces exemples n’impliquent aucun partenariat."
       ]
+    },
+    "home": {
+      "headline": [
+        "FRANCE ET UKRAINE :",
+        "SCIENCE ET INNOVATION POUR",
+        "L’AVENIR DE L’EUROPE"
+      ],
+      "description": "UFDE renforce la coopération entre l’Ukraine et la France, favorise les échanges de connaissances et soutient le développement durable et l’intégration européenne de l’Ukraine.",
+      "activitiesButton": "NOS ACTIVITÉS",
+      "contactButton": "NOUS CONTACTER",
+      "strategic": "Axes stratégiques",
+      "activities": "Dernières activités",
+      "projects": "Projets à la une",
+      "partners": "Nos partenaires",
+      "all": "Tout voir",
+      "allPartners": "Voir tous les partenaires",
+      "learn": "En savoir plus",
+      "read": "Lire la suite",
+      "join": "Rejoignez notre réseau",
+      "joinText": "Chercheurs, institutions et partenaires sont invités à collaborer avec UFDE.",
+      "joinButton": "CONTACTER UFDE",
+      "demoNotice": "Contenu illustratif — les dates, images et fiches ci-dessous sont des exemples, et non des annonces d’activités ou de projets réels d’UFDE.",
+      "pendingDate": "Dates à confirmer",
+      "pendingStatus": "Informations à venir",
+      "partnerPlaceholder": "Logo en attente de validation",
+      "partnerDemo": "Exemple de démonstration",
+      "partnersNotice": "Les logos des partenaires seront publiés après vérification. Ces exemples n’impliquent aucun partenariat.",
+      "demoImage": "Image illustrative de Paris",
+      "dateExample": "Dates de démonstration",
+      "focusEyebrow": "SCIENCE · SAVOIR · COOPÉRATION"
     }
   },
   "uk": {
@@ -395,19 +495,34 @@
     ],
     "areas": [
       [
-        "Наука та дослідження",
-        "Науковий обмін і міждисциплінарні зв’язки.",
-        "Напрям для діалогу про наукову співпрацю, міждисциплінарні дослідження та обмін знаннями між Україною та Францією."
+        "Наукові дослідження",
+        "Об’єднання дослідників і підтримка обміну науковими знаннями.",
+        "Об’єднання дослідників і підтримка обміну науковими знаннями."
       ],
       [
-        "Інновації та знання",
-        "Відкритий діалог між ідеями, дослідженнями та інноваціями.",
-        "Напрям для обговорення ролі досліджень в інноваціях, передачі знань і пошуку відповідей на спільні виклики."
+        "Освіта та навчання",
+        "Розвиток навичок через навчання й академічний обмін.",
+        "Розвиток навичок через навчання й академічний обмін."
       ],
       [
-        "Європейський розвиток",
-        "Перспективи співпраці та спільного європейського майбутнього.",
-        "Напрям для осмислення європейського розвитку через академічний обмін, інституційний діалог та змістовне обговорення."
+        "Цифрова трансформація та ШІ",
+        "Дослідження відповідальних технологій і можливостей штучного інтелекту.",
+        "Дослідження відповідальних технологій і можливостей штучного інтелекту."
+      ],
+      [
+        "Міжнародні партнерства",
+        "Простір для діалогу та співпраці через кордони.",
+        "Простір для діалогу та співпраці через кордони."
+      ],
+      [
+        "Державна політика та розвиток",
+        "Знання для обговорення питань сталого розвитку.",
+        "Знання для обговорення питань сталого розвитку."
+      ],
+      [
+        "Культура та креативні індустрії",
+        "Культурний обмін і зв’язки між творчими дисциплінами.",
+        "Культурний обмін і зв’язки між творчими дисциплінами."
       ]
     ],
     "connect": [
@@ -533,7 +648,42 @@
         "Проєкт — очікує інституційної та юридичної перевірки.",
         "Матеріали та дозволи",
         "Демонстраційні матеріали не можна цитувати як інституційну діяльність, дослідження чи партнерство. Фотографія Парижа має окрему ліцензію, посилання на яку наведено на головній сторінці. Остаточні умови мають бути затверджені перед запуском."
+      ],
+      "partners": [
+        "Наші партнери",
+        "Наші партнери",
+        "Логотипи партнерів буде опубліковано після перевірки. Ці приклади не означають партнерства."
       ]
+    },
+    "home": {
+      "headline": [
+        "ФРАНЦІЯ ТА УКРАЇНА:",
+        "НАУКА Й ІННОВАЦІЇ ДЛЯ",
+        "МАЙБУТНЬОГО ЄВРОПИ"
+      ],
+      "description": "UFDE зміцнює співпрацю між Україною та Францією, сприяє обміну знаннями та підтримує сталий розвиток і європейську інтеграцію України.",
+      "activitiesButton": "НАША ДІЯЛЬНІСТЬ",
+      "contactButton": "ЗВ’ЯЗАТИСЯ З НАМИ",
+      "strategic": "Стратегічні напрями",
+      "activities": "Останні заходи",
+      "projects": "Вибрані проєкти",
+      "partners": "Наші партнери",
+      "all": "Переглянути всі",
+      "allPartners": "Усі партнери",
+      "learn": "Дізнатися більше",
+      "read": "Докладніше",
+      "join": "Долучайтеся до нашої мережі",
+      "joinText": "Дослідників, установи та партнерів запрошуємо до співпраці з UFDE.",
+      "joinButton": "ЗВ’ЯЗАТИСЯ З UFDE",
+      "demoNotice": "Ілюстративні матеріали — дати, зображення й записи нижче є прикладами, а не оголошеннями про реальні заходи чи проєкти UFDE.",
+      "pendingDate": "Дати очікують підтвердження",
+      "pendingStatus": "Деталі готуються до публікації",
+      "partnerPlaceholder": "Логотип очікує затвердження",
+      "partnerDemo": "Демонстраційний приклад",
+      "partnersNotice": "Логотипи партнерів буде опубліковано після перевірки. Ці приклади не означають партнерства.",
+      "demoImage": "Ілюстративне зображення Парижа",
+      "dateExample": "Демонстраційні дати",
+      "focusEyebrow": "НАУКА · ЗНАННЯ · СПІВПРАЦЯ"
     }
   }
 }

@@ -59,3 +59,15 @@ export class TeamDto {
  @ApiProperty() @IsBoolean() published!:boolean;
  @ApiProperty() @IsInt() @Min(0) @Max(1000) order!:number;
 }
+
+export class PartnerDto {
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(100) id!:string;
+ @ApiProperty() @IsString() @MinLength(2) @MaxLength(180) name!:string;
+ @ApiPropertyOptional() @IsOptional() @Matches(/^\/images\/[a-zA-Z0-9/_\-.]+$/) @MaxLength(2000) logoUrl?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(300) logoAlt?:string;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) href?:string;
+ @ApiProperty() @IsBoolean() isDemo!:boolean;
+}
+export class PartnersDto {
+ @ApiProperty({type:[PartnerDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerDto) partners!:PartnerDto[];
+}
