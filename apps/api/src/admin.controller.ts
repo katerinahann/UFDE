@@ -2,7 +2,7 @@ import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestExce
 import {ApiBearerAuth,ApiTags} from '@nestjs/swagger';
 import {PrismaService} from './prisma.service';
 import {AdminGuard} from './admin.guard';
-import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto} from './dto';
+import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto} from './dto';
 @ApiTags('Editorial administration') @ApiBearerAuth() @UseGuards(AdminGuard) @Controller('admin')
 export class AdminController {
  constructor(private readonly db:PrismaService){}
@@ -14,6 +14,7 @@ export class AdminController {
  @Put('settings/hero/:assetId') async hero(@Param('assetId') id:string){const asset=await this.db.asset.findUnique({where:{id}});if(!asset)throw new NotFoundException();return this.db.siteSetting.upsert({where:{key:'hero'},create:{key:'hero',value:asset},update:{value:asset}})}
  @Put('pages/:slug') page(@Param('slug') slug:string,@Body() dto:PageDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');return this.db.page.upsert({where:{slug_locale:{slug,locale:dto.locale}},create:dto,update:dto})}
  @Put('settings/partners') partners(@Body() dto:PartnersDto){return this.db.siteSetting.upsert({where:{key:'partners'},create:{key:'partners',value:JSON.parse(JSON.stringify(dto.partners))},update:{value:JSON.parse(JSON.stringify(dto.partners))}})}
+ @Put('settings/about-profile') aboutProfile(@Body() dto:AboutProfileDto){const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key:'aboutProfile'},create:{key:'aboutProfile',value},update:{value}})}
  @Get('pages') pages(@Query() q:ListQuery){return this.db.page.findMany({take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
  @Post('team') team(@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.create({data:dto})}
  @Put('team/:id') updateTeam(@Param('id') id:string,@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.update({where:{id},data:dto})}

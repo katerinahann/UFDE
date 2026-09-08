@@ -6,3 +6,5 @@ const inter=Inter({subsets:['latin','cyrillic'],variable:'--font-inter',display:
 export function Root({children,locale}:{children:React.ReactNode;locale:Locale}){return <html lang={locale}><body className={inter.variable}>{children}</body></html>}
 
 import './home.css';
+
+import './about.css';

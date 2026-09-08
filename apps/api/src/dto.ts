@@ -71,3 +71,24 @@ export class PartnerDto {
 export class PartnersDto {
  @ApiProperty({type:[PartnerDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerDto) partners!:PartnerDto[];
 }
+
+export class AboutLocalizedDto {
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(180) en!:string;
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(180) fr!:string;
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(180) uk!:string;
+}
+export class AboutPhotoDto {
+ @ApiProperty() @Matches(/^(\/images\/[a-zA-Z0-9/_\-.]+|https:\/\/[^\s]+)$/) @MaxLength(2000) url!:string;
+ @ApiProperty() @IsString() @MinLength(5) @MaxLength(300) alt!:string;
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(300) credit!:string;
+ @ApiProperty() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) source!:string;
+ @ApiProperty() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) licenseUrl!:string;
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(100) licenseLabel!:string;
+}
+export class AboutProfileDto {
+ @ApiProperty() @Matches(/^\d{4}$/) founded!:string;
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(180) registeredOffice!:string;
+ @ApiProperty({type:AboutLocalizedDto}) @IsObject() @ValidateNested() @Type(()=>AboutLocalizedDto) organisationType!:AboutLocalizedDto;
+ @ApiProperty({type:AboutLocalizedDto}) @IsObject() @ValidateNested() @Type(()=>AboutLocalizedDto) geographicalFocus!:AboutLocalizedDto;
+ @ApiProperty({type:[AboutPhotoDto]}) @IsArray() @ArrayMinSize(2) @ArrayMaxSize(10) @ValidateNested({each:true}) @Type(()=>AboutPhotoDto) photos!:AboutPhotoDto[];
+}

@@ -117,7 +117,7 @@
       "about": [
         "About UFDE",
         "Science, innovation and European development — in dialogue.",
-        "The Ukrainian-French Institute for Science, Innovation and European Development brings these three themes into a shared institutional space in Paris.",
+        "To build lasting bridges between Ukraine, France and Europe through science, innovation, education and international cooperation.",
         "Our perspective",
         "The institute’s website is a place to present its purpose, areas of focus and opportunities for dialogue. The final institutional profile will be published after approval.",
         "Explore our strategic areas"
@@ -226,6 +226,79 @@
       "demoImage": "Illustrative Paris image",
       "dateExample": "Demo dates",
       "focusEyebrow": "SCIENCE · KNOWLEDGE · COOPERATION"
+    },
+    "about": {
+      "title": "About UFDE",
+      "missionTitle": "Our Mission",
+      "mission": [
+        "To build lasting bridges between Ukraine, France and Europe through science, innovation, education and international cooperation.",
+        "UFDE brings together researchers, universities, public institutions, innovators and development partners to create opportunities for knowledge exchange, joint projects and sustainable solutions addressing contemporary social, economic and technological challenges.",
+        "We believe that scientific cooperation, human capital development and international partnerships are essential foundations for a stronger, more innovative and more resilient future."
+      ],
+      "whoTitle": "Who We Are",
+      "who": [
+        "UFDE is a non-profit, non-governmental institute based in France, bringing together researchers, professionals, institutions and partners committed to strengthening cooperation between Ukraine, France and Europe.",
+        "Our work connects research, education, innovation, public policy and international cooperation with a particular focus on practical impact and long-term European development."
+      ],
+      "factLabels": [
+        "Founded",
+        "Registered Office",
+        "Organisation Type",
+        "Geographical Focus"
+      ],
+      "valuesTitle": "Our Values",
+      "values": [
+        [
+          "Integrity",
+          "We uphold honesty, responsibility and ethical standards in our work."
+        ],
+        [
+          "Collaboration",
+          "We build cooperation through shared purpose and mutual respect."
+        ],
+        [
+          "Impact",
+          "We focus on work that can make a meaningful difference."
+        ],
+        [
+          "Openness",
+          "We welcome diverse perspectives and the exchange of knowledge."
+        ],
+        [
+          "Excellence",
+          "We pursue quality and rigour in everything we do."
+        ]
+      ],
+      "workTitle": "How We Work",
+      "work": [
+        [
+          "Knowledge",
+          "Generate and share research and evidence."
+        ],
+        [
+          "Partnership",
+          "Connect institutions, researchers and decision makers."
+        ],
+        [
+          "Impact",
+          "Transform cooperation into meaningful projects and results."
+        ]
+      ],
+      "governanceTitle": "Governance & Transparency",
+      "governanceText": "UFDE operates according to principles of transparent governance and institutional accountability. Our governance, legal information, official documents and policies provide a framework for responsible cooperation.",
+      "governanceCards": [
+        "Governance Structure",
+        "Legal Information",
+        "Official Documents",
+        "Policies & Transparency"
+      ],
+      "governanceButton": "EXPLORE GOVERNANCE & TRANSPARENCY",
+      "carousel": "French institutional architecture",
+      "previous": "Previous photograph",
+      "next": "Next photograph",
+      "slide": "Photograph",
+      "imageNote": "Illustrative institutional architecture. Images do not imply a partnership or affiliation.",
+      "photoCredit": "Photography"
     }
   },
   "fr": {
@@ -346,7 +419,7 @@
       "about": [
         "À propos d’UFDE",
         "Science, innovation et développement européen — en dialogue.",
-        "L’Institut ukraino-français pour la science, l’innovation et le développement européen réunit ces trois thèmes dans un espace institutionnel commun à Paris.",
+        "Construire des ponts durables entre l’Ukraine, la France et l’Europe grâce à la science, à l’innovation, à l’éducation et à la coopération internationale.",
         "Notre perspective",
         "Le site de l’institut présente sa vocation, ses axes et les possibilités de dialogue. La présentation institutionnelle définitive sera publiée après validation.",
         "Explorer nos axes stratégiques"
@@ -455,6 +528,79 @@
       "demoImage": "Image illustrative de Paris",
       "dateExample": "Dates de démonstration",
       "focusEyebrow": "SCIENCE · SAVOIR · COOPÉRATION"
+    },
+    "about": {
+      "title": "À propos d’UFDE",
+      "missionTitle": "Notre mission",
+      "mission": [
+        "Construire des ponts durables entre l’Ukraine, la France et l’Europe grâce à la science, à l’innovation, à l’éducation et à la coopération internationale.",
+        "UFDE réunit des chercheurs, des universités, des institutions publiques, des innovateurs et des partenaires du développement afin de créer des possibilités d’échange de connaissances, de projets communs et de solutions durables face aux défis sociaux, économiques et technologiques contemporains.",
+        "Nous sommes convaincus que la coopération scientifique, le développement du capital humain et les partenariats internationaux sont des fondements essentiels d’un avenir plus fort, plus innovant et plus résilient."
+      ],
+      "whoTitle": "Qui sommes-nous ?",
+      "who": [
+        "UFDE est un institut non gouvernemental à but non lucratif basé en France, réunissant des chercheurs, des professionnels, des institutions et des partenaires engagés dans le renforcement de la coopération entre l’Ukraine, la France et l’Europe.",
+        "Notre travail relie la recherche, l’éducation, l’innovation, les politiques publiques et la coopération internationale, avec une attention particulière portée aux effets concrets et au développement européen à long terme."
+      ],
+      "factLabels": [
+        "Fondation",
+        "Siège social",
+        "Type d’organisation",
+        "Champ géographique"
+      ],
+      "valuesTitle": "Nos valeurs",
+      "values": [
+        [
+          "Intégrité",
+          "Nous défendons l’honnêteté, la responsabilité et l’éthique dans notre travail."
+        ],
+        [
+          "Collaboration",
+          "Nous construisons la coopération autour d’un objectif commun et du respect mutuel."
+        ],
+        [
+          "Impact",
+          "Nous privilégions les travaux susceptibles de produire des effets concrets."
+        ],
+        [
+          "Ouverture",
+          "Nous accueillons la diversité des perspectives et les échanges de connaissances."
+        ],
+        [
+          "Excellence",
+          "Nous recherchons la qualité et la rigueur dans toutes nos activités."
+        ]
+      ],
+      "workTitle": "Notre approche",
+      "work": [
+        [
+          "Connaissance",
+          "Produire et partager des recherches et des données probantes."
+        ],
+        [
+          "Partenariat",
+          "Relier les institutions, les chercheurs et les décideurs."
+        ],
+        [
+          "Impact",
+          "Transformer la coopération en projets et en résultats concrets."
+        ]
+      ],
+      "governanceTitle": "Gouvernance et transparence",
+      "governanceText": "UFDE agit selon des principes de gouvernance transparente et de responsabilité institutionnelle. Sa gouvernance, ses informations juridiques, ses documents officiels et ses politiques constituent un cadre pour une coopération responsable.",
+      "governanceCards": [
+        "Structure de gouvernance",
+        "Informations juridiques",
+        "Documents officiels",
+        "Politiques et transparence"
+      ],
+      "governanceButton": "DÉCOUVRIR LA GOUVERNANCE ET LA TRANSPARENCE",
+      "carousel": "Architecture institutionnelle française",
+      "previous": "Photographie précédente",
+      "next": "Photographie suivante",
+      "slide": "Photographie",
+      "imageNote": "Architecture institutionnelle à titre illustratif. Les images n’impliquent aucun partenariat ni aucune affiliation.",
+      "photoCredit": "Photographies"
     }
   },
   "uk": {
@@ -575,7 +721,7 @@
       "about": [
         "Про UFDE",
         "Наука, інновації та європейський розвиток — у діалозі.",
-        "Українсько-французький інститут науки, інновацій та європейського розвитку об’єднує ці три теми у спільному інституційному просторі в Парижі.",
+        "Будувати міцні мости між Україною, Францією та Європою через науку, інновації, освіту й міжнародну співпрацю.",
         "Наше бачення",
         "Сайт інституту представляє його призначення, напрями та можливості діалогу. Остаточний інституційний профіль буде опубліковано після затвердження.",
         "Переглянути стратегічні напрями"
@@ -684,6 +830,79 @@
       "demoImage": "Ілюстративне зображення Парижа",
       "dateExample": "Демонстраційні дати",
       "focusEyebrow": "НАУКА · ЗНАННЯ · СПІВПРАЦЯ"
+    },
+    "about": {
+      "title": "Про UFDE",
+      "missionTitle": "Наша місія",
+      "mission": [
+        "Будувати міцні мости між Україною, Францією та Європою через науку, інновації, освіту й міжнародну співпрацю.",
+        "UFDE об’єднує дослідників, університети, державні установи, інноваторів і партнерів з розвитку, щоб створювати можливості для обміну знаннями, спільних проєктів та сталих рішень сучасних соціальних, економічних і технологічних викликів.",
+        "Ми переконані, що наукова співпраця, розвиток людського капіталу та міжнародні партнерства є важливими основами сильнішого, інноваційнішого та стійкішого майбутнього."
+      ],
+      "whoTitle": "Хто ми",
+      "who": [
+        "UFDE — неприбутковий неурядовий інститут, що базується у Франції та об’єднує дослідників, фахівців, установи й партнерів, які прагнуть зміцнити співпрацю між Україною, Францією та Європою.",
+        "Наша робота поєднує дослідження, освіту, інновації, державну політику й міжнародну співпрацю з особливою увагою до практичного впливу та довгострокового європейського розвитку."
+      ],
+      "factLabels": [
+        "Рік заснування",
+        "Юридична адреса",
+        "Тип організації",
+        "Географічне спрямування"
+      ],
+      "valuesTitle": "Наші цінності",
+      "values": [
+        [
+          "Доброчесність",
+          "Ми дотримуємося чесності, відповідальності та етичних стандартів у роботі."
+        ],
+        [
+          "Співпраця",
+          "Ми розвиваємо співпрацю на основі спільної мети та взаємоповаги."
+        ],
+        [
+          "Вплив",
+          "Ми зосереджуємося на роботі, що здатна забезпечити змістовні зміни."
+        ],
+        [
+          "Відкритість",
+          "Ми вітаємо різні погляди та обмін знаннями."
+        ],
+        [
+          "Досконалість",
+          "Ми прагнемо якості та ґрунтовності в усьому, що робимо."
+        ]
+      ],
+      "workTitle": "Як ми працюємо",
+      "work": [
+        [
+          "Знання",
+          "Створювати й поширювати дослідження та доказові дані."
+        ],
+        [
+          "Партнерство",
+          "Об’єднувати установи, дослідників і осіб, які ухвалюють рішення."
+        ],
+        [
+          "Вплив",
+          "Перетворювати співпрацю на змістовні проєкти та результати."
+        ]
+      ],
+      "governanceTitle": "Управління та прозорість",
+      "governanceText": "UFDE діє на засадах прозорого управління та інституційної підзвітності. Структура управління, юридична інформація, офіційні документи та політики створюють основу для відповідальної співпраці.",
+      "governanceCards": [
+        "Структура управління",
+        "Юридична інформація",
+        "Офіційні документи",
+        "Політики та прозорість"
+      ],
+      "governanceButton": "ДІЗНАТИСЯ ПРО УПРАВЛІННЯ ТА ПРОЗОРІСТЬ",
+      "carousel": "Французька інституційна архітектура",
+      "previous": "Попередня фотографія",
+      "next": "Наступна фотографія",
+      "slide": "Фотографія",
+      "imageNote": "Ілюстративні фотографії інституційної архітектури не означають партнерства чи афіліації.",
+      "photoCredit": "Фотографії"
     }
   }
 }
