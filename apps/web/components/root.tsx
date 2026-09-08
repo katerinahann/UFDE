@@ -10,3 +10,5 @@ import './home.css';
 import './about.css';
 
 import './strategic-areas.css';
+
+import './activities.css';

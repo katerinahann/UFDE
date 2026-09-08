@@ -13,6 +13,7 @@
     "./demo": "./src/demo.ts",
     "./partners": "./src/partners.ts",
     "./about": "./src/about.ts",
-    "./strategic-areas": "./src/strategic-areas.ts"
+    "./strategic-areas": "./src/strategic-areas.ts",
+    "./activities": "./src/activities.ts"
   }
 }

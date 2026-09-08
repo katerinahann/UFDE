@@ -8,7 +8,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Scientific dialogue — example format",
     "summary": "An illustrative record for previewing the website. This is not an actual institutional activity, project or publication.",
     "body": "This demonstration shows how approved material will appear on the UFDE website.\n\nNo event, participant, partner, funding, research finding or publication is represented by this example. Replace this record with verified content through the content API before public launch.",
-    "category": "Science & research",
+    "category": "scientific-cooperation",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -56,7 +56,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Dialogue scientifique — exemple de format",
     "summary": "Un exemple destiné à la prévisualisation du site. Il ne s’agit pas d’une activité, d’un projet ou d’une publication réels.",
     "body": "Cette démonstration présente l’affichage des futurs contenus approuvés sur le site UFDE.\n\nCet exemple ne représente aucun événement, participant, partenaire, financement, résultat de recherche ou publication. Remplacez-le par un contenu vérifié avant le lancement public.",
-    "category": "Science et recherche",
+    "category": "scientific-cooperation",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -104,7 +104,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Науковий діалог — приклад формату",
     "summary": "Приклад для попереднього перегляду сайту. Це не реальна діяльність, проєкт або публікація інституту.",
     "body": "Цей приклад показує, як затверджені матеріали виглядатимуть на сайті UFDE.\n\nВін не представляє подію, учасника, партнера, фінансування, результат дослідження або публікацію. Перед публічним запуском замініть його перевіреними матеріалами.",
-    "category": "Наука та дослідження",
+    "category": "scientific-cooperation",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -152,7 +152,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Education and training exchange",
     "summary": "An illustrative record for previewing the website. This is not an actual institutional activity, project or publication.",
     "body": "This demonstration shows how approved material will appear on the UFDE website.\n\nNo event, participant, partner, funding, research finding or publication is represented by this example. Replace this record with verified content through the content API before public launch.",
-    "category": "Education & Training",
+    "category": "education-training",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -168,7 +168,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "A dialogue on digital transformation",
     "summary": "An illustrative record for previewing the website. This is not an actual institutional activity, project or publication.",
     "body": "This demonstration shows how approved material will appear on the UFDE website.\n\nNo event, participant, partner, funding, research finding or publication is represented by this example. Replace this record with verified content through the content API before public launch.",
-    "category": "Digital Transformation & AI",
+    "category": "conferences-events",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -222,7 +222,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Échanges sur l’éducation et la formation",
     "summary": "Un exemple destiné à la prévisualisation du site. Il ne s’agit pas d’une activité, d’un projet ou d’une publication réels.",
     "body": "Cette démonstration présente l’affichage des futurs contenus approuvés sur le site UFDE.\n\nCet exemple ne représente aucun événement, participant, partenaire, financement, résultat de recherche ou publication. Remplacez-le par un contenu vérifié avant le lancement public.",
-    "category": "Éducation et formation",
+    "category": "education-training",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -238,7 +238,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Dialogue sur la transformation numérique",
     "summary": "Un exemple destiné à la prévisualisation du site. Il ne s’agit pas d’une activité, d’un projet ou d’une publication réels.",
     "body": "Cette démonstration présente l’affichage des futurs contenus approuvés sur le site UFDE.\n\nCet exemple ne représente aucun événement, participant, partenaire, financement, résultat de recherche ou publication. Remplacez-le par un contenu vérifié avant le lancement public.",
-    "category": "Transformation numérique et IA",
+    "category": "conferences-events",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -292,7 +292,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Обмін у сфері освіти та навчання",
     "summary": "Приклад для попереднього перегляду сайту. Це не реальна діяльність, проєкт або публікація інституту.",
     "body": "Цей приклад показує, як затверджені матеріали виглядатимуть на сайті UFDE.\n\nВін не представляє подію, учасника, партнера, фінансування, результат дослідження або публікацію. Перед публічним запуском замініть його перевіреними матеріалами.",
-    "category": "Освіта та навчання",
+    "category": "education-training",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -308,7 +308,7 @@ export const demoRecords:ContentRecord[]=[
     "title": "Діалог про цифрову трансформацію",
     "summary": "Приклад для попереднього перегляду сайту. Це не реальна діяльність, проєкт або публікація інституту.",
     "body": "Цей приклад показує, як затверджені матеріали виглядатимуть на сайті UFDE.\n\nВін не представляє подію, учасника, партнера, фінансування, результат дослідження або публікацію. Перед публічним запуском замініть його перевіреними матеріалами.",
-    "category": "Цифрова трансформація та ШІ",
+    "category": "conferences-events",
     "isDemo": true,
     "publishedAt": "2026-09-01T10:00:00.000Z",
     "image": {
@@ -353,5 +353,101 @@ export const demoRecords:ContentRecord[]=[
     "status": "Демонстраційний проєкт",
     "startDate": "2026-09-01",
     "endDate": "2026-12-31"
+  },
+  {
+    "id": "demo-activity-3-en",
+    "slug": "demo-activity-3",
+    "kind": "ACTIVITY",
+    "locale": "en",
+    "title": "Policy dialogue — example format",
+    "summary": "An illustrative record for previewing the website. This is not an actual institutional activity, project or publication.",
+    "body": "This demonstration shows how approved material will appear on the UFDE website.\n\nNo event, participant, partner, funding, research finding or publication is represented by this example. Replace this record with verified content through the content API before public launch.",
+    "category": "policy-development",
+    "isDemo": true,
+    "publishedAt": "2026-09-01T10:00:00.000Z",
+    "image": {
+      "url": "/images/paris.webp",
+      "alt": "Illustrative Paris image"
+    }
+  },
+  {
+    "id": "demo-activity-4-en",
+    "slug": "demo-activity-4",
+    "kind": "ACTIVITY",
+    "locale": "en",
+    "title": "Cultural exchange — example format",
+    "summary": "An illustrative record for previewing the website. This is not an actual institutional activity, project or publication.",
+    "body": "This demonstration shows how approved material will appear on the UFDE website.\n\nNo event, participant, partner, funding, research finding or publication is represented by this example. Replace this record with verified content through the content API before public launch.",
+    "category": "culture-arts",
+    "isDemo": true,
+    "publishedAt": "2026-09-01T10:00:00.000Z",
+    "image": {
+      "url": "/images/paris.webp",
+      "alt": "Illustrative Paris image"
+    }
+  },
+  {
+    "id": "demo-activity-3-fr",
+    "slug": "demo-activity-3",
+    "kind": "ACTIVITY",
+    "locale": "fr",
+    "title": "Dialogue politique — exemple de format",
+    "summary": "Un exemple destiné à la prévisualisation du site. Il ne s’agit pas d’une activité, d’un projet ou d’une publication réels.",
+    "body": "Cette démonstration présente l’affichage des futurs contenus approuvés sur le site UFDE.\n\nCet exemple ne représente aucun événement, participant, partenaire, financement, résultat de recherche ou publication. Remplacez-le par un contenu vérifié avant le lancement public.",
+    "category": "policy-development",
+    "isDemo": true,
+    "publishedAt": "2026-09-01T10:00:00.000Z",
+    "image": {
+      "url": "/images/paris.webp",
+      "alt": "Image illustrative de Paris"
+    }
+  },
+  {
+    "id": "demo-activity-4-fr",
+    "slug": "demo-activity-4",
+    "kind": "ACTIVITY",
+    "locale": "fr",
+    "title": "Échange culturel — exemple de format",
+    "summary": "Un exemple destiné à la prévisualisation du site. Il ne s’agit pas d’une activité, d’un projet ou d’une publication réels.",
+    "body": "Cette démonstration présente l’affichage des futurs contenus approuvés sur le site UFDE.\n\nCet exemple ne représente aucun événement, participant, partenaire, financement, résultat de recherche ou publication. Remplacez-le par un contenu vérifié avant le lancement public.",
+    "category": "culture-arts",
+    "isDemo": true,
+    "publishedAt": "2026-09-01T10:00:00.000Z",
+    "image": {
+      "url": "/images/paris.webp",
+      "alt": "Image illustrative de Paris"
+    }
+  },
+  {
+    "id": "demo-activity-3-uk",
+    "slug": "demo-activity-3",
+    "kind": "ACTIVITY",
+    "locale": "uk",
+    "title": "Політичний діалог — приклад формату",
+    "summary": "Приклад для попереднього перегляду сайту. Це не реальна діяльність, проєкт або публікація інституту.",
+    "body": "Цей приклад показує, як затверджені матеріали виглядатимуть на сайті UFDE.\n\nВін не представляє подію, учасника, партнера, фінансування, результат дослідження або публікацію. Перед публічним запуском замініть його перевіреними матеріалами.",
+    "category": "policy-development",
+    "isDemo": true,
+    "publishedAt": "2026-09-01T10:00:00.000Z",
+    "image": {
+      "url": "/images/paris.webp",
+      "alt": "Ілюстративне зображення Парижа"
+    }
+  },
+  {
+    "id": "demo-activity-4-uk",
+    "slug": "demo-activity-4",
+    "kind": "ACTIVITY",
+    "locale": "uk",
+    "title": "Культурний обмін — приклад формату",
+    "summary": "Приклад для попереднього перегляду сайту. Це не реальна діяльність, проєкт або публікація інституту.",
+    "body": "Цей приклад показує, як затверджені матеріали виглядатимуть на сайті UFDE.\n\nВін не представляє подію, учасника, партнера, фінансування, результат дослідження або публікацію. Перед публічним запуском замініть його перевіреними матеріалами.",
+    "category": "culture-arts",
+    "isDemo": true,
+    "publishedAt": "2026-09-01T10:00:00.000Z",
+    "image": {
+      "url": "/images/paris.webp",
+      "alt": "Ілюстративне зображення Парижа"
+    }
   }
 ];

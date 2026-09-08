@@ -2,7 +2,7 @@ import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestExce
 import {ApiBearerAuth,ApiTags} from '@nestjs/swagger';
 import {PrismaService} from './prisma.service';
 import {AdminGuard} from './admin.guard';
-import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto} from './dto';
+import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto} from './dto';
 @ApiTags('Editorial administration') @ApiBearerAuth() @UseGuards(AdminGuard) @Controller('admin')
 export class AdminController {
  constructor(private readonly db:PrismaService){}
@@ -15,6 +15,7 @@ export class AdminController {
  @Put('pages/:slug') page(@Param('slug') slug:string,@Body() dto:PageDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');return this.db.page.upsert({where:{slug_locale:{slug,locale:dto.locale}},create:dto,update:dto})}
  @Put('settings/partners') partners(@Body() dto:PartnersDto){return this.db.siteSetting.upsert({where:{key:'partners'},create:{key:'partners',value:JSON.parse(JSON.stringify(dto.partners))},update:{value:JSON.parse(JSON.stringify(dto.partners))}})}
  @Put('settings/about-profile') aboutProfile(@Body() dto:AboutProfileDto){const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key:'aboutProfile'},create:{key:'aboutProfile',value},update:{value}})}
+ @Put('activity-details/:slug') async activityDetails(@Param('slug') slug:string,@Query() q:ListQuery,@Body() dto:ActivityDetailsDto){const content=await this.db.content.findUnique({where:{slug}});if(!content||content.kind!=='ACTIVITY')throw new NotFoundException();const key='activity:'+slug+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
  @Get('pages') pages(@Query() q:ListQuery){return this.db.page.findMany({take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
  @Post('team') team(@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.create({data:dto})}
  @Put('team/:id') updateTeam(@Param('id') id:string,@Body() dto:TeamDto){this.validateTeam(dto);return this.db.teamMember.update({where:{id},data:dto})}

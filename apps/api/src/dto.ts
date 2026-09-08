@@ -92,3 +92,12 @@ export class AboutProfileDto {
  @ApiProperty({type:AboutLocalizedDto}) @IsObject() @ValidateNested() @Type(()=>AboutLocalizedDto) geographicalFocus!:AboutLocalizedDto;
  @ApiProperty({type:[AboutPhotoDto]}) @IsArray() @ArrayMinSize(2) @ArrayMaxSize(10) @ValidateNested({each:true}) @Type(()=>AboutPhotoDto) photos!:AboutPhotoDto[];
 }
+
+export class ActivityDetailsDto {
+ @ApiPropertyOptional() @IsOptional() @IsDateString() date?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(250) location?:string;
+ @ApiProperty({type:[AssetDto]}) @IsArray() @ArrayMaxSize(30) @ValidateNested({each:true}) @Type(()=>AssetDto) gallery!:AssetDto[];
+ @ApiProperty({type:[PartnerDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerDto) partners!:PartnerDto[];
+ @ApiPropertyOptional() @IsOptional() @Matches(/^(\/documents\/[a-zA-Z0-9/_\-.]+\.pdf|https:\/\/[^\s]+)$/) @MaxLength(2000) programmeUrl?:string;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) eventUrl?:string;
+}
