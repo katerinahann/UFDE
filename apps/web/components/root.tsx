@@ -40,3 +40,5 @@ import './governance.css';
 import './contact.css';
 
 import './responsive.css';
+
+import './interactions.css';

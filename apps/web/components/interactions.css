@@ -1,0 +1,123 @@
+/* Quiet feedback only: no entrance animations, timers or scroll effects. */
+:root {
+  --uf-interaction-duration: 200ms;
+  --uf-interaction-easing: ease-out;
+}
+:is(
+  .uf-card:has(a),
+  .project-card,
+  .publication-tile,
+  .team-member-card,
+  .strategy-card,
+  .about-governance-grid > a
+) {
+  transition:
+    transform var(--uf-interaction-duration) var(--uf-interaction-easing),
+    border-color var(--uf-interaction-duration),
+    box-shadow var(--uf-interaction-duration);
+}
+:is(
+  .uf-button,
+  .uf-tab,
+  .language-button,
+  .menu-trigger,
+  [data-slot='carousel-previous'],
+  [data-slot='carousel-next']
+) {
+  transition:
+    background-color 200ms,
+    border-color 200ms,
+    color 200ms;
+}
+:is(.uf-text-link, .home-view-all, .project-learn, .strategy-learn) {
+  text-decoration-line: underline;
+  text-decoration-color: transparent;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 5px;
+  transition:
+    text-decoration-color 200ms,
+    color 200ms;
+}
+:is(
+  .uf-text-link,
+  .home-view-all,
+  .project-learn,
+  .strategy-learn
+):focus-visible {
+  text-decoration-color: #b79a5a;
+}
+:is(
+  .uf-card:has(a),
+  .project-card,
+  .publication-tile,
+  .team-member-card,
+  .strategy-card,
+  .about-governance-grid > a
+):focus-within {
+  border-color: #b79a5a;
+}
+:is(.home-card-photo, .activity-image, .project-card-image) img {
+  transition: transform 200ms ease-out;
+}
+/* These legacy demo crops must also respect the 1.02 scale ceiling. */
+.home-card-photo.crop-1 img,
+.home-card-photo.crop-2 img {
+  transform: none;
+}
+@media (hover: hover) and (pointer: fine) {
+  :is(
+    .uf-card:has(a),
+    .project-card,
+    .publication-tile,
+    .team-member-card,
+    .strategy-card,
+    .about-governance-grid > a
+  ):hover {
+    transform: translateY(-2px);
+    border-color: #b79a5a;
+    box-shadow: 0 4px 12px rgb(16 43 78 / 6%);
+  }
+  :is(.uf-card, .project-card):hover
+    :is(.home-card-photo, .activity-image, .project-card-image)
+    img {
+    transform: scale(1.02);
+  }
+  :is(.uf-text-link, .home-view-all, .project-learn, .strategy-learn):hover {
+    text-decoration-color: #b79a5a;
+  }
+  :is([data-slot='carousel-previous'], [data-slot='carousel-next']):hover:not(
+      :disabled
+    ) {
+    border-color: #b79a5a;
+    background-color: #f5f3ee;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --uf-interaction-duration: 0ms;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  :is(
+    .uf-card:has(a),
+    .project-card,
+    .publication-tile,
+    .team-member-card,
+    .strategy-card,
+    .about-governance-grid > a
+  ):hover {
+    transform: none;
+  }
+  :is(.uf-card, .project-card):hover
+    :is(.home-card-photo, .activity-image, .project-card-image)
+    img {
+    transform: none;
+  }
+}
