@@ -1,4 +1,6 @@
-import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestException,NotFoundException,UploadedFile,UseInterceptors} from '@nestjs/common';
+import {AdminMediaService} from './admin/media.controller';
+import {AdminRequest} from './admin/auth.service';
+import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestException,NotFoundException,UploadedFile,UseInterceptors,Req} from '@nestjs/common';
 import {FileInterceptor} from '@nestjs/platform-express';
 import {ApiBearerAuth,ApiTags} from '@nestjs/swagger';
 import {PrismaService} from './prisma.service';
@@ -7,7 +9,7 @@ import {AdminGuard} from './admin.guard';
 import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto,TeamProfileDto,GovernanceDto,SocialLinksDto,PartnerPresentationDto} from './dto';
 @ApiTags('Editorial administration') @ApiBearerAuth() @UseGuards(AdminGuard) @Controller('admin')
 export class AdminController {
- constructor(private readonly db:PrismaService,private readonly partnerRegistry:PartnersService){}
+ constructor(private readonly db:PrismaService,private readonly partnerRegistry:PartnersService,private readonly media:AdminMediaService){}
  @Get('content') list(@Query() q:ListQuery){return this.db.content.findMany({include:{translations:true,image:true},take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
  @Put('content/:slug') async save(@Param('slug') slug:string,@Body() dto:ContentDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');if(new Set(dto.translations.map(t=>t.locale)).size!==dto.translations.length)throw new BadRequestException('Duplicate locale');if(dto.published&&!dto.isDemo&&!dto.publishedAt)throw new BadRequestException('Published content needs a publication date');const {translations,publishedAt,...data}=dto;return this.db.$transaction(async tx=>{const item=await tx.content.upsert({where:{slug},create:{...data,publishedAt:publishedAt?new Date(publishedAt):null},update:{...data,publishedAt:publishedAt?new Date(publishedAt):null}});await tx.contentTranslation.deleteMany({where:{contentId:item.id}});await tx.contentTranslation.createMany({data:translations.map(t=>({...t,contentId:item.id}))});return item;});}
  @Delete('content/:id') async remove(@Param('id') id:string){await this.db.content.delete({where:{id}});return {deleted:true}}
@@ -16,7 +18,7 @@ export class AdminController {
  @Put('settings/hero/:assetId') async hero(@Param('assetId') id:string){const asset=await this.db.asset.findUnique({where:{id}});if(!asset)throw new NotFoundException();return this.db.siteSetting.upsert({where:{key:'hero'},create:{key:'hero',value:asset},update:{value:asset}})}
  @Put('pages/:slug') page(@Param('slug') slug:string,@Body() dto:PageDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');return this.db.page.upsert({where:{slug_locale:{slug,locale:dto.locale}},create:dto,update:dto})}
  @Put(['settings/partners','partners']) partners(@Body() dto:PartnersDto){return this.partnerRegistry.save(dto)}
- @Post('partner-logos') @UseInterceptors(FileInterceptor('file',{limits:{fileSize:2097152,files:1}})) uploadPartnerLogo(@UploadedFile() file:{buffer:Buffer}){return this.partnerRegistry.uploadLogo(file?.buffer)}
+ @Post('partner-logos') @UseInterceptors(FileInterceptor('file',{limits:{fileSize:2097152,files:1}})) async uploadPartnerLogo(@Req() req:AdminRequest,@UploadedFile() file:{buffer:Buffer;originalname:string}){const result=await this.media.upload(req,file,'LOGO');return this.db.asset.create({data:{url:result.url,alt:'Administrator-uploaded official logo'}})}
  @Get('partners') partnerRecords(){return this.partnerRegistry.all()}
  @Put('settings/partner-presentation') partnerPresentation(@Body() dto:PartnerPresentationDto){return this.db.siteSetting.upsert({where:{key:'partnerPresentation'},create:{key:'partnerPresentation',value:{label:dto.label}},update:{value:{label:dto.label}}})}
  @Put('settings/about-profile') aboutProfile(@Body() dto:AboutProfileDto){const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key:'aboutProfile'},create:{key:'aboutProfile',value},update:{value}})}

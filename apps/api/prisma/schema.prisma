@@ -282,6 +282,11 @@ model PageSEO {
 }
 
 model Media {
+  storageProvider     MediaStorageProvider  @default(LOCAL)
+  storageBucket       String?
+  purpose             MediaPurpose          @default(GENERAL)
+  copyrightNotice     String?
+  variants            MediaVariant[]
   id                  String                @id @default(cuid())
   slug                String                @unique @default(cuid())
   storageKey          String?               @unique
@@ -897,4 +902,36 @@ model SiteSettingsTranslation {
   updatedAt        DateTime     @default(now()) @updatedAt
 
   @@unique([siteSettingsId, locale])
+}
+
+enum MediaStorageProvider {
+  LOCAL
+  S3
+}
+
+enum MediaPurpose {
+  GENERAL
+  HERO
+  ACTIVITY_PROJECT
+  PORTRAIT
+  LOGO
+  DOCUMENT
+}
+
+model MediaVariant {
+  id         String   @id @default(cuid())
+  mediaId    String
+  media      Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  name       String
+  format     String
+  storageKey String   @unique
+  url        String
+  mimeType   String
+  width      Int?
+  height     Int?
+  sizeBytes  BigInt
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@unique([mediaId, name, format])
 }

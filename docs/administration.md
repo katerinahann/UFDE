@@ -72,3 +72,12 @@ SEO route keys are `home`, `about`, `projects/example-slug`, etc., without a lea
 ## Verification
 
 `pnpm test` includes password/session/CSRF/role tests, CMS validation tests, and isolated PostgreSQL-engine tests for migrations, seed idempotency, every module's selectors and editable CRUD, and public publication filtering. Test fixtures never use the configured production database. `pnpm typecheck`, `pnpm --filter @ufde/api build` and `pnpm build:vercel` verify API and static deployment output.
+
+## Central media update
+
+The original local-only upload instructions above are superseded by
+[centralized media configuration](media.md). New uploads support S3-compatible
+storage, image variants, credit/copyright metadata and safe static SVG logos.
+Use the intended-use selector in Media Library. Legacy partner-logo uploads also
+use the central service; new files start private and must be published in Media
+Library before they can appear publicly.

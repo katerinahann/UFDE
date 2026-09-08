@@ -27,6 +27,7 @@ async function database() {
   for (const name of [
     '202609080002_normalized_platform',
     '202609080003_admin_sessions',
+    '202609090001_media_variants',
   ])
     await engine.exec(
       readFileSync('prisma/migrations/' + name + '/migration.sql', 'utf8'),

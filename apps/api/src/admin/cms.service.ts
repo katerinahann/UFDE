@@ -164,6 +164,8 @@ export class CmsService {
         mimeType: true,
         sizeBytes: true,
         storageKey: true,
+        width: true, height: true, purpose: true, copyrightNotice: true,
+        variants: {select:{name:true,format:true,url:true,width:true,height:true,mimeType:true}},
       });
     return select;
   }

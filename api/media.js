@@ -10,6 +10,7 @@ export default async function handler(req, res) {
     if (url.protocol !== 'https:') throw Error();
     url.pathname = url.pathname.replace(/\/admin\/?$/, '') + '/media/' + id;
     url.search = '';
+    for (const key of ['size','format']) if (typeof req.query[key] === 'string') url.searchParams.set(key,req.query[key]);
     const upstream = await fetch(url, {
       redirect: 'manual',
       signal: AbortSignal.timeout(20000),

@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: 'Not found' });
     target.pathname = target.pathname.replace(/\/$/, '') + '/' + route;
     target.search = '';
-    for (const name of ['page', 'version', 'search', 'slug'])
+    for (const name of ['page', 'version', 'search', 'slug', 'size', 'format'])
       if (typeof req.query[name] === 'string')
         target.searchParams.set(name, req.query[name]);
     const headers = {};

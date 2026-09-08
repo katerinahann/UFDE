@@ -38,7 +38,7 @@ function image(media: any, locale: string, alt?: string) {
     !media.mimeType.startsWith('image/')
   )
     return undefined;
-  return { url: media.url, alt: alt || local(media, locale)?.altText || '' };
+  return { url: media.url, alt: alt || local(media, locale)?.altText || '', width:media.width,height:media.height,caption:local(media,locale)?.caption,credit:media.credit,copyrightNotice:media.copyrightNotice,variants:(media.variants||[]).map((v:any)=>({name:v.name,format:v.format,url:v.url,width:v.width,height:v.height})) };
 }
 function pdf(media: any) {
   return media?.visibility === 'PUBLIC' &&
@@ -47,7 +47,7 @@ function pdf(media: any) {
     ? media.url
     : undefined;
 }
-const mediaInclude = { include: { translations: true } };
+const mediaInclude = { include: { translations: true, variants: true } };
 const partnerInclude = { translations: true, logo: mediaInclude };
 function partner(row: any, locale: string) {
   const t = local(row, locale);

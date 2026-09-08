@@ -663,13 +663,46 @@ function UploadBox({
   onUploaded: () => void | Promise<void>;
 }) {
   const [busy, setBusy] = useState(false),
-    [error, setError] = useState('');
+    [error, setError] = useState(''),
+    [purpose, setPurpose] = useState('GENERAL'),
+    [notice, setNotice] = useState('');
   return (
     <div className="admin-upload">
       <Upload size={24} />
       <div>
         <strong>Upload media</strong>
-        <p>PNG, JPEG, WebP or PDF · Maximum 4 MB · Files start private</p>
+        <p>
+          Photographs, official logos or PDF · Maximum 4 MB · Files start
+          private
+        </p>
+        <label>
+          Intended use{' '}
+          <select
+            value={purpose}
+            disabled={busy}
+            onChange={(e) => setPurpose(e.target.value)}
+          >
+            {[
+              ['GENERAL', 'General image'],
+              ['HERO', 'Hero — 1920 × 800+'],
+              ['ACTIVITY_PROJECT', 'Activity / project — 1600 × 1000'],
+              ['PORTRAIT', 'Team portrait — 1000 × 1200'],
+              ['LOGO', 'Official logo — SVG or transparent PNG'],
+              ['DOCUMENT', 'PDF document'],
+            ].map(([value, label]) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
+          </select>
+        </label>
+        {purpose === 'LOGO' && (
+          <p>
+            Upload supplied official artwork. Logos retain their proportions and
+            transparency.
+          </p>
+        )}
+        {notice && <p role="status">{notice}</p>}
         {error && (
           <p className="admin-error" role="alert">
             {error}
@@ -681,12 +714,19 @@ function UploadBox({
         <input
           aria-label="Upload media file"
           type="file"
-          accept="image/png,image/jpeg,image/webp,application/pdf"
+          accept={
+            purpose === 'LOGO'
+              ? 'image/svg+xml,image/png,image/webp,image/jpeg'
+              : purpose === 'DOCUMENT'
+                ? 'application/pdf'
+                : 'image/png,image/jpeg,image/webp,image/avif'
+          }
           disabled={busy}
           onChange={async (e) => {
             const file = e.target.files?.[0];
             if (!file) return;
             setError('');
+            setNotice('');
             if (file.size > 4 * 1024 * 1024) {
               setError('Choose a file smaller than 4 MB');
               return;
@@ -694,8 +734,18 @@ function UploadBox({
             setBusy(true);
             const data = new FormData();
             data.append('file', file);
+            data.append('purpose', purpose);
             try {
-              await api('media/upload', { method: 'POST', body: data });
+              const result = await api('media/upload', {
+                method: 'POST',
+                body: data,
+              });
+              setNotice(
+                [
+                  'Upload complete. Original and optimized sizes are available.',
+                  ...(result.warnings || []),
+                ].join(' '),
+              );
               await onUploaded();
             } catch (error) {
               setError(message(error));
@@ -855,6 +905,38 @@ function Editor({
         <div className="admin-error" role="alert">
           {error}
         </div>
+      )}
+      {row && module === 'media' && (
+        <section className="admin-editor-panel">
+          <h2>Image files</h2>
+          <p>
+            {String(row.purpose || 'GENERAL')} ·{' '}
+            {row.width ? `${row.width} × ${row.height}` : 'Document'} · Original
+            source retained
+          </p>
+          <div className="admin-media-variants">
+            {(
+              (row.variants || []) as {
+                name: string;
+                format: string;
+                width?: number;
+                height?: number;
+                url: string;
+              }[]
+            ).map((v) => (
+              <a
+                className="admin-secondary"
+                key={v.name + v.format}
+                href={`/api/admin/media/${row.id}/file?size=${v.name}&format=${v.format}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {v.name} · {v.format.toUpperCase()}{' '}
+                {v.width ? `${v.width}×${v.height}` : ''} ↗
+              </a>
+            ))}
+          </div>
+        </section>
       )}
       <form onSubmit={save}>
         <fieldset disabled={busy}>

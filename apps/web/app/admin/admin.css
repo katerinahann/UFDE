@@ -934,3 +934,5 @@
     transition: none;
   }
 }
+
+.admin-media-variants{display:flex;flex-wrap:wrap;gap:10px}.admin-upload select{margin:10px 0 0 10px}

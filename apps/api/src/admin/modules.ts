@@ -410,6 +410,7 @@ export const modules: Record<string, AdminModule> = {
     fields: [
       slug,
       f('credit', 'Credit'),
+      f('copyrightNotice', 'Copyright notice'),
       f('licenseUrl', 'Licence URL', 'url'),
       f('visibility', 'Access', 'select', { options: ['PRIVATE', 'PUBLIC'] }),
       f('isDemo', 'DEMO placeholder', 'boolean'),

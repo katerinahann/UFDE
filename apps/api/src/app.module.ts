@@ -1,3 +1,4 @@
+import {MediaStorage} from './media/storage.service';
 import {PublicContentController} from './admin/public-content.controller';
 import {AuthService} from './admin/auth.service';
 import {AuthController,SessionGuard} from './admin/auth.controller';
@@ -17,4 +18,4 @@ import {AdminController} from './admin.controller';
 import {AdminGuard} from './admin.guard';
 import {validateEnvironment} from './environment';
 @Controller('health') class HealthController {constructor(private readonly db:PrismaService){} @Get() async health(){try{await this.db.$queryRaw`SELECT 1`;return {status:'ok'}}catch{throw new ServiceUnavailableException('Database unavailable')}}}
-@Module({imports:[ConfigModule.forRoot({isGlobal:true,validate:validateEnvironment}),ThrottlerModule.forRoot([{name:'default',ttl:60000,limit:120}])],controllers:[PublicContentController,AuthController,CmsController,AdminMediaController,PublicMediaController,HealthController,ContentController,FormsController,AdminController],providers:[AuthService,SessionGuard,CmsService,AdminMediaService,PrismaService,PartnersService,ContactMailService,AdminGuard,{provide:APP_GUARD,useClass:ThrottlerGuard}]}) export class AppModule {}
+@Module({imports:[ConfigModule.forRoot({isGlobal:true,validate:validateEnvironment}),ThrottlerModule.forRoot([{name:'default',ttl:60000,limit:120}])],controllers:[PublicContentController,AuthController,CmsController,AdminMediaController,PublicMediaController,HealthController,ContentController,FormsController,AdminController],providers:[MediaStorage,AuthService,SessionGuard,CmsService,AdminMediaService,PrismaService,PartnersService,ContactMailService,AdminGuard,{provide:APP_GUARD,useClass:ThrottlerGuard}]}) export class AppModule {}

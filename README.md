@@ -225,3 +225,9 @@ migration and administrator creation. The older bearer-token instructions above
 are superseded: legacy admin endpoints also require a secure administrator
 session. New dashboard content uses normalized Prisma models and `/v1/cms-public`
 readers. Review legacy content before enabling those readers on a live site.
+
+### Centralized media
+
+See [media storage and processing](docs/media.md) for local `uploads/`, AWS S3,
+Cloudflare R2, DigitalOcean Spaces, image variants and official SVG logo support.
+Apply the new additive media migration before deploying the updated API.
