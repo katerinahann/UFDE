@@ -340,7 +340,8 @@ export const modules: Record<string, AdminModule> = {
     noCreate: true,
     fields: [
       f('email', 'Email', 'email', { required: true }),
-      f('locale', 'Language', 'select', { options: ['EN', 'FR', 'UK'] }),
+      f('language', 'Language', 'select', { options: ['EN', 'FR', 'UK'] }),
+      f('source', 'Source'),
       f('status', 'Subscription status', 'select', {
         options: ['UNSUBSCRIBED'],
       }),

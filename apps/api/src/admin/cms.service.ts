@@ -368,9 +368,14 @@ export class CmsService {
         if (
           key === 'subscribers' &&
           current &&
-          (data.email !== current.email || data.locale !== current.locale)
+          (data.email !== current.email || data.language !== current.language)
         )
           bad('Subscriber identity and consent language cannot be changed');
+        if (key === 'subscribers' && data.status === 'UNSUBSCRIBED') {
+          data.unsubscribedAt = current?.unsubscribedAt || data.unsubscribedAt;
+          data.confirmationTokenHash = null;
+          data.confirmationExpiresAt = null;
+        }
         const effective = { ...current, ...data };
         if (effective.published && effective.isDemo)
           bad('DEMO content cannot be published');

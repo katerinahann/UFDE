@@ -28,6 +28,7 @@ async function database() {
     '202609080002_normalized_platform',
     '202609080003_admin_sessions',
     '202609090001_media_variants',
+    '202609090002_newsletter',
   ])
     await engine.exec(
       readFileSync('prisma/migrations/' + name + '/migration.sql', 'utf8'),
@@ -221,6 +222,159 @@ test('publishing exposes only approved records and unpublishing removes public r
     assert.equal((await publicApi.team(locale)).length, 0);
     assert.equal((await publicApi.partners(locale)).length, 0);
     assert.equal((await publicApi.governance(locale)).documents.length, 0);
+  } finally {
+    await close();
+  }
+});
+
+import { ConfigService } from '@nestjs/config';
+import {
+  NewsletterService,
+  NewsletterDelivery,
+  tokenHash,
+} from '../src/newsletter/newsletter.service';
+test('newsletter normalizes duplicates, persists metadata and never reverses an unsubscribe', async () => {
+  const { db, close } = await database();
+  try {
+    const service = new NewsletterService(
+      db as any,
+      new ConfigService(),
+      new NewsletterDelivery(),
+    );
+    const dto = {
+      email: ' NEWS@example.org ',
+      language: 'fr',
+      source: 'footer',
+      consent: true,
+    };
+    const first = await service.subscribe(dto);
+    assert.deepEqual(
+      first,
+      await service.subscribe({ ...dto, email: 'news@example.org' }),
+    );
+    assert.equal(await db.newsletterSubscriber.count(), 1);
+    const row = await db.newsletterSubscriber.findUniqueOrThrow({
+      where: { email: 'news@example.org' },
+    });
+    assert.equal(row.language, 'FR');
+    assert.equal(row.source, 'footer');
+    assert.equal(row.status, 'SUBSCRIBED');
+    assert.equal(row.confirmedAt, null);
+    const token = await service.issueUnsubscribeToken(row.id);
+    assert.notEqual(row.unsubscribeTokenHash, token);
+    await service.unsubscribe(token);
+    const unsub = await db.newsletterSubscriber.findUniqueOrThrow({
+      where: { id: row.id },
+    });
+    assert.ok(unsub.unsubscribedAt);
+    assert.equal(unsub.status, 'UNSUBSCRIBED');
+    await service.unsubscribe(token);
+    await service.subscribe(dto);
+    assert.deepEqual(
+      (
+        await db.newsletterSubscriber.findUniqueOrThrow({
+          where: { id: row.id },
+        })
+      ).unsubscribedAt,
+      unsub.unsubscribedAt,
+    );
+    assert.deepEqual(await service.unsubscribe('a'.repeat(64)), {
+      status: 'unsubscribed',
+    });
+  } finally {
+    await close();
+  }
+});
+test('double opt-in requires delivery, expires tokens and confirms only once', async () => {
+  const { db, close } = await database();
+  try {
+    const config = new ConfigService({ NEWSLETTER_DOUBLE_OPT_IN: 'true' });
+    const dto = {
+      email: 'confirm@example.org',
+      language: 'uk',
+      source: 'website',
+      consent: true,
+    };
+    await assert.rejects(
+      new NewsletterService(
+        db as any,
+        config,
+        new NewsletterDelivery(),
+      ).subscribe(dto),
+    );
+    assert.equal(await db.newsletterSubscriber.count(), 0);
+    let sent: any;
+    let sends = 0;
+    const service = new NewsletterService(db as any, config, {
+      isConfigured: () => true,
+      sendConfirmation: async (message: any) => {
+        sent = message;
+        sends++;
+      },
+    });
+    await service.subscribe(dto);
+    await service.subscribe(dto);
+    assert.equal(sends, 1);
+    let row = await db.newsletterSubscriber.findUniqueOrThrow({
+      where: { email: dto.email },
+    });
+    assert.equal(row.status, 'PENDING');
+    assert.equal(row.confirmationTokenHash, tokenHash(sent.confirmationToken));
+    await db.newsletterSubscriber.update({
+      where: { id: row.id },
+      data: { confirmationExpiresAt: new Date(0) },
+    });
+    await assert.rejects(service.confirm(sent.confirmationToken));
+    await service.subscribe(dto);
+    assert.equal(sends, 2);
+    await service.confirm(sent.confirmationToken);
+    await assert.rejects(service.confirm(sent.confirmationToken));
+    row = await db.newsletterSubscriber.findUniqueOrThrow({
+      where: { id: row.id },
+    });
+    assert.equal(row.status, 'SUBSCRIBED');
+    assert.ok(row.confirmedAt);
+    assert.equal(row.confirmationTokenHash, null);
+    await service.unsubscribe(sent.unsubscribeToken);
+    assert.equal(
+      (
+        await db.newsletterSubscriber.findUniqueOrThrow({
+          where: { id: row.id },
+        })
+      ).status,
+      'UNSUBSCRIBED',
+    );
+  } finally {
+    await close();
+  }
+});
+test('failed confirmation delivery leaves a retryable pending subscription', async () => {
+  const { db, close } = await database();
+  try {
+    const service = new NewsletterService(
+      db as any,
+      new ConfigService({ NEWSLETTER_DOUBLE_OPT_IN: 'true' }),
+      {
+        isConfigured: () => true,
+        sendConfirmation: async () => {
+          throw Error('offline');
+        },
+      },
+    );
+    await assert.rejects(
+      service.subscribe({
+        email: 'retry@example.org',
+        language: 'en',
+        source: 'footer',
+        consent: true,
+      }),
+    );
+    const row = await db.newsletterSubscriber.findUniqueOrThrow({
+      where: { email: 'retry@example.org' },
+    });
+    assert.equal(row.status, 'PENDING');
+    assert.equal(row.confirmationTokenHash, null);
+    assert.equal(row.confirmationExpiresAt, null);
   } finally {
     await close();
   }

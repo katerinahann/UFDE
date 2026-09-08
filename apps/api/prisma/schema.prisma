@@ -777,7 +777,9 @@ model StrategicAreaTranslation {
 model NewsletterSubscriber {
   id                    String             @id @default(cuid())
   email                 String             @unique
-  locale                Locale             @default(EN)
+  language              Locale             @default(EN) @map("locale")
+  source                String             @default("website")
+  confirmationExpiresAt DateTime?
   status                SubscriptionStatus @default(PENDING)
   consentVersion        String
   consentedAt           DateTime
@@ -789,7 +791,7 @@ model NewsletterSubscriber {
   createdAt             DateTime           @default(now())
   updatedAt             DateTime           @default(now()) @updatedAt
 
-  @@index([status, locale])
+  @@index([status, language], map: "NewsletterSubscriber_status_locale_idx")
 }
 
 model ProjectActivity {
