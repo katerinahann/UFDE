@@ -3,7 +3,8 @@ import Image from 'next/image';
 import {Mail,MapPin,Phone} from 'lucide-react';
 import {institute,type Locale} from '@ufde/config';
 import {dictionary,localizedPath} from '@ufde/config/messages';
-import {Navigation,navPaths} from './navigation';
+import {Navigation} from './navigation';
+import {navPaths} from '@/lib/navigation';
 import {EnquiryForm} from './forms';
 import {demoMode} from '@/lib/content';
 export function Header({locale='en',path=''}:{locale?:Locale;path?:string}){const d=dictionary(locale);return <><a className="skip" href="#main">{d.skip}</a><header className="header"><div className="container header-inner"><Link href={localizedPath(locale)} className="wordmark" aria-label={'UFDE — '+d.nav[0]}>{institute.logo.supplied?<Image src={institute.logo.light} alt="UFDE" width={180} height={55}/>:<>UFDE<span>{locale==='uk'?'УКРАЇНСЬКО-ФРАНЦУЗЬКИЙ ІНСТИТУТ':locale==='fr'?'INSTITUT UKRAINO-FRANÇAIS':'UKRAINIAN–FRENCH INSTITUTE'}</span></>}</Link><Navigation locale={locale} path={path} d={d}/></div></header></>}
