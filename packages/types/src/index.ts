@@ -3,3 +3,6 @@ export interface ContentRecord { id: string; slug: string; kind: ContentKind; lo
 
 export interface PartnerRecord { id:string; name:string; logoUrl?:string; logoAlt?:string; href?:string; isDemo:boolean; }
 export interface ActivityDetails {date?:string;location?:string;gallery:{url:string;alt:string;credit?:string}[];partners:PartnerRecord[];programmeUrl?:string;eventUrl?:string}
+export type ProjectStatus='Ongoing'|'Upcoming'|'Completed'|'Planned';
+export interface ProjectDetails {status?:ProjectStatus;category?:string;startDate?:string;endDate?:string;institutionType?:string;strategicArea?:string;lead?:string;countries:string[];partners:PartnerRecord[];background?:string;objectives:string[];activities:string[];outcomes:string[];resources:{title:string;url:string;format:'PDF'|'Link'}[];relatedActivitySlugs:string[];contactEmail?:string;featured:boolean}
+export interface ProjectView {record:ContentRecord;details:ProjectDetails}

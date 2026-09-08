@@ -14,6 +14,7 @@
     "./partners": "./src/partners.ts",
     "./about": "./src/about.ts",
     "./strategic-areas": "./src/strategic-areas.ts",
-    "./activities": "./src/activities.ts"
+    "./activities": "./src/activities.ts",
+    "./projects": "./src/projects.ts"
   }
 }

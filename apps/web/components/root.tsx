@@ -12,3 +12,5 @@ import './about.css';
 import './strategic-areas.css';
 
 import './activities.css';
+
+import './projects.css';

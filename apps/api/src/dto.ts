@@ -101,3 +101,28 @@ export class ActivityDetailsDto {
  @ApiPropertyOptional() @IsOptional() @Matches(/^(\/documents\/[a-zA-Z0-9/_\-.]+\.pdf|https:\/\/[^\s]+)$/) @MaxLength(2000) programmeUrl?:string;
  @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) eventUrl?:string;
 }
+
+export class ProjectResourceDto {
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(250) title!:string;
+ @ApiProperty() @Matches(/^(\/documents\/[a-zA-Z0-9/_\-.]+\.pdf|https:\/\/[^\s]+)$/) @MaxLength(2000) url!:string;
+ @ApiProperty({enum:['PDF','Link']}) @IsIn(['PDF','Link']) format!:'PDF'|'Link';
+}
+export class ProjectDetailsDto {
+ @ApiPropertyOptional({enum:['Ongoing','Upcoming','Completed','Planned']}) @IsOptional() @IsIn(['Ongoing','Upcoming','Completed','Planned']) status?:string;
+ @ApiPropertyOptional() @IsOptional() @IsIn(['research-innovation','education-training','policy-development','international-cooperation','culture-creative-industries']) category?:string;
+ @ApiPropertyOptional() @IsOptional() @IsDateString() startDate?:string;
+ @ApiPropertyOptional() @IsOptional() @IsDateString() endDate?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(250) institutionType?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(250) strategicArea?:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(250) lead?:string;
+ @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(100) @IsString({each:true}) @MaxLength(120,{each:true}) countries!:string[];
+ @ApiProperty({type:[PartnerDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerDto) partners!:PartnerDto[];
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(20000) background?:string;
+ @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(50) @IsString({each:true}) @MaxLength(5000,{each:true}) objectives!:string[];
+ @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(50) @IsString({each:true}) @MaxLength(5000,{each:true}) activities!:string[];
+ @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(50) @IsString({each:true}) @MaxLength(5000,{each:true}) outcomes!:string[];
+ @ApiProperty({type:[ProjectResourceDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>ProjectResourceDto) resources!:ProjectResourceDto[];
+ @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(100) @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/,{each:true}) @MaxLength(160,{each:true}) relatedActivitySlugs!:string[];
+ @ApiPropertyOptional() @IsOptional() @IsEmail() @MaxLength(250) contactEmail?:string;
+ @ApiProperty() @IsBoolean() featured!:boolean;
+}

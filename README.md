@@ -33,3 +33,26 @@ Authenticated editors use `PUT /admin/activity-details/:slug?locale=en` (or `fr`
 Absent metadata renders honest empty states. Rebuild static deployments after
 content edits. No database connection or live editorial API was exercised during
 this implementation's build verification.
+
+### Projects
+
+`/projects` uses local category tabs and a responsive three/two/one-column grid.
+Project records supply titles, summaries and images. Additional localized data
+is stored in `SiteSetting` through authenticated
+`PUT /admin/project-details/:slug?locale=en` (`fr` and `uk` also supported).
+`GET /project-details/:slug?locale=en` only reads published project metadata.
+
+The payload shape is documented by `ProjectDetailsDto` and `ProjectDetails`:
+optional status (`Ongoing`, `Upcoming`, `Completed`, `Planned`), category key,
+start/end ISO dates, institution type, strategic area, lead, background and
+contact email; arrays for countries, partners, objectives, activities, outcomes,
+resources and related activity slugs; and a `featured` boolean. Set one project
+per locale as featured; if several are flagged, the first in publication order
+is shown. Category keys are in `packages/config/src/projects.ts`. Resource URLs
+accept HTTPS or local `/documents/*.pdf` files. Dates are validated so the end
+cannot precede the start. Related activities use explicit links, not guesses.
+
+Demo project badges and dates are examples. Missing approved facts use empty
+states; no project metrics or affiliations are generated. Metadata edits require
+a rebuild for static Vercel deployments. The project details reuse existing
+SiteSetting storage, so no database migration is required.
