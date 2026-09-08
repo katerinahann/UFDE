@@ -935,4 +935,72 @@
   }
 }
 
-.admin-media-variants{display:flex;flex-wrap:wrap;gap:10px}.admin-upload select{margin:10px 0 0 10px}
+.admin-media-variants {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.admin-upload select {
+  margin: 10px 0 0 10px;
+}
+
+/* Keep dense CMS controls usable without widening the page. */
+.admin-shell button,
+.admin-login button {
+  min-height: 44px;
+}
+.admin-account button,
+.admin-mobile-menu,
+.admin-nav-close,
+.admin-table-card td button {
+  min-width: 44px;
+}
+.admin-editor-panel,
+.admin-field-grid > *,
+.admin-social-fields > *,
+.admin-table-card,
+.admin-login-panel,
+.admin-account {
+  min-width: 0;
+}
+.admin-shell :is(input:not([type='checkbox']):not([type='radio']), select) {
+  min-height: 44px;
+}
+.admin-pagination,
+.admin-table-tools {
+  flex-wrap: wrap;
+}
+.admin-table-tools label {
+  min-width: 0;
+  max-width: 100%;
+}
+.admin-table-scroll {
+  max-width: 100%;
+  overscroll-behavior-x: contain;
+}
+@media (max-width: 1023px) {
+  .admin-field-grid,
+  .admin-social-fields {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+@media (max-width: 639px) {
+  .admin-shell input,
+  .admin-shell textarea,
+  .admin-shell select,
+  .admin-login input {
+    font-size: 16px;
+  }
+  .admin-stat-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .admin-topbar {
+    height: auto;
+    min-height: 70px;
+    flex-wrap: wrap;
+    padding-block: 12px;
+  }
+  .admin-account strong {
+    overflow-wrap: anywhere;
+  }
+}
