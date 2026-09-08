@@ -14,7 +14,11 @@ export class NewsletterDto {
  @ApiProperty({enum:[true]}) @Equals(true) consent!:boolean;
  @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(0) website?:string;
 }
-export class ContactDto extends NewsletterDto {
+export class ContactDto {
+ @ApiProperty() @Transform(({value})=>typeof value==='string'?value.trim().toLowerCase():value) @IsEmail() @MaxLength(254) email!:string;
+ @ApiProperty() @IsIn(['en','fr','uk']) locale!:string;
+ @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(0) website?:string;
+ @ApiPropertyOptional() @IsOptional() @IsBoolean() acknowledgement?:boolean;
  @ApiProperty() @Transform(clean) @IsString() @MinLength(2) @MaxLength(120) name!:string;
  @ApiPropertyOptional() @Transform(clean) @IsOptional() @IsString() @MaxLength(180) organization?:string;
  @ApiProperty() @Transform(clean) @IsString() @MinLength(3) @MaxLength(160) subject!:string;
@@ -184,4 +188,12 @@ export class GovernanceDto {
  @ApiProperty() @IsString() @MaxLength(10000) compliance!:string;
  @ApiProperty() @IsEmail() @MaxLength(250) contactEmail!:string;
  @ApiProperty({type:[GovernanceDocumentDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>GovernanceDocumentDto) documents!:GovernanceDocumentDto[];
+}
+
+export class SocialLinkDto {
+ @ApiProperty() @IsIn(['LinkedIn','Facebook','X','Instagram','YouTube']) network!:string;
+ @ApiProperty() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) url!:string;
+}
+export class SocialLinksDto {
+ @ApiProperty({type:[SocialLinkDto]}) @IsArray() @ArrayMaxSize(5) @ValidateNested({each:true}) @Type(()=>SocialLinkDto) socialLinks!:SocialLinkDto[];
 }

@@ -18,6 +18,7 @@
     "./projects": "./src/projects.ts",
     "./publications": "./src/publications.ts",
     "./team": "./src/team.ts",
-    "./governance": "./src/governance.ts"
+    "./governance": "./src/governance.ts",
+    "./contact": "./src/contact.ts"
   }
 }

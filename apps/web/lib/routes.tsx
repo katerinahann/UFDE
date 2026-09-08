@@ -22,6 +22,8 @@ import {Team} from '@/components/team';
 import {teamLabels,teamHero} from '@ufde/config/team';
 import {Governance} from '@/components/governance';
 import {governanceLabels} from '@ufde/config/governance';
+import {Contact} from '@/components/contact';
+import {contactLabels} from '@ufde/config/contact';
 import {About} from '@/components/about';
 import {Home} from '@/components/home';
 import {EnquiryForm} from '@/components/forms';
@@ -32,6 +34,7 @@ const kinds:Record<string,ContentKind>={activities:'ACTIVITY',projects:'PROJECT'
 export async function routeParams(locale:Locale){const paths:{path:string[]}[]=[{path:[]},...pageKeys.map(key=>({path:[key]})),...strategicAreaSlugs.map(slug=>({path:['strategic-areas',slug]}))];for(const [name,kind] of Object.entries(kinds)){const records=kind==='PUBLICATION'?await listPublications(locale):await listContent(kind,locale);for(const r of records)paths.push({path:[name,r.slug]});}return paths;}
 export async function routeMetadata(locale:Locale,props:RouteProps){const {path=[]}=await props.params;const d=dictionary(locale);if(!path.length)return metadataFor(locale,'',d.fullName,d.home.description,institute.hero.src);if(path[0]==='publications'&&path.length<=2){const p=path[1]?await getPublication(path[1],locale):null;if(path[1]&&!p)notFound();return metadataFor(locale,'/'+path.join('/'),p?.title||publicationLabels[locale].title,p?.summary||publicationLabels[locale].subtitle,p?.coverImage?.url||'/images/sorbonne.webp');}if(path.length===2&&kinds[path[0]]){const item=await getContent(path[1],locale);if(!item||item.kind!==kinds[path[0]])notFound();return metadataFor(locale,'/'+path.join('/'),item.seoTitle||item.title,item.seoDescription||item.summary,item.image?.url);}
 if(path.length===1&&path[0]==='governance-transparency')return metadataFor(locale,'/governance-transparency',governanceLabels[locale].title,governanceLabels[locale].subtitle,'/images/institut.webp');
+if(path.length===1&&path[0]==='contact')return metadataFor(locale,'/contact',contactLabels[locale].title,contactLabels[locale].subtitle,institute.hero.src);
 if(path.length===1&&path[0]==='team')return metadataFor(locale,'/team',teamLabels[locale].title,teamLabels[locale].subtitle,teamHero.url);
 if(path.length===1&&path[0]==='projects')return metadataFor(locale,'/projects',projectLabels[locale].title,projectLabels[locale].subtitle,'/images/institut.webp');
 if(path.length===1&&path[0]==='activities')return metadataFor(locale,'/activities',activityLabels[locale].title,activityLabels[locale].subtitle,institute.hero.src);
@@ -41,6 +44,7 @@ if(path.length!==1||!pageKeys.includes(path[0] as PageKey))notFound();const bloc
 export async function renderRoute(locale:Locale,props:RouteProps){const {path=[]}=await props.params;const d=dictionary(locale);const key=path[0] as PageKey;const href=(s:string)=>localizedPath(locale,s);const fullPath=path.length?'/'+path.join('/'):'';let content:React.ReactNode,title=d.fullName,description=d.home.description;
 if(!path.length)content=<Home locale={locale}/>;
 else if(key==='governance-transparency'&&path.length===1){title=governanceLabels[locale].title;description=governanceLabels[locale].subtitle;content=<Governance locale={locale}/>;}
+else if(key==='contact'&&path.length===1){title=contactLabels[locale].title;description=contactLabels[locale].subtitle;content=<Contact locale={locale}/>;}
 else if(key==='team'&&path.length===1){title=teamLabels[locale].title;description=teamLabels[locale].subtitle;content=<Team locale={locale}/>;}
 else if(key==='publications'&&path.length<=2){const item=path[1]?await getPublication(path[1],locale):null;if(path[1]&&!item)notFound();title=item?.title||publicationLabels[locale].title;description=item?.summary||publicationLabels[locale].subtitle;content=<Publications locale={locale} item={item||undefined}/>;}
 else if(key==='projects'&&path.length<=2){const item=path[1]?await getContent(path[1],locale):undefined;if(path[1]&&(!item||item.kind!=='PROJECT'))notFound();title=item?.title||projectLabels[locale].title;description=item?.summary||projectLabels[locale].subtitle;content=<Projects locale={locale} item={item||undefined}/>;}

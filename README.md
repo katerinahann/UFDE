@@ -131,3 +131,51 @@ file URL only after uploading the actual file. Public entries without a file
 show Coming soon. The Code of Ethics CTA uses the public `code-ethics` file when
 available, otherwise it points to the documents section with Coming soon status.
 Rebuild static Vercel exports after content or privacy changes.
+
+### Contact submissions and notification delivery
+
+The Contact page posts to same-origin `/api/contact`. `api/contact.js` is the
+Vercel Node function forwarding to the separately hosted Nest API; static files
+alone cannot store messages or send mail. Configure these **server-side Vercel**
+variables (never NEXT_PUBLIC):
+
+- `CONTACT_BACKEND_URL`: complete HTTPS endpoint, e.g. `https://api.example.org/v1/contact`.
+- `CONTACT_PROXY_SECRET`: random secret of at least 32 characters, identical on both services.
+
+On the **persistent Nest API service**, configure PostgreSQL and the existing API
+settings, plus `CONTACT_PROXY_SECRET`, `CONTACT_RATE_SECRET` (random secret),
+`RESEND_API_KEY`, `CONTACT_FROM_EMAIL` (a verified sender), and optional
+`CONTACT_NOTIFY_EMAIL` (defaults to `info@ufde.org`). Set the website's
+`NEXT_PUBLIC_DEMO_MODE=false` when connecting real submissions. Local Next server
+mode rewrites `/api/contact` to `CONTACT_BACKEND_URL`, defaulting to
+`http://localhost:4000/v1/contact`. The Nest service also accepts `/api/contact`
+as an alias for `/v1/contact`. Newsletter subscription remains a separate flow.
+
+Validation runs in the browser and in Nest's whitelist ValidationPipe. Contacts
+require name (2–120), email (up to 254), subject (3–160), message (20–5000);
+organisation is optional (up to 180). The honeypot must be empty. Database-backed
+limits allow five requests per IP/minute and three per email/hour. IP forwarding
+from the Vercel function is HMAC-signed and expires after five minutes; unsigned
+headers are not trusted. Rate keys are hashed; old rate/deduplication keys are
+removed after 24 hours. Identical enquiries within ten minutes return the same
+reference without another notification or database submission.
+
+The contact and its mail queue entries are created atomically using existing
+SiteSetting storage, so no schema migration is required. Notification email goes
+to UFDE. An unchecked optional acknowledgement box queues a fixed acknowledgement
+only if selected; it does not subscribe anyone to marketing. The acknowledgement
+does not echo user-supplied content. The UI success message means stored/received,
+not guaranteed mailbox delivery. No real mail was sent during automated checks.
+
+`ContactMailService` processes the durable outbox on the persistent API every 30
+seconds and after submission. Claims are coordinated through PostgreSQL advisory
+locks; failed delivery retries use exponential backoff, up to six attempts within
+23 hours, and a stable Resend idempotency key. Admins can inspect delivery states
+through `GET /admin/contact-deliveries`. Investigate `failed` entries; do not blindly
+replay deliveries beyond the provider's idempotency window. Missing mail
+credentials leave messages queued until the service is configured.
+
+Configure social links with `PUT /admin/settings/social-links` and a `socialLinks`
+array of `{network,url}`. Supported networks: LinkedIn, Facebook, X, Instagram,
+YouTube. Only configured HTTPS links are rendered. Rebuild static pages after
+social configuration changes. No social URLs were fabricated.

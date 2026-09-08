@@ -2,7 +2,7 @@ import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestExce
 import {ApiBearerAuth,ApiTags} from '@nestjs/swagger';
 import {PrismaService} from './prisma.service';
 import {AdminGuard} from './admin.guard';
-import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto,TeamProfileDto,GovernanceDto} from './dto';
+import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto,TeamProfileDto,GovernanceDto,SocialLinksDto} from './dto';
 @ApiTags('Editorial administration') @ApiBearerAuth() @UseGuards(AdminGuard) @Controller('admin')
 export class AdminController {
  constructor(private readonly db:PrismaService){}
@@ -21,6 +21,8 @@ export class AdminController {
  @Get('publications') async publications(@Query() q:ListQuery){return (await this.db.siteSetting.findMany({where:{key:{startsWith:'publication:',endsWith:':'+q.locale}},take:q.limit,skip:q.offset,orderBy:{key:'asc'}})).map(r=>r.value)}
  @Put('governance') governance(@Query() q:ListQuery,@Body() dto:GovernanceDto){for(const [record,keys] of [[dto.legal,['officialName','legalForm','registeredOffice','registrationNumber','registrationDate','officialPublication','sirenSiret']],[dto.structure,['assembly','board','executive','advisory']]] as const){if(Object.entries(record).some(([key,value])=>!keys.includes(key as never)||typeof value!=='string'||value.length>5000))throw new BadRequestException('Invalid governance fields');}if(new Set(dto.documents.map(d=>d.id)).size!==dto.documents.length)throw new BadRequestException('Duplicate document id');const key='governance:'+q.locale,value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
  @Get('governance') async governanceRead(@Query() q:ListQuery){return (await this.db.siteSetting.findUnique({where:{key:'governance:'+q.locale}}))?.value??null;}
+ @Put('settings/social-links') socialLinks(@Body() dto:SocialLinksDto){if(new Set(dto.socialLinks.map(s=>s.network)).size!==dto.socialLinks.length)throw new BadRequestException('Duplicate social network');const value=JSON.parse(JSON.stringify(dto.socialLinks));return this.db.siteSetting.upsert({where:{key:'socialLinks'},create:{key:'socialLinks',value},update:{value}})}
+ @Get('contact-deliveries') async contactDeliveries(@Query() q:ListQuery){return this.db.siteSetting.findMany({where:{key:{startsWith:'contact-mail:'}},take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
  @Get('pages') pages(@Query() q:ListQuery){return this.db.page.findMany({take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
  @Get('team') async teamList(@Query() q:ListQuery){const rows=await this.db.teamMember.findMany({take:q.limit,skip:q.offset,orderBy:[{order:'asc'},{id:'asc'}]});const profiles=await this.db.siteSetting.findMany({where:{key:{in:rows.map(r=>'team:'+r.id+':'+q.locale)}}});return rows.map(r=>({...r,profile:profiles.find(p=>p.key==='team:'+r.id+':'+q.locale)?.value??null}))}
  @Put('team/:id/profile') async teamProfile(@Param('id') id:string,@Query() q:ListQuery,@Body() dto:TeamProfileDto){if(!await this.db.teamMember.findUnique({where:{id}}))throw new NotFoundException();const key='team:'+id+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
