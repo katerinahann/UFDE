@@ -12,6 +12,7 @@
     "./messages": "./src/messages.ts",
     "./demo": "./src/demo.ts",
     "./partners": "./src/partners.ts",
-    "./about": "./src/about.ts"
+    "./about": "./src/about.ts",
+    "./strategic-areas": "./src/strategic-areas.ts"
   }
 }

@@ -8,3 +8,5 @@ export function Root({children,locale}:{children:React.ReactNode;locale:Locale})
 import './home.css';
 
 import './about.css';
+
+import './strategic-areas.css';
