@@ -104,3 +104,30 @@ focus-managed dialog with Escape/close support. Rebuild static deployments after
 CMS changes. The meeting hero is illustrative, credited to woodleywonderworks,
 CC BY 2.0, source https://commons.wikimedia.org/wiki/File:Team_Meeting.jpg; the
 local WebP is resized and the layout crops it. It does not depict the UFDE team.
+
+### Governance & Transparency
+
+The About dropdown (hover, click or keyboard) and its mobile disclosure link to
+Governance & Transparency. The About CTA and footer Important column also link
+there. Mission & Values and Our Story point to existing About sections; no
+unverified institutional history was created.
+
+`GET /governance?locale=en` serves public governance content. Authenticated
+`GET /admin/governance?locale=en` includes private documents and
+`PUT /admin/governance?locale=en` replaces localized content. French and Ukrainian
+are supported. The `GovernanceContent` / `GovernanceDto` object contains the four
+introductory facts, overview, legal fields, editable structure descriptions,
+policies, financial information, compliance, contact email and documents.
+Missing values display “To be updated”; supplied defaults live in
+`packages/config/src/governance.ts`. No legal registration category or number is
+inferred. Administrators should verify the governance structure against the
+registration documents before publishing formal descriptions.
+
+Documents have id, title, description, type, optional publicationDate, language,
+optional fileUrl, public flag and sortOrder. Private entries are removed by the
+public API, not merely hidden in CSS. Keep private files in access-controlled
+storage; a public flag does not revoke a separately public storage URL. Add a
+file URL only after uploading the actual file. Public entries without a file
+show Coming soon. The Code of Ethics CTA uses the public `code-ethics` file when
+available, otherwise it points to the documents section with Coming soon status.
+Rebuild static Vercel exports after content or privacy changes.

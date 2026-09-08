@@ -18,3 +18,5 @@ import './projects.css';
 import './publications.css';
 
 import './team.css';
+
+import './governance.css';

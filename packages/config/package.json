@@ -17,6 +17,7 @@
     "./activities": "./src/activities.ts",
     "./projects": "./src/projects.ts",
     "./publications": "./src/publications.ts",
-    "./team": "./src/team.ts"
+    "./team": "./src/team.ts",
+    "./governance": "./src/governance.ts"
   }
 }

@@ -159,3 +159,29 @@ export class TeamProfileDto {
  @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) googleScholar?:string;
  @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) institutionalProfile?:string;
 }
+
+export class GovernanceDocumentDto {
+ @ApiProperty() @Matches(/^[a-z0-9-]+$/) @MaxLength(100) id!:string;
+ @ApiProperty() @IsString() @MinLength(1) @MaxLength(250) title!:string;
+ @ApiProperty() @IsString() @MaxLength(2000) description!:string;
+ @ApiProperty() @IsString() @MaxLength(100) type!:string;
+ @ApiPropertyOptional() @IsOptional() @IsDateString() publicationDate?:string;
+ @ApiProperty() @IsString() @MaxLength(100) language!:string;
+ @ApiPropertyOptional() @IsOptional() @Matches(/^(\/documents\/[a-zA-Z0-9/_\-.]+\.pdf|https:\/\/[^\s]+)$/) @MaxLength(4000) fileUrl?:string;
+ @ApiProperty() @IsBoolean() public!:boolean;
+ @ApiProperty() @IsInt() @Min(0) @Max(10000) sortOrder!:number;
+}
+export class GovernanceDto {
+ @ApiProperty() @IsString() @MaxLength(100) founded!:string;
+ @ApiProperty() @IsString() @MaxLength(250) organisationType!:string;
+ @ApiProperty() @IsString() @MaxLength(500) registeredOffice!:string;
+ @ApiProperty() @IsString() @MaxLength(250) governanceModel!:string;
+ @ApiProperty() @IsString() @MaxLength(10000) overview!:string;
+ @ApiProperty() @IsObject() legal!:Record<string,string>;
+ @ApiProperty() @IsObject() structure!:Record<string,string>;
+ @ApiProperty() @IsString() @MaxLength(10000) policies!:string;
+ @ApiProperty() @IsString() @MaxLength(10000) financial!:string;
+ @ApiProperty() @IsString() @MaxLength(10000) compliance!:string;
+ @ApiProperty() @IsEmail() @MaxLength(250) contactEmail!:string;
+ @ApiProperty({type:[GovernanceDocumentDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>GovernanceDocumentDto) documents!:GovernanceDocumentDto[];
+}
