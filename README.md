@@ -179,3 +179,40 @@ Configure social links with `PUT /admin/settings/social-links` and a `socialLink
 array of `{network,url}`. Supported networks: LinkedIn, Facebook, X, Instagram,
 YouTube. Only configured HTTPS links are rendered. Rebuild static pages after
 social configuration changes. No social URLs were fabricated.
+
+### Reusable partner registry
+
+Partners now have a single canonical model: id, name, slug, logo (`url`, `alt`),
+website, description, country, partnerType, featured, sortOrder, published.
+`GET /admin/partners` reads the registry; authenticated `PUT /admin/partners`
+(or the compatible `/admin/settings/partners`) replaces `{partners:[...]}`.
+Ids and slugs must be unique. The public `/partners` API and `/settings` only
+return published partners with logos, ordered by sortOrder then name. Legacy
+placeholder records remain excluded until upgraded explicitly.
+
+Upload genuine logos with authenticated multipart
+`POST /admin/partner-logos`, field `file`. PNG, JPEG and WebP are accepted up to
+2 MB; SVG, HTML and unsupported signatures are rejected. Configure persistent
+`PARTNER_LOGO_DIRECTORY` on the API server and
+`PARTNER_LOGO_PUBLIC_BASE_URL=https://your-api.example/media/partner-logos`.
+The response is an Asset; use its URL and supply meaningful logo alt text in the
+partner record. Include the API hostname in `NEXT_PUBLIC_IMAGE_HOSTS`. Object
+storage uploads are also supported by uploading externally then registering the
+actual uploaded URL through `POST /admin/assets`. Publishing requires the logo
+URL to match a registered asset. No logos are generated or substitute logos used.
+
+Select the sitewide public heading with
+`PUT /admin/settings/partner-presentation`, e.g.
+`{"label":"Collaborating Institutions"}`. Allowed labels: Our Partners,
+Institutional Partners, Selected Partners, Collaborating Institutions. The shared
+renderer translates these labels and explicitly avoids implying endorsement.
+Home shows featured published partners; About shows published partners. The
+`PartnerSection` and `PartnerStrip` components are reusable across pages.
+
+Project/activity metadata now stores references only:
+`"partners":[{"id":"partner-id"}]`. Public detail APIs resolve those ids from
+the canonical registry, so edits propagate and unpublished/deleted partners are
+removed. Never infer a relationship from shared countries, themes or names.
+Rebuild static deployments after registry, relationship or publication changes.
+Existing copied partner details must be replaced with ids of reviewed registry
+records. Configuring a label or featuring a partner does not confer endorsement.

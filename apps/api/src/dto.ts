@@ -65,12 +65,20 @@ export class TeamDto {
 }
 
 export class PartnerDto {
- @ApiProperty() @IsString() @MinLength(1) @MaxLength(100) id!:string;
+ @ApiProperty() @Matches(/^[a-zA-Z0-9_-]+$/) @MaxLength(100) id!:string;
  @ApiProperty() @IsString() @MinLength(2) @MaxLength(180) name!:string;
- @ApiPropertyOptional() @IsOptional() @Matches(/^\/images\/[a-zA-Z0-9/_\-.]+$/) @MaxLength(2000) logoUrl?:string;
- @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(300) logoAlt?:string;
- @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) href?:string;
- @ApiProperty() @IsBoolean() isDemo!:boolean;
+ @ApiProperty() @Matches(/^[a-z0-9]+(?:-[a-z0-9]+)*$/) @MaxLength(160) slug!:string;
+ @ApiPropertyOptional({type:AssetDto}) @IsOptional() @ValidateNested() @Type(()=>AssetDto) logo?:AssetDto;
+ @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) website?:string;
+ @ApiProperty() @IsString() @MaxLength(3000) description!:string;
+ @ApiProperty() @IsString() @MaxLength(150) country!:string;
+ @ApiProperty() @IsIn(['Institutional Partner','Academic Partner','Research Partner','Public Authority','International Organisation','Local Authority','Strategic Partner']) partnerType!:string;
+ @ApiProperty() @IsBoolean() featured!:boolean;
+ @ApiProperty() @IsInt() @Min(0) @Max(10000) sortOrder!:number;
+ @ApiProperty() @IsBoolean() published!:boolean;
+}
+export class PartnerReferenceDto {
+ @ApiProperty() @Matches(/^[a-zA-Z0-9_-]+$/) @MaxLength(100) id!:string;
 }
 export class PartnersDto {
  @ApiProperty({type:[PartnerDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerDto) partners!:PartnerDto[];
@@ -101,7 +109,7 @@ export class ActivityDetailsDto {
  @ApiPropertyOptional() @IsOptional() @IsDateString() date?:string;
  @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(250) location?:string;
  @ApiProperty({type:[AssetDto]}) @IsArray() @ArrayMaxSize(30) @ValidateNested({each:true}) @Type(()=>AssetDto) gallery!:AssetDto[];
- @ApiProperty({type:[PartnerDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerDto) partners!:PartnerDto[];
+ @ApiProperty({type:[PartnerReferenceDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerReferenceDto) partners!:PartnerReferenceDto[];
  @ApiPropertyOptional() @IsOptional() @Matches(/^(\/documents\/[a-zA-Z0-9/_\-.]+\.pdf|https:\/\/[^\s]+)$/) @MaxLength(2000) programmeUrl?:string;
  @ApiPropertyOptional() @IsOptional() @IsUrl({protocols:['https'],require_protocol:true}) @MaxLength(2000) eventUrl?:string;
 }
@@ -120,7 +128,7 @@ export class ProjectDetailsDto {
  @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(250) strategicArea?:string;
  @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(250) lead?:string;
  @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(100) @IsString({each:true}) @MaxLength(120,{each:true}) countries!:string[];
- @ApiProperty({type:[PartnerDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerDto) partners!:PartnerDto[];
+ @ApiProperty({type:[PartnerReferenceDto]}) @IsArray() @ArrayMaxSize(100) @ValidateNested({each:true}) @Type(()=>PartnerReferenceDto) partners!:PartnerReferenceDto[];
  @ApiPropertyOptional() @IsOptional() @IsString() @MaxLength(20000) background?:string;
  @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(50) @IsString({each:true}) @MaxLength(5000,{each:true}) objectives!:string[];
  @ApiProperty({type:[String]}) @IsArray() @ArrayMaxSize(50) @IsString({each:true}) @MaxLength(5000,{each:true}) activities!:string[];
@@ -196,4 +204,8 @@ export class SocialLinkDto {
 }
 export class SocialLinksDto {
  @ApiProperty({type:[SocialLinkDto]}) @IsArray() @ArrayMaxSize(5) @ValidateNested({each:true}) @Type(()=>SocialLinkDto) socialLinks!:SocialLinkDto[];
+}
+
+export class PartnerPresentationDto {
+ @ApiProperty() @IsIn(['Our Partners','Institutional Partners','Selected Partners','Collaborating Institutions']) label!:string;
 }

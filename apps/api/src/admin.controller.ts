@@ -1,11 +1,13 @@
-import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestException,NotFoundException} from '@nestjs/common';
+import {Controller,Get,Post,Put,Delete,Body,Param,Query,UseGuards,BadRequestException,NotFoundException,UploadedFile,UseInterceptors} from '@nestjs/common';
+import {FileInterceptor} from '@nestjs/platform-express';
 import {ApiBearerAuth,ApiTags} from '@nestjs/swagger';
 import {PrismaService} from './prisma.service';
+import {PartnersService} from './partners.service';
 import {AdminGuard} from './admin.guard';
-import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto,TeamProfileDto,GovernanceDto,SocialLinksDto} from './dto';
+import {ContentDto,AssetDto,PageDto,TeamDto,ListQuery,PartnersDto,AboutProfileDto,ActivityDetailsDto,ProjectDetailsDto,PublicationDto,TeamProfileDto,GovernanceDto,SocialLinksDto,PartnerPresentationDto} from './dto';
 @ApiTags('Editorial administration') @ApiBearerAuth() @UseGuards(AdminGuard) @Controller('admin')
 export class AdminController {
- constructor(private readonly db:PrismaService){}
+ constructor(private readonly db:PrismaService,private readonly partnerRegistry:PartnersService){}
  @Get('content') list(@Query() q:ListQuery){return this.db.content.findMany({include:{translations:true,image:true},take:q.limit,skip:q.offset,orderBy:{updatedAt:'desc'}})}
  @Put('content/:slug') async save(@Param('slug') slug:string,@Body() dto:ContentDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');if(new Set(dto.translations.map(t=>t.locale)).size!==dto.translations.length)throw new BadRequestException('Duplicate locale');if(dto.published&&!dto.isDemo&&!dto.publishedAt)throw new BadRequestException('Published content needs a publication date');const {translations,publishedAt,...data}=dto;return this.db.$transaction(async tx=>{const item=await tx.content.upsert({where:{slug},create:{...data,publishedAt:publishedAt?new Date(publishedAt):null},update:{...data,publishedAt:publishedAt?new Date(publishedAt):null}});await tx.contentTranslation.deleteMany({where:{contentId:item.id}});await tx.contentTranslation.createMany({data:translations.map(t=>({...t,contentId:item.id}))});return item;});}
  @Delete('content/:id') async remove(@Param('id') id:string){await this.db.content.delete({where:{id}});return {deleted:true}}
@@ -13,7 +15,10 @@ export class AdminController {
  @Get('assets') assets(@Query() q:ListQuery){return this.db.asset.findMany({take:q.limit,skip:q.offset,orderBy:{createdAt:'desc'}})}
  @Put('settings/hero/:assetId') async hero(@Param('assetId') id:string){const asset=await this.db.asset.findUnique({where:{id}});if(!asset)throw new NotFoundException();return this.db.siteSetting.upsert({where:{key:'hero'},create:{key:'hero',value:asset},update:{value:asset}})}
  @Put('pages/:slug') page(@Param('slug') slug:string,@Body() dto:PageDto){if(slug!==dto.slug)throw new BadRequestException('Slug mismatch');return this.db.page.upsert({where:{slug_locale:{slug,locale:dto.locale}},create:dto,update:dto})}
- @Put('settings/partners') partners(@Body() dto:PartnersDto){return this.db.siteSetting.upsert({where:{key:'partners'},create:{key:'partners',value:JSON.parse(JSON.stringify(dto.partners))},update:{value:JSON.parse(JSON.stringify(dto.partners))}})}
+ @Put(['settings/partners','partners']) partners(@Body() dto:PartnersDto){return this.partnerRegistry.save(dto)}
+ @Post('partner-logos') @UseInterceptors(FileInterceptor('file',{limits:{fileSize:2097152,files:1}})) uploadPartnerLogo(@UploadedFile() file:{buffer:Buffer}){return this.partnerRegistry.uploadLogo(file?.buffer)}
+ @Get('partners') partnerRecords(){return this.partnerRegistry.all()}
+ @Put('settings/partner-presentation') partnerPresentation(@Body() dto:PartnerPresentationDto){return this.db.siteSetting.upsert({where:{key:'partnerPresentation'},create:{key:'partnerPresentation',value:{label:dto.label}},update:{value:{label:dto.label}}})}
  @Put('settings/about-profile') aboutProfile(@Body() dto:AboutProfileDto){const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key:'aboutProfile'},create:{key:'aboutProfile',value},update:{value}})}
  @Put('activity-details/:slug') async activityDetails(@Param('slug') slug:string,@Query() q:ListQuery,@Body() dto:ActivityDetailsDto){const content=await this.db.content.findUnique({where:{slug}});if(!content||content.kind!=='ACTIVITY')throw new NotFoundException();const key='activity:'+slug+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}
  @Put('project-details/:slug') async projectDetails(@Param('slug') slug:string,@Query() q:ListQuery,@Body() dto:ProjectDetailsDto){const content=await this.db.content.findUnique({where:{slug}});if(!content||content.kind!=='PROJECT')throw new NotFoundException();if(dto.startDate&&dto.endDate&&new Date(dto.endDate)<new Date(dto.startDate))throw new BadRequestException('Project end date precedes start date');const key='project:'+slug+':'+q.locale;const value=JSON.parse(JSON.stringify(dto));return this.db.siteSetting.upsert({where:{key},create:{key,value},update:{value}})}

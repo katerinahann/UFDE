@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import {PartnerSection} from './partner-section';
 import {ShieldCheck,Handshake,Target,Globe2,Award,BookOpen,Network,Landmark,Scale,FileText,Eye,ArrowRight} from 'lucide-react';
 import type {Locale} from '@ufde/config';
 import {dictionary,localizedPath} from '@ufde/config/messages';
@@ -17,5 +18,5 @@ export async function About({locale}:{locale:Locale}){
  <Section tone="soft"><Container><SectionHeading title={a.workTitle} underline/><div className="about-work">{a.work.map(([title,text],i)=>{const Icon=work[i];return <article key={title}><Icon aria-hidden="true"/><h3>{title}</h3><p>{text}</p></article>})}</div></Container></Section>
  <Section><Container><div className="about-governance"><SectionHeading title={a.governanceTitle} underline/><p>{a.governanceText}</p><div className="about-governance-grid">{a.governanceCards.map((title,i)=>{const Icon=governance[i];return <a key={title} href={href('/governance-transparency')}><Icon aria-hidden="true"/><h3>{title}</h3><ArrowRight size={18} aria-hidden="true"/></a>})}</div><PrimaryButton href={href('/governance-transparency')}>{a.governanceButton}<ArrowRight size={18}/></PrimaryButton></div></Container></Section>
  <Section tone="soft"><Container><SectionHeading title={d.home.strategic} underline/><div className="home-strategic-grid about-strategic">{d.areas.map(([title,description],i)=>{const Icon=areaIcons[i];return <StrategicAreaCard key={title} title={title} description={description} icon={<Icon/>} href={href('/strategic-areas')+'#area-'+(i+1)} linkLabel={d.home.learn}/>})}</div></Container></Section>
- <Container><div className="about-credits"><p>{a.imageNote}</p>{profile.photos.map(p=><p key={p.url}>{a.photoCredit}: <a href={p.source}>{p.alt} — {p.credit}</a> · <a href={p.licenseUrl}>{p.licenseLabel}</a> · {d.cropped}</p>)}</div></Container></div>;
+ <PartnerSection locale={locale}/><Container><div className="about-credits"><p>{a.imageNote}</p>{profile.photos.map(p=><p key={p.url}>{a.photoCredit}: <a href={p.source}>{p.alt} — {p.credit}</a> · <a href={p.licenseUrl}>{p.licenseLabel}</a> · {d.cropped}</p>)}</div></Container></div>;
 }
