@@ -1,12 +1,12 @@
 import {ArrowRight} from 'lucide-react';
 import type {Locale} from '@ufde/config';
 import {dictionary,localizedPath} from '@ufde/config/messages';
-import {strategicAreas} from '@ufde/config/strategic-areas';
+import {getStrategicAreas} from '@/lib/content';
 import {Container,Section,Breadcrumbs,Heading1,Heading2,Body} from '@ufde/ui';
 import {areaIcons} from './home';
 function ResearchNetwork(){return <svg className="strategy-network" viewBox="0 0 800 440" fill="none" aria-hidden="true"><defs><pattern id="strategy-grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" stroke="white" strokeOpacity=".07"/></pattern></defs><path fill="url(#strategy-grid)" d="M0 0h800v440H0z"/><g stroke="#86abc6" strokeOpacity=".45"><path d="m150 260 100-140 130 70 130-100 160 100-80 150-210-40-130-180m130 70 210 150M150 260l230 40V190l290 0M250 120l260-30 80 250M150 260l440 80"/><circle cx="380" cy="220" r="180" strokeDasharray="3 9"/><circle cx="380" cy="220" r="120" strokeOpacity=".2"/></g>{[[150,260],[250,120],[380,190],[510,90],[670,190],[590,340],[380,300]].map(([x,y],i)=><g key={i}><circle cx={x} cy={y} r="17" fill="#d9b366" fillOpacity=".12"/><circle cx={x} cy={y} r="5" fill="#dfbd77"/></g>)}</svg>}
-export function StrategicAreas({locale,slug}:{locale:Locale;slug?:string}){
- const d=dictionary(locale),areas=strategicAreas(locale),area=areas.find(a=>a.slug===slug),href=(p:string)=>localizedPath(locale,p),title=area?.title||d.home.strategic;
+export async function StrategicAreas({locale,slug}:{locale:Locale;slug?:string}){
+ const d=dictionary(locale),areas=await getStrategicAreas(locale),area=areas.find(a=>a.slug===slug),href=(p:string)=>localizedPath(locale,p),title=area?.title||d.home.strategic;
  const crumbs=[{label:d.nav[0],href:href('')},{label:d.pages.about[0],href:href('/about')},{label:d.home.strategic,...(area?{href:href('/strategic-areas')}:{})},...(area?[{label:area.title}]:[])];
  return <div className="strategy-page"><section className="strategy-hero"><ResearchNetwork/><Container><Breadcrumbs items={crumbs}/><p className="home-kicker">UKRAINE · FRANCE · EUROPE</p><Heading1>{title}</Heading1></Container></section><Section tone="soft"><Container>{area?<article className="strategy-detail"><Heading2>{area.title}</Heading2><p className="uf-lead">{area.description}</p><Body>{area.body}</Body><a className="strategy-learn" href={href('/contact')}>{d.connect[3]}<ArrowRight size={18}/></a></article>:<div className="strategy-grid">{areas.map(a=>{const Icon=areaIcons[a.index];return <article className="strategy-card" id={'area-'+(a.index+1)} key={a.slug}><Icon className="strategy-icon" aria-hidden="true" strokeWidth={1.4}/><div><Heading2><a href={href('/strategic-areas/'+a.slug)}>{a.title}</a></Heading2><Body>{a.description}</Body><a className="strategy-learn" href={href('/strategic-areas/'+a.slug)} aria-label={`${d.home.learn}: ${a.title}`}>{d.home.learn}<ArrowRight size={18} aria-hidden="true"/></a></div></article>})}</div>}</Container></Section></div>;
 }

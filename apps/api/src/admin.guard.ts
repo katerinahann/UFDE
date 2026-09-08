@@ -1,9 +1,18 @@
-import {CanActivate,ExecutionContext,Injectable,UnauthorizedException} from '@nestjs/common';
-import {ConfigService} from '@nestjs/config';
-import {timingSafeEqual,createHash} from 'node:crypto';
+import { CanActivate, ExecutionContext, Injectable } from '@nestjs/common';
+import {
+  AuthService,
+  AdminRequest,
+  requirePermission,
+} from './admin/auth.service';
+// Legacy editorial endpoints now require a full administrator session too.
 @Injectable()
 export class AdminGuard implements CanActivate {
- constructor(private readonly config:ConfigService){}
- canActivate(ctx:ExecutionContext){const expected=this.config.get<string>('ADMIN_API_TOKEN');const authorization=ctx.switchToHttp().getRequest().headers.authorization;const actual=typeof authorization==='string'&&authorization.startsWith('Bearer ')?authorization.slice(7):'';
- if(!expected || expected.length<48 || !actual || !timingSafeEqual(createHash('sha256').update(actual).digest(),createHash('sha256').update(expected).digest()))throw new UnauthorizedException();return true;}
+  constructor(private readonly auth: AuthService) {}
+  async canActivate(ctx: ExecutionContext) {
+    const req = ctx.switchToHttp().getRequest<AdminRequest>();
+    req.admin = await this.auth.authenticate(req);
+    requirePermission(req.admin, '*');
+    ctx.switchToHttp().getResponse().setHeader('Cache-Control', 'no-store');
+    return true;
+  }
 }

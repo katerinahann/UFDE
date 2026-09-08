@@ -1,3 +1,9 @@
+import {PublicContentController} from './admin/public-content.controller';
+import {AuthService} from './admin/auth.service';
+import {AuthController,SessionGuard} from './admin/auth.controller';
+import {CmsController} from './admin/cms.controller';
+import {CmsService} from './admin/cms.service';
+import {AdminMediaService,AdminMediaController,PublicMediaController} from './admin/media.controller';
 import {Module,Controller,Get,ServiceUnavailableException} from '@nestjs/common';
 import {ConfigModule} from '@nestjs/config';
 import {APP_GUARD} from '@nestjs/core';
@@ -11,4 +17,4 @@ import {AdminController} from './admin.controller';
 import {AdminGuard} from './admin.guard';
 import {validateEnvironment} from './environment';
 @Controller('health') class HealthController {constructor(private readonly db:PrismaService){} @Get() async health(){try{await this.db.$queryRaw`SELECT 1`;return {status:'ok'}}catch{throw new ServiceUnavailableException('Database unavailable')}}}
-@Module({imports:[ConfigModule.forRoot({isGlobal:true,validate:validateEnvironment}),ThrottlerModule.forRoot([{name:'default',ttl:60000,limit:120}])],controllers:[HealthController,ContentController,FormsController,AdminController],providers:[PrismaService,PartnersService,ContactMailService,AdminGuard,{provide:APP_GUARD,useClass:ThrottlerGuard}]}) export class AppModule {}
+@Module({imports:[ConfigModule.forRoot({isGlobal:true,validate:validateEnvironment}),ThrottlerModule.forRoot([{name:'default',ttl:60000,limit:120}])],controllers:[PublicContentController,AuthController,CmsController,AdminMediaController,PublicMediaController,HealthController,ContentController,FormsController,AdminController],providers:[AuthService,SessionGuard,CmsService,AdminMediaService,PrismaService,PartnersService,ContactMailService,AdminGuard,{provide:APP_GUARD,useClass:ThrottlerGuard}]}) export class AppModule {}

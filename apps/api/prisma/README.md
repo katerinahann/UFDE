@@ -49,3 +49,12 @@ ALLOW_DEMO_SEED=true pnpm db:seed
 ```
 
 The seed refuses production mode, runs transactionally, and uses stable upserts without overwriting existing entries. Domain fixtures are unpublished and marked `isDemo`. Partner placeholders have no logos or relationship links. Document placeholders are private drafts without files. All localized text is explicitly marked DEMO. The inactive `.invalid` account has no password. No legal facts, official documents, subscriptions or contact messages are fabricated. Fixtures are not exposed through existing legacy public API repositories.
+
+## Administration extension
+
+`202609080003_admin_sessions` adds revocable hashed sessions, persistent login
+buckets, audit records and localized website settings. The `/admin` dashboard
+writes normalized models. Public `/v1/cms-public` readers are available, and new
+website builds use them outside demo mode; use `CMS_LEGACY_CONTENT=true` temporarily
+while reviewing/migrating legacy content. Legacy tables remain intact.
+See `docs/administration.md` for the complete deployment and account setup.

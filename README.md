@@ -216,3 +216,12 @@ removed. Never infer a relationship from shared countries, themes or names.
 Rebuild static deployments after registry, relationship or publication changes.
 Existing copied partner details must be replaced with ids of reviewed registry
 records. Configuring a label or featuring a partner does not confer endorsement.
+
+### Administration dashboard and normalized CMS
+
+`/admin` now provides session-based administration and EN/FR/UK editing. See
+[administration setup](docs/administration.md) for API/Vercel variables, database
+migration and administrator creation. The older bearer-token instructions above
+are superseded: legacy admin endpoints also require a secure administrator
+session. New dashboard content uses normalized Prisma models and `/v1/cms-public`
+readers. Review legacy content before enabling those readers on a live site.

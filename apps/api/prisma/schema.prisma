@@ -199,20 +199,22 @@ enum SubscriptionStatus {
 }
 
 model User {
-  id              String      @id @default(cuid())
-  slug            String      @unique @default(cuid())
-  email           String      @unique
+  sessions        AdminSession[]
+  auditLogs       AdminAuditLog[]
+  id              String          @id @default(cuid())
+  slug            String          @unique @default(cuid())
+  email           String          @unique
   name            String
   passwordHash    String?
   emailVerifiedAt DateTime?
-  active          Boolean     @default(false)
-  isDemo          Boolean     @default(false)
-  teamMemberId    String?     @unique
-  teamMember      TeamMember? @relation(fields: [teamMemberId], references: [id], onDelete: SetNull)
+  active          Boolean         @default(false)
+  isDemo          Boolean         @default(false)
+  teamMemberId    String?         @unique
+  teamMember      TeamMember?     @relation(fields: [teamMemberId], references: [id], onDelete: SetNull)
   roles           UserRole[]
   uploads         Media[]
-  createdAt       DateTime    @default(now())
-  updatedAt       DateTime    @default(now()) @updatedAt
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @default(now()) @updatedAt
 }
 
 model Role {
@@ -238,10 +240,11 @@ model UserRole {
 }
 
 model SiteSettings {
-  id                     String       @id @default("site")
+  translations           SiteSettingsTranslation[]
+  id                     String                    @id @default("site")
   siteName               String
-  defaultLocale          Locale       @default(EN)
-  enabledLocales         Locale[]     @default([EN, FR, UK])
+  defaultLocale          Locale                    @default(EN)
+  enabledLocales         Locale[]                  @default([EN, FR, UK])
   contactEmail           String?
   contactPhone           String?
   registeredOffice       String?
@@ -249,17 +252,17 @@ model SiteSettings {
   legalName              String?
   legalForm              String?
   registrationNumber     String?
-  registrationDate       DateTime?    @db.Date
+  registrationDate       DateTime?                 @db.Date
   officialPublicationUrl String?
   siren                  String?
   siret                  String?
-  socialLinks            Json         @default("{}")
-  partnerLabel           PartnerLabel @default(OUR_PARTNERS)
+  socialLinks            Json                      @default("{}")
+  partnerLabel           PartnerLabel              @default(OUR_PARTNERS)
   logoId                 String?
-  logo                   Media?       @relation("SiteLogo", fields: [logoId], references: [id], onDelete: SetNull)
-  isDemo                 Boolean      @default(false)
-  createdAt              DateTime     @default(now())
-  updatedAt              DateTime     @default(now()) @updatedAt
+  logo                   Media?                    @relation("SiteLogo", fields: [logoId], references: [id], onDelete: SetNull)
+  isDemo                 Boolean                   @default(false)
+  createdAt              DateTime                  @default(now())
+  updatedAt              DateTime                  @default(now()) @updatedAt
 }
 
 model PageSEO {
@@ -842,4 +845,56 @@ model PublicationDocument {
 
   @@id([publicationId, documentId])
   @@index([documentId])
+}
+
+model AdminSession {
+  id         String   @id @default(cuid())
+  tokenHash  String   @unique
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt  DateTime
+  lastSeenAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+model AuthRateLimit {
+  key          String   @id
+  count        Int      @default(0)
+  windowEndsAt DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @default(now()) @updatedAt
+
+  @@index([windowEndsAt])
+}
+
+model AdminAuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  action    String
+  module    String
+  recordId  String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([createdAt])
+  @@index([userId])
+}
+
+model SiteSettingsTranslation {
+  id               String       @id @default(cuid())
+  siteSettingsId   String
+  siteSettings     SiteSettings @relation(fields: [siteSettingsId], references: [id], onDelete: Cascade)
+  locale           Locale
+  organisationName String?
+  addressText      String?
+  footerText       String?
+  createdAt        DateTime     @default(now())
+  updatedAt        DateTime     @default(now()) @updatedAt
+
+  @@unique([siteSettingsId, locale])
 }
