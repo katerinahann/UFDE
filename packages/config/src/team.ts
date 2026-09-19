@@ -39,7 +39,9 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   },
   {
     "id": "volodymyr-kohutiak",
-    "name": "VOLODYMYR KOHUTIAK",
+    "name": "VOLODYMYR KOGUTYAK",
+    "photoUrl": "/images/team/volodymyr-kogutyak.png",
+    "photoAlt": "Volodymyr Kogutyak",
     "role": "Co-Founder, Public Affairs Expert",
     "biography": "Co-Founder of the Ukrainian-French Institute of Science, Innovation and Economic Development (UFDE, France), public affairs expert, Vice-President of the Ukrainian Congress in France, and Vice-President of the Union of Ukrainians in France.\n\nHe actively promotes Ukrainian-French cooperation, supports the Ukrainian community abroad, and contributes to the implementation of international humanitarian and cultural initiatives. He represents the interests of the Ukrainian diaspora in France and works to strengthen cooperation between Ukrainian and European institutions. In 2025, he was appointed Advisor to the Ukrainian Parliament Commissioner for Human Rights (Ombudsman) in the French Republic.",
     "category": "leadership",
