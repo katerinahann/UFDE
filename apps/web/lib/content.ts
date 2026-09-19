@@ -31,7 +31,7 @@ export const getGovernance=cache(async(locale:Locale):Promise<import('@ufde/type
 
 export const getSocialLinks=cache(async():Promise<{network:string;url:string}[]>=>{if(demoMode)return [];const settings=await request('/settings');return (settings?.socialLinks||[]).filter((s:{network:string;url:string})=>['LinkedIn','Facebook','X','Instagram','YouTube'].includes(s.network)&&/^https:\/\//.test(s.url));});
 
-export const getWebsiteSettings=cache(async(locale:Locale):Promise<{siteName?:string;address?:string;email?:string;phone?:string;footerText?:string}>=>demoMode?{}:await request('/settings?locale='+locale)||{});
+export const getWebsiteSettings=cache(async(locale:Locale):Promise<{logo?:import('@ufde/types').MediaImage;siteName?:string;address?:string;email?:string;phone?:string;footerText?:string}>=>demoMode?{}:await request('/settings?locale='+locale)||{});
 export const getPageSEO=cache(async(slug:string,locale:Locale)=>demoMode?null:request('/seo/'+encodeURIComponent(slug)+'?locale='+locale));
 
 export const getStrategicAreas=cache(async(locale:Locale):Promise<{slug:string;title:string;description:string;body:string;index:number}[]>=>{if(demoMode||process.env.CMS_LEGACY_CONTENT==='true'){const {strategicAreas}=await import('@ufde/config/strategic-areas');return strategicAreas(locale);}return (await request('/strategic-areas?locale='+locale)||[]).map((r:{slug:string;title:string;summary:string;body?:string},index:number)=>({slug:r.slug,title:r.title,description:r.summary,body:r.body||'',index:index%6}));});

@@ -41,7 +41,7 @@ export class FormsController {
     const dedupe = 'contact-dedupe:' + hash(JSON.stringify(data));
     const now = Date.now();
     const reference = await this.db.$transaction(async (tx) => {
-      await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${dedupe}))`;
+      await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${dedupe}))::text`;
       const prior = (
         await tx.siteSetting.findUnique({ where: { key: dedupe } })
       )?.value as { reference: string; at: number } | undefined;
@@ -54,7 +54,7 @@ export class FormsController {
         number,
         number,
       ][]) {
-        await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${key}))`;
+        await tx.$queryRaw`SELECT pg_advisory_xact_lock(hashtext(${key}))::text`;
         const current = (await tx.siteSetting.findUnique({ where: { key } }))
           ?.value as { count: number; at: number } | undefined;
         const value =

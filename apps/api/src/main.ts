@@ -1,3 +1,4 @@
+import {SanitizePipe} from './sanitize.pipe';
 import 'reflect-metadata';
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe, Logger } from '@nestjs/common';
@@ -48,10 +49,12 @@ async function bootstrap() {
     origin: config.getOrThrow<string>('CORS_ORIGINS').split(','),
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'X-CSRF-Token'],
+    maxAge: 600,
     credentials: true,
   });
   app.setGlobalPrefix('v1');
   app.useGlobalPipes(
+    new SanitizePipe(),
     new ValidationPipe({
       whitelist: true,
       forbidNonWhitelisted: true,

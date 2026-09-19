@@ -1,3 +1,4 @@
+export const metadata = {robots:{index:false,follow:false}};
 import { Root } from '@/components/root';
 import './admin.css';
 export default function Layout({ children }: { children: React.ReactNode }) {

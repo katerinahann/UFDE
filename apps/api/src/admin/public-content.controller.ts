@@ -377,7 +377,7 @@ export class PublicContentController {
   @Get('settings') async settings(@Query() q: ListQuery) {
     const row = await this.db.siteSettings.findUnique({
       where: { id: 'site' },
-      include: { translations: true },
+      include: { translations: true, logo: mediaInclude },
     });
     const profile = (
       await this.db.siteSetting.findUnique({ where: { key: 'aboutProfile' } })
@@ -404,6 +404,7 @@ export class PublicContentController {
     const t = local(row, language(q));
     return {
       siteName: t?.organisationName || row.siteName,
+      logo: image(row.logo, language(q)),
       address: t?.addressText || row.registeredOffice,
       email: row.contactEmail,
       phone: row.contactPhone,
