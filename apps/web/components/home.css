@@ -7,3 +7,8 @@
 
 .home-hero>img{object-position:62% 38%}
 @media(max-width:639px){.home-hero>img{object-position:58% center}}
+
+/* Keep the flags visible and their national colours distinct. */
+.home-hero>img{object-position:75% center}
+.home-hero-shade{background:linear-gradient(90deg,rgba(0,27,61,.94),rgba(0,27,61,.78) 42%,rgba(0,27,61,.28) 68%,rgba(0,27,61,.06))}
+@media(max-width:639px){.home-hero>img{object-position:82% center}.home-hero-shade{background:linear-gradient(0deg,rgba(0,27,61,.94),rgba(0,27,61,.78) 65%,rgba(0,27,61,.28))}}

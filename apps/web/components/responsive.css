@@ -394,3 +394,9 @@ footer a {
 .official-logo.footer-logo{width:220px;height:80px}
 @media(min-width:1024px) and (max-width:1199px){.header .official-logo{width:160px;height:64px}}
 @media(max-width:1023px){.header{height:88px}.header .official-logo{width:176px;height:64px}}
+
+/* Category filters stay above their panel as one horizontally scrollable row. */
+.uf-tabs[data-slot='tabs']{display:flex;flex-direction:column;min-width:0;width:100%}
+.uf-tabs>.uf-tabs-list{display:flex;flex-direction:row;flex-wrap:nowrap;width:100%;max-width:100%;height:auto;justify-content:flex-start;gap:8px;overflow-x:auto;padding:4px 2px 12px;overscroll-behavior-x:contain;scrollbar-width:thin}
+.uf-tabs>.uf-tabs-list>.uf-tab{flex:0 0 auto;white-space:nowrap;max-width:none;min-height:46px;height:auto;padding:12px 18px}
+.uf-tabs>.uf-tab-panel{min-width:0;width:100%}
