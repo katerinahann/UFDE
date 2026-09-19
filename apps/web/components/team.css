@@ -18,3 +18,11 @@
 .team-member-card>.team-profile-trigger>.team-portrait{width:calc(100% - 32px);margin:16px auto 0}
 .team-profile-layout>.team-portrait{border-radius:50%;width:100%;max-width:280px}
 .team-portrait-empty{background:#f4f6f9}
+
+/* Consistent first-name / surname rows, followed by the full position. */
+.team-card-name{font-size:17px;line-height:1.45;letter-spacing:.015em;padding:22px 18px 12px;min-height:84px}
+.team-card-name>span{display:block}
+.team-card-name>span:first-child{font-weight:500}
+.team-card-name>span:last-child{font-weight:700}
+.team-card-role{font-size:13px;line-height:1.65;min-height:102px;padding:0 18px 16px;color:#627387}
+@media(max-width:639px){.team-card-name{font-size:19px;min-height:90px}.team-card-role{min-height:80px}}
