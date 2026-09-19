@@ -11,7 +11,7 @@ export interface ProjectDetails {status?:ProjectStatus;category?:string;startDat
 export interface ProjectView {record:ContentRecord;details:ProjectDetails}
 export type PublicationType='Scientific Journal'|'Research Reports'|'Policy Briefs'|'Working Papers'|'Articles & Insights';
 export interface Publication {title:string;slug:string;type:PublicationType;coverImage?:MediaImage;summary:string;abstract:string;executiveSummary?:string;authors:string[];publishedAt?:string;year?:number;language:string;pdfUrl?:string;externalUrl?:string;doi?:string;isbn?:string;citation?:string;featured:boolean;status:'Published'|'Forthcoming'|'Draft';isDemo:boolean}
-export interface TeamProfileDetails {category:'leadership'|'advisory';expertise:string[];institutionRole?:string;email?:string;linkedin?:string;orcid?:string;googleScholar?:string;institutionalProfile?:string}
+export interface TeamProfileDetails {category:'leadership'|'advisory';expertise:string[];institutionRole?:string;email?:string;linkedin?:string;instagram?:string;orcid?:string;googleScholar?:string;institutionalProfile?:string}
 export interface TeamProfile extends TeamProfileDetails {id:string;name:string;role:string;biography:string;photoUrl?:string;photoAlt?:string}
 export interface GovernanceDocument {id:string;title:string;description:string;type:string;publicationDate?:string;language:string;fileUrl?:string;public:boolean;sortOrder:number}
 export interface GovernanceContent {founded:string;organisationType:string;registeredOffice:string;governanceModel:string;overview:string;legal:Record<string,string>;structure:Record<string,string>;policies:string;financial:string;compliance:string;contactEmail:string;documents:GovernanceDocument[]}

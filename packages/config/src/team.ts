@@ -9,6 +9,7 @@ export const teamLabels={
 export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   {
     "id": "kateryna-hannouf",
+    "instagram": "https://www.instagram.com/dr_hannouf_kateryna/",
     "linkedin": "https://www.linkedin.com/in/dr-kateryna-hannouf/",
     "email": "khannouf.prof@gmail.com",
     "photoUrl": "/images/team/kateryna-hannouf-v2.png",
@@ -41,6 +42,7 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   },
   {
     "id": "volodymyr-kohutiak",
+    "instagram": "https://www.instagram.com/volodymyr_kogutyak/",
     "linkedin": "https://www.linkedin.com/in/volodymyr-kogutyak/",
     "name": "VOLODYMYR KOGUTYAK",
     "photoUrl": "/images/team/volodymyr-kogutyak-v2.jpg",
@@ -52,6 +54,7 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   },
   {
     "id": "anna-golovkova",
+    "linkedin": "https://www.linkedin.com/in/anna-golovkova-60511540/",
     "name": "ANNA GOLOVKOVA",
     "role": "Co-Founder, Entrepreneur, Certified IPS Business Coach",
     "biography": "Co-Founder of the Ukrainian-French Institute of Science, Innovation and Economic Development (UFDE, France), entrepreneur, Co-Founder and Managing Director of the international digital agency WebVision360 (Paris, France), and Certified IPS Business Coach.\n\nShe specializes in digital communications, branding, business development, strategic marketing, and international project management. She has extensive experience in supporting digital transformation processes and building international partnerships. Within the Institute, she contributes to the implementation of innovative projects, the development of digital infrastructure, and the promotion of international scientific and educational initiatives.",

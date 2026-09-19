@@ -216,6 +216,7 @@ export const modules: Record<string, AdminModule> = {
       media('portraitId', 'Portrait'),
       f('email', 'Email', 'email'),
       f('linkedin', 'LinkedIn', 'url'),
+      f('instagram', 'Instagram', 'url'),
       f('orcid', 'ORCID profile', 'url'),
       f('googleScholar', 'Google Scholar', 'url'),
       f('institutionalProfile', 'Institutional profile', 'url'),

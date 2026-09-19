@@ -358,6 +358,7 @@ export class PublicContentController {
         institutionRole: t.institutionRole,
         email: r.email,
         linkedin: r.linkedin,
+        instagram: r.instagram,
         orcid: r.orcid,
         googleScholar: r.googleScholar,
         institutionalProfile: r.institutionalProfile,

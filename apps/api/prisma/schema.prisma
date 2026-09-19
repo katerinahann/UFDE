@@ -95,6 +95,7 @@ model TeamMember {
   portraitId           String?
   portrait             Media?                  @relation("TeamPortrait", fields: [portraitId], references: [id], onDelete: SetNull)
   email                String?
+  instagram            String?
   linkedin             String?
   orcid                String?
   googleScholar        String?
