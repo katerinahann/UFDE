@@ -29,6 +29,7 @@ async function database() {
     '202609080003_admin_sessions',
     '202609090001_media_variants',
     '202609090002_newsletter',
+    '202609200001_institute_contact',
   ])
     await engine.exec(
       readFileSync('prisma/migrations/' + name + '/migration.sql', 'utf8'),

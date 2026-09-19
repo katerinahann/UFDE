@@ -356,7 +356,6 @@ export const modules: Record<string, AdminModule> = {
       f('siteName', 'Organisation name', 'text', { required: true }),
       f('isDemo', 'DEMO configuration', 'boolean'),
       f('contactEmail', 'Email', 'email'),
-      f('contactPhone', 'Phone'),
       f('registeredOffice', 'Registered office / address'),
       f('foundedYear', 'Founded year', 'number'),
       f('legalName', 'Official registered name'),

@@ -1,3 +1,4 @@
+import {institute} from '@ufde/config';
 import {
   Controller,
   Get,
@@ -405,9 +406,9 @@ export class PublicContentController {
     return {
       siteName: t?.organisationName || row.siteName,
       logo: image(row.logo, language(q)),
-      address: t?.addressText || row.registeredOffice,
-      email: row.contactEmail,
-      phone: row.contactPhone,
+      address: institute.location,
+      email: institute.email,
+
       footerText: t?.footerText,
       partnerPresentation: { label: names[row.partnerLabel] },
       socialLinks: Object.entries(
@@ -437,18 +438,18 @@ export class PublicContentController {
       ...base,
       founded: actual?.foundedYear ? String(actual.foundedYear) : '',
       organisationType: actual?.legalForm || '',
-      registeredOffice: actual?.registeredOffice || '',
+      registeredOffice: institute.location,
       legal: {
         officialName: actual?.legalName || '',
         legalForm: actual?.legalForm || '',
-        registeredOffice: actual?.registeredOffice || '',
+        registeredOffice: institute.location,
         registrationNumber: actual?.registrationNumber || '',
         registrationDate:
           actual?.registrationDate?.toISOString().slice(0, 10) || '',
         officialPublication: actual?.officialPublicationUrl || '',
         sirenSiret: [actual?.siren, actual?.siret].filter(Boolean).join(' / '),
       },
-      contactEmail: actual?.contactEmail || base.contactEmail,
+      contactEmail: institute.email,
       documents: rows.map((r) => {
         const t = local(r, locale);
         return {

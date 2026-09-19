@@ -5,7 +5,7 @@ export function absoluteUrl(value: string | undefined, origin: string): string |
 }
 export const serializeJsonLd = (value: unknown) => JSON.stringify(value).replace(/</g, '\\u003c').replace(/\u2028/g,'\\u2028').replace(/\u2029/g,'\\u2029');
 export function organizationSchema(origin:string, officialName:string, logo:string|undefined, socials:string[], legalName?:string) {
-  return {'@type':'Organization','@id':origin+'/#organization',name:'UFDE',alternateName:officialName,...(legalName?{legalName}:{}),url:origin,logo:absoluteUrl(logo,origin),address:{'@type':'PostalAddress',addressLocality:'Paris',addressCountry:'FR'},sameAs:socials.map(u=>absoluteUrl(u,origin)).filter(Boolean)};
+  return {'@type':'Organization','@id':origin+'/#organization',name:'UFDE',email:'institut.ufde@gmail.com',alternateName:officialName,...(legalName?{legalName}:{}),url:origin,logo:absoluteUrl(logo,origin),address:{'@type':'PostalAddress',streetAddress:'27, boulevard Saint-Martin',postalCode:'75003',addressLocality:'Paris',addressCountry:'FR'},sameAs:socials.map(u=>absoluteUrl(u,origin)).filter(Boolean)};
 }
 export function contentSchema(origin:string,url:string,item:ContentRecord,details?:ActivityDetails) {
   if(item.isDemo)return null;
