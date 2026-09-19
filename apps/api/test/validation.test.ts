@@ -121,3 +121,8 @@ test('newsletter validates language, source, explicit consent, email and tokens'
       .length,
   );
 });
+
+test('contact rejects missing, empty and invalid sender email',async()=>{
+ const base={name:'Test Sender',subject:'Website enquiry',message:'A sufficiently detailed test enquiry.',locale:'en'};
+ for(const email of [undefined,'','   ','invalid','user@']){const dto=plainToInstance(ContactDto,{...base,email});assert.ok((await validate(dto)).some(e=>e.property==='email'));}
+});
