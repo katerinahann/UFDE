@@ -9,6 +9,7 @@ export const teamLabels={
 export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   {
     "id": "kateryna-hannouf",
+    "email": "khannouf.prof@gmail.com",
     "photoUrl": "/images/team/kateryna-hannouf-v2.png",
     "photoAlt": "Kateryna Hannouf",
     "name": "KATERYNA HANNOUF",
