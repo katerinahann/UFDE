@@ -9,7 +9,7 @@ export const teamLabels={
 export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   {
     "id": "kateryna-hannouf",
-    "photoUrl": "/images/team/kateryna-hannouf.jpg",
+    "photoUrl": "/images/team/kateryna-hannouf-v2.png",
     "photoAlt": "Kateryna Hannouf",
     "name": "KATERYNA HANNOUF",
     "role": "President, PhD",
@@ -40,7 +40,7 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   {
     "id": "volodymyr-kohutiak",
     "name": "VOLODYMYR KOGUTYAK",
-    "photoUrl": "/images/team/volodymyr-kogutyak.png",
+    "photoUrl": "/images/team/volodymyr-kogutyak-v2.jpg",
     "photoAlt": "Volodymyr Kogutyak",
     "role": "Co-Founder, Public Affairs Expert",
     "biography": "Co-Founder of the Ukrainian-French Institute of Science, Innovation and Economic Development (UFDE, France), public affairs expert, Vice-President of the Ukrainian Congress in France, and Vice-President of the Union of Ukrainians in France.\n\nHe actively promotes Ukrainian-French cooperation, supports the Ukrainian community abroad, and contributes to the implementation of international humanitarian and cultural initiatives. He represents the interests of the Ukrainian diaspora in France and works to strengthen cooperation between Ukrainian and European institutions. In 2025, he was appointed Advisor to the Ukrainian Parliament Commissioner for Human Rights (Ombudsman) in the French Republic.",
@@ -53,6 +53,8 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
     "role": "Co-Founder, Entrepreneur, Certified IPS Business Coach",
     "biography": "Co-Founder of the Ukrainian-French Institute of Science, Innovation and Economic Development (UFDE, France), entrepreneur, Co-Founder and Managing Director of the international digital agency WebVision360 (Paris, France), and Certified IPS Business Coach.\n\nShe specializes in digital communications, branding, business development, strategic marketing, and international project management. She has extensive experience in supporting digital transformation processes and building international partnerships. Within the Institute, she contributes to the implementation of innovative projects, the development of digital infrastructure, and the promotion of international scientific and educational initiatives.",
     "category": "leadership",
-    "expertise": []
+    "expertise": [],
+    "photoUrl": "/images/team/anna-golovkova.jpg",
+    "photoAlt": "Anna Golovkova"
   }
 ];
