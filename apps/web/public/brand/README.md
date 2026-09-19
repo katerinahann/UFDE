@@ -1,1 +1,1 @@
-Replace the three placeholder SVGs with approved supplied UFDE assets. These placeholders do not redraw the logo. Set institute.logo.supplied=true in packages/config/src/index.ts after replacement. The current header uses a plain text acronym, not an invented logo.
+The approved UFDE logo is ufde-official.png, supplied by the institute. Preserve its original blue/yellow colours and proportions. The shared clickable header/footer presentation trims only surrounding canvas through CSS and links to the localized home page. Legacy SVG files are unused placeholders.

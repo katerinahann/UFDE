@@ -26,3 +26,6 @@
 .team-card-name>span:last-child{font-weight:700}
 .team-card-role{font-size:13px;line-height:1.65;min-height:102px;padding:0 18px 16px;color:#627387}
 @media(max-width:639px){.team-card-name{font-size:19px;min-height:90px}.team-card-role{min-height:80px}}
+
+/* Updated portrait direction: consistent square photographs. */
+.team-portrait,.team-portrait:has(img),.team-profile-layout>.team-portrait{aspect-ratio:1/1;border-radius:8px}

@@ -377,3 +377,12 @@ footer a {
     right: 0;
   }
 }
+
+/* Approved full-colour logo, with a light surface for the navy artwork. */
+.header{height:136px}
+.header .official-logo,.official-logo.footer-logo{position:relative;display:block;flex-shrink:0;width:124px;height:120px;overflow:hidden;background:white;border-radius:6px}
+.header .official-logo img,.official-logo.footer-logo img{position:absolute;width:180px;max-width:none;height:180px;left:50%;top:50%;transform:translate(-50%,-50%);object-fit:contain}
+.official-logo:focus-visible{outline:3px solid #C5A35D;outline-offset:4px}
+.official-logo.footer-logo{width:180px;height:170px;margin-bottom:24px}
+.official-logo.footer-logo img{width:246px;height:246px}
+@media(max-width:1023px){.header{height:104px}.header .official-logo{width:92px;height:88px}.header .official-logo img{width:130px;height:130px}}

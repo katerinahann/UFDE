@@ -9,6 +9,7 @@ export const teamLabels={
 export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   {
     "id": "kateryna-hannouf",
+    "linkedin": "https://www.linkedin.com/in/dr-kateryna-hannouf/",
     "email": "khannouf.prof@gmail.com",
     "photoUrl": "/images/team/kateryna-hannouf-v2.png",
     "photoAlt": "Kateryna Hannouf",
@@ -40,6 +41,7 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   },
   {
     "id": "volodymyr-kohutiak",
+    "linkedin": "https://www.linkedin.com/in/volodymyr-kogutyak/",
     "name": "VOLODYMYR KOGUTYAK",
     "photoUrl": "/images/team/volodymyr-kogutyak-v2.jpg",
     "photoAlt": "Volodymyr Kogutyak",
