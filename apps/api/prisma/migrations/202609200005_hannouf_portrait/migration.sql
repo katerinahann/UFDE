@@ -1,0 +1,3 @@
+INSERT INTO "Media" ("id","slug","url","filename","mimeType","sizeBytes","width","height","sha256","visibility","purpose","updatedAt") VALUES ('portrait-kateryna-hannouf','portrait-kateryna-hannouf','/images/team/kateryna-hannouf.jpg','kateryna-hannouf.jpg','image/jpeg',67114,769,886,'cb795f9f4b55e9a097178ded2598949decb9d7b823f5f3dca29ddeff14a7df39','PUBLIC','PORTRAIT',CURRENT_TIMESTAMP) ON CONFLICT ("slug") DO NOTHING;
+UPDATE "TeamMember" SET "portraitId"=(SELECT "id" FROM "Media" WHERE "slug"='portrait-kateryna-hannouf'), "updatedAt"=CURRENT_TIMESTAMP WHERE "slug"='kateryna-hannouf';
+UPDATE "TeamMemberTranslation" SET "portraitAlt"='Kateryna Hannouf', "updatedAt"=CURRENT_TIMESTAMP WHERE "teamMemberId" IN (SELECT "id" FROM "TeamMember" WHERE "slug"='kateryna-hannouf');

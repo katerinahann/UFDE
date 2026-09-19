@@ -9,6 +9,8 @@ export const teamLabels={
 export const approvedFounders: import("@ufde/types").TeamProfile[] = [
   {
     "id": "kateryna-hannouf",
+    "photoUrl": "/images/team/kateryna-hannouf.jpg",
+    "photoAlt": "Kateryna Hannouf",
     "name": "KATERYNA HANNOUF",
     "role": "President, PhD",
     "biography": "President of the Ukrainian-French Institute of Science, Innovation and Economic Development (UFDE, France), PhD, international expert in innovation, digital transformation, and international cooperation. Founder and leader of international scientific and educational initiatives aimed at strengthening cooperation between Ukraine and the European Union.\n\nShe actively participates in international expert consultations on artificial intelligence regulation and digital governance. She is the author of expert recommendations on digital transformation, the ethical use of artificial intelligence, and innovation-driven development. A regular participant in international forums, conferences, and hackathons dedicated to artificial intelligence and emerging technologies, including the International AI Hackathon in New York (2025) and Paris (2026). She coordinates international partnerships, science diplomacy projects, and the Institute’s strategic initiatives aimed at integrating Ukrainian science into the European and global research community.",

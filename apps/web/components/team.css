@@ -3,3 +3,5 @@
 
 /* Preserve the complete supplied square portraits. */
 .team-portrait:has(img){aspect-ratio:1/1}
+
+.team-portrait img{object-fit:contain}
