@@ -5,3 +5,16 @@
 .team-portrait:has(img){aspect-ratio:1/1}
 
 .team-portrait img{object-fit:contain}
+
+/* Section label sits above the complete team row, never alongside cards. */
+.team-browser{display:block;min-width:0}
+.team-section-label{display:flex;align-items:center;gap:16px;width:100%;margin:0 0 32px;padding:0 0 20px;border-bottom:1px solid #DCE3ED;color:#173758;font-size:12px;font-weight:650;line-height:1.6;letter-spacing:.14em;text-transform:uppercase}
+.team-section-label::before{content:"";display:block;flex:0 0 36px;height:2px;background:#B79A5A}
+@media(max-width:639px){.team-section-label{font-size:11px;letter-spacing:.1em;gap:12px;margin-bottom:24px;padding-bottom:16px}.team-section-label::before{flex-basis:24px}}
+
+/* One portrait treatment for both full photographs and supplied circular crops. */
+.team-portrait,.team-portrait:has(img){aspect-ratio:1/1;border-radius:50%;background:#fff;isolation:isolate}
+.team-portrait img{object-fit:cover;object-position:center}
+.team-member-card>.team-profile-trigger>.team-portrait{width:calc(100% - 32px);margin:16px auto 0}
+.team-profile-layout>.team-portrait{border-radius:50%;width:100%;max-width:280px}
+.team-portrait-empty{background:#f4f6f9}
