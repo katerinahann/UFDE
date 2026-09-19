@@ -21,7 +21,9 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
     "role": "Co-Founder, Doctor of Economics, Professor",
     "biography": "Co-Founder of the Ukrainian-French Institute of Science, Innovation and Economic Development (UFDE, France), Doctor of Economics, Professor, and Academician of the Academy of Economic Sciences of Ukraine.\n\nA distinguished Ukrainian scholar in the fields of economics, management, human capital development, and organizational studies. She is the author of numerous scientific publications, monographs, textbooks, and methodological works. Editor-in-Chief of the international scientific journal “Synergies Scientifiques”. With extensive experience in academic, research, and managerial activities, she actively contributes to the development of international academic cooperation and the integration of Ukrainian science into the European Research Area. Within the Institute, she is responsible for scientific programs, international academic relations, and research projects.",
     "category": "leadership",
-    "expertise": []
+    "expertise": [],
+    "photoUrl": "/images/team/liudmyla-golovkova.jpg",
+    "photoAlt": "Liudmyla Golovkova"
   },
   {
     "id": "glib-vysheslavsky",
@@ -29,7 +31,9 @@ export const approvedFounders: import("@ufde/types").TeamProfile[] = [
     "role": "Co-Founder, Doctor of Art Studies, Professor",
     "biography": "Co-Founder of the Ukrainian-French Institute of Science, Innovation and Economic Development (UFDE, France), Doctor of Art Studies, Professor, Associate Professor at Sorbonne University, renowned Ukrainian art historian, curator, and researcher of contemporary art.\n\nAuthor of numerous scholarly publications and monographs on the history, theory, and philosophy of art. He has been actively involved in international academic and cultural projects promoting intercultural dialogue and the international visibility of Ukrainian culture. Within the Institute, he coordinates research in the humanities, cultural diplomacy initiatives, and international cooperation in the fields of art and cultural heritage.",
     "category": "leadership",
-    "expertise": []
+    "expertise": [],
+    "photoUrl": "/images/team/glib-vysheslavsky.jpg",
+    "photoAlt": "Glib Vysheslavsky"
   },
   {
     "id": "volodymyr-kohutiak",
